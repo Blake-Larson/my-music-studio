@@ -1,6 +1,6 @@
-# MERN - Auth - Template
+# My Music Studio
 
-A template to use for full-stack MERN apps with authentication and MVC backend organization.
+A full-stack application for private music teachers to manage their studios and their students.
 
 <!-- **Link to project:** http://recruiters-love-seeing-live-demos.com/
 
@@ -18,11 +18,7 @@ The front-end for this app was built using React and Tailwindcss along with Axio
 The back-end for this app was built using Node, Express, Mongoose, and MongoDB along with Passport-local, Express-session, and Bcrpyt for authentication. The backend is based off of an MVC architecture with the views being in the client folder. The routes and controller handle login, logout, signup, and authenticated to check if the current user has an authenticated session stored.  
 
 ## Optimizations
-While I want to keep this template simple, I know that there is more work to be done refactoring how I handle authentication.<br>  
-My next steps are:
-* Ensure authentication is using best practices and is secure.
-* Possibly look into using cookies along with express-session.
-* Fix the RequireAuth component to redirect to home page if the user is not authenticated.
+Current work in progress.
 
 ## Lessons Learned:
 I have really become familar with MVC architecture and navigating the backend. I have also learned that there are so many ways to authenticate your applications and they all have their pros and cons. It was a challenge to try to keep the authentication simple while still being secure.
