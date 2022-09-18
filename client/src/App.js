@@ -17,6 +17,14 @@ const App = () => {
 					</RequireAuth>
 				}
 			/>
+			<Route
+				path='/students'
+				element={
+					<RequireAuth>
+						<Dashboard />
+					</RequireAuth>
+				}
+			/>
 			<Route path='*' element={<NoMatch />} />
 		</Routes>
 	);

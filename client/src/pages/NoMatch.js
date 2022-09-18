@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from '../components/Header';
+import Nav from '../components/Nav';
 
 function NoMatch() {
 	return (
 		<div>
-			<Header />
+			<Nav />
 			<p>There's nothing here: 404!</p>
 		</div>
 	);
