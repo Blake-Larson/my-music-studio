@@ -4,6 +4,7 @@ import { RequireAuth } from './auth/RequireAuth';
 import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
 import Dashboard from './pages/Dashboard';
+import Students from './pages/Students';
 
 const App = () => {
 	return (
@@ -21,7 +22,7 @@ const App = () => {
 				path='/students'
 				element={
 					<RequireAuth>
-						<Dashboard />
+						<Students />
 					</RequireAuth>
 				}
 			/>

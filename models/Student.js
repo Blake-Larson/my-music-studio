@@ -5,9 +5,14 @@ const StudentSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	age: {
+		type: String,
+	},
+	email: {
+		type: String,
+	},
 	instrument: {
 		type: String,
-		require: true,
 	},
 	teacher: {
 		type: mongoose.Schema.Types.ObjectId,

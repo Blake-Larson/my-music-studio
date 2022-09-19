@@ -5,7 +5,7 @@ import useAuth from './useAuth';
 import Nav from '../components/Nav';
 
 export const RequireAuth = ({ children }) => {
-	const { authed, user } = useAuth();
+	const { authed, user, handleLogout } = useAuth();
 	// const location = useLocation();
 
 	// return authed === true ? (
@@ -18,7 +18,7 @@ export const RequireAuth = ({ children }) => {
 			<Nav />
 			<div className='drawer drawer-mobile'>
 				<input id='drawer' type='checkbox' className='drawer-toggle' />
-				<div className='drawer-content flex flex-col items-center justify-center'>
+				<div className='drawer-content flex flex-col'>
 					{/* <!-- Page content here --> */}
 					{authed ? (
 						children
@@ -29,7 +29,7 @@ export const RequireAuth = ({ children }) => {
 					)}
 					<label
 						htmlFor='drawer'
-						className='btn btn-square btn-ghost drawer-button lg:hidden fixed top-14 left-3'
+						className='btn btn-square btn-ghost drawer-button lg:hidden fixed top-2 left-2 z-50'
 					>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -48,18 +48,29 @@ export const RequireAuth = ({ children }) => {
 				</div>
 				<div className='drawer-side'>
 					<label htmlFor='drawer' className='drawer-overlay'></label>
-					<ul className='menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content'>
+					<div className='menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content'>
 						{/* <!-- Sidebar content here --> */}
-						<li>
-							<NavLink to='/dashboard'>Dashboard</NavLink>
-						</li>
-						<li>
-							<NavLink to='/students'>Students</NavLink>
-						</li>
-					</ul>
-					<div className='flex flex-col'>
-						<span>Authenticated as {user.userName}</span>
-						<span>ID: {user._id}</span>
+						<ul>
+							<li>
+								<NavLink to='/dashboard'>Dashboard</NavLink>
+							</li>
+							<li>
+								<NavLink to='/students'>Students</NavLink>
+							</li>
+						</ul>
+						<div className='flex flex-col'>
+							<span>Authenticated as {user.userName}</span>
+							<span>ID: {user._id}</span>
+						</div>
+						{authed && (
+							<button
+								type='button'
+								onClick={handleLogout}
+								className='btn btn-neutral'
+							>
+								Sign Out
+							</button>
+						)}
 					</div>
 				</div>
 			</div>

@@ -7,12 +7,18 @@ import Login from './Login';
 function Nav() {
 	const location = useLocation();
 
-	const { authed, handleLogout } = useAuth();
+	const { authed } = useAuth();
 
 	return (
 		<nav className='navbar bg-base-100'>
 			<div className='flex-1'>
-				<div className='btn btn-ghost normal-case text-xl'>
+				<div
+					className={
+						location.pathname !== '/'
+							? 'btn btn-ghost normal-case text-xl ml-10'
+							: 'btn btn-ghost normal-case text-xl'
+					}
+				>
 					<NavLink to='/'>My Music Studio</NavLink>
 				</div>
 				{authed && location.pathname === '/' && (
@@ -44,15 +50,6 @@ function Nav() {
 							</label>
 						</label>
 					</div>
-				)}
-				{authed && (
-					<button
-						type='button'
-						onClick={handleLogout}
-						className='btn btn-neutral'
-					>
-						Sign Out
-					</button>
 				)}
 			</div>
 		</nav>
