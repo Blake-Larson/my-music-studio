@@ -5,7 +5,7 @@ import StudentProfile from './StudentProfile';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 function Students() {
-	const [currentStudent, setCurrentStudent] = React.useState({});
+	const [selectedStudent, setSelectedStudent] = React.useState({});
 	const location = useLocation();
 
 	return (
@@ -14,21 +14,21 @@ function Students() {
 				<h1 className='text-3xl text-center lg:text-start'>Students</h1>
 			</div>
 			{location.pathname === '/students' && (
-				<div className='flex flex-col mx-3'>
+				<div className='flex flex-col mx-3 gap-5'>
 					<StudentTable
-						currentStudent={currentStudent}
-						setCurrentStudent={setCurrentStudent}
+						selectedStudent={selectedStudent}
+						setSelectedStudent={setSelectedStudent}
 					/>
 					{location.pathname === '/students' && <CreateStudent />}
 				</div>
 			)}
 			<Routes>
 				<Route
-					path='/studentprofile'
+					path={`/${selectedStudent._id}`}
 					element={
 						<StudentProfile
-							currentStudent={currentStudent}
-							setCurrentStudent={setCurrentStudent}
+							selectedStudent={selectedStudent}
+							setSelectedStudent={setSelectedStudent}
 						/>
 					}
 				></Route>

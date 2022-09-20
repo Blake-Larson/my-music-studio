@@ -3,7 +3,7 @@ import useAuth from '../auth/useAuth';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function StudentTable({ currentStudent, setCurrentStudent }) {
+function StudentTable({ selectedStudent, setSelectedStudent }) {
 	const { user } = useAuth();
 	let navigate = useNavigate();
 
@@ -34,8 +34,8 @@ function StudentTable({ currentStudent, setCurrentStudent }) {
 						<div
 							className='flex items-center space-x-3 hover:cursor-pointer'
 							onClick={() => {
-								setCurrentStudent(el);
-								navigate(`/students/studentprofile`);
+								setSelectedStudent(el);
+								navigate(`/students/${el._id}`);
 							}}
 						>
 							<div>
@@ -62,8 +62,8 @@ function StudentTable({ currentStudent, setCurrentStudent }) {
 						<div
 							className='flex items-center space-x-3 hover:cursor-pointer'
 							onClick={() => {
-								setCurrentStudent(el);
-								navigate(`/students/studentprofile`);
+								setSelectedStudent(el);
+								navigate(`/students/${el._id}`);
 							}}
 						>
 							<div>

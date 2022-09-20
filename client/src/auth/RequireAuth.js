@@ -49,14 +49,14 @@ export const RequireAuth = ({ children }) => {
 				</div>
 				<div className='drawer-side'>
 					<label htmlFor='drawer' className='drawer-overlay'></label>
-					<div className='menu p-4 overflow-y-auto bg-base-100 text-base-content w-64 flex flex-col gap-5'>
+					<div className='menu p-4 overflow-y-auto bg-base-100 lg:bg-base-200 text-base-content w-64 flex flex-col gap-5'>
 						{/* <!-- Sidebar content here --> */}
 
 						<h2 className='font-bold text-center text-xl'>
 							<NavLink to='/'>My Music Studio</NavLink>
 						</h2>
 
-						<ul className='custom-70vh'>
+						<ul className='custom-70vh flex flex-col gap-3'>
 							<li>
 								<NavLink to='/dashboard'>Dashboard</NavLink>
 							</li>
