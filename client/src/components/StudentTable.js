@@ -18,41 +18,39 @@ function StudentTable({ selectedStudent, setSelectedStudent }) {
 					url: 'http://localhost:5000/students',
 					withCredentials: true,
 				});
-				setStudents(response.data);
+				setStudents(response.data.sort((a, b) => (a.name > b.name ? 1 : -1)));
 			} catch (err) {
 				console.log(err);
 			}
 		})();
 	}, [user._id]);
 
-	const studentArrLarge = students
-		.sort((a, b) => (a.name > b.name ? 1 : -1))
-		.map((el, i) => {
-			return (
-				<tr key={i}>
-					<td>
-						<div
-							className='flex items-center space-x-3 hover:cursor-pointer'
-							onClick={() => {
-								setSelectedStudent(el);
-								navigate(`/students/${el._id}`);
-							}}
-						>
-							<div>
-								<div className='font-bold'>{el.name}</div>
-							</div>
+	const studentArrLarge = students.map((el, i) => {
+		return (
+			<tr key={i}>
+				<td>
+					<div
+						className='flex items-center space-x-3 hover:cursor-pointer'
+						onClick={() => {
+							setSelectedStudent(el);
+							navigate(`/students/${el._id}`);
+						}}
+					>
+						<div>
+							<div className='font-bold'>{el.name}</div>
 						</div>
-					</td>
-					<td>{el.instrument}</td>
-					<td>
-						<a href='tel:1-111-1111'>Phone</a>
-					</td>
-					<td>
-						<a href={`mailto:${el.email}`}>{el.email}</a>
-					</td>
-				</tr>
-			);
-		});
+					</div>
+				</td>
+				<td>{el.instrument}</td>
+				<td>
+					<a href='tel:1-111-1111'>Phone</a>
+				</td>
+				<td>
+					<a href={`mailto:${el.email}`}>{el.email}</a>
+				</td>
+			</tr>
+		);
+	});
 	const studentArrSmall = students
 		.sort((a, b) => (a.name > b.name ? 1 : -1))
 		.map((el, i) => {

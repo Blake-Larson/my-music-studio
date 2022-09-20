@@ -1,11 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import useAuth from '../auth/useAuth';
-import useStringHook from '../hooks/useStringHook';
 
-function CreateStudent() {
+function CreateLesson() {
 	const { user } = useAuth();
-	const { capitolizeFirst } = useStringHook();
 
 	const [msg, setMsg] = React.useState({
 		text: '',
@@ -13,10 +11,8 @@ function CreateStudent() {
 	});
 
 	const [formData, setFormData] = React.useState({
-		name: '',
-		age: '',
-		email: '',
-		instrument: '',
+		student: '',
+		date: '',
 	});
 
 	function handleFormChange(event) {
@@ -34,13 +30,11 @@ function CreateStudent() {
 			const response = await axios({
 				method: 'POST',
 				data: {
-					name: capitolizeFirst(formData.name),
-					age: formData.age,
-					email: formData.email.toLowerCase(),
-					instrument: capitolizeFirst(formData.instrument),
 					teacher: user._id,
+					student: '',
+					date: '',
 				},
-				url: 'http://localhost:5000/students/createStudent',
+				url: 'http://localhost:5000/lessons/createLesson',
 				withCredentials: true,
 			});
 			console.log('From Server:', response);
@@ -57,6 +51,28 @@ function CreateStudent() {
 			console.log(err.response);
 		}
 	};
+
+	const [students, setStudents] = React.useState([]);
+
+	React.useEffect(() => {
+		(async () => {
+			try {
+				const response = await axios({
+					method: 'GET',
+					data: user._id,
+					url: 'http://localhost:5000/students',
+					withCredentials: true,
+				});
+				setStudents(response.data.sort((a, b) => (a.name > b.name ? 1 : -1)));
+			} catch (err) {
+				console.log(err);
+			}
+		})();
+	}, [user._id]);
+
+	const selectStudent = students.map((el, i) => {
+		return <option key={i}>{el.name}</option>;
+	});
 
 	return (
 		<div>
@@ -84,43 +100,28 @@ function CreateStudent() {
 			<label htmlFor='createStudent-modal' className='modal cursor-pointer'>
 				<label>
 					<section className='flex flex-col items-center p-10'>
-						<div className='card w-96 shadow-xl bg-neutral'>
+						<div className='card w-96 shadow-xl bg-base-100'>
 							<div className='card-body'>
-								<h1 className='card-title self-center mb-4 text-white'>
-									New Student
-								</h1>
-								<form onSubmit={handleSubmit} className='flex flex-col gap-2'>
-									<input
-										type='text'
-										name='name'
-										placeholder='Name'
-										onChange={handleFormChange}
-										className='input input-bordered w-full max-w-xs'
-									/>
-									<input
-										type='text'
-										name='age'
-										placeholder='Age'
-										onChange={handleFormChange}
-										className='input input-bordered w-full max-w-xs'
-									/>
-									<input
-										type='text'
-										name='email'
-										placeholder='Email'
-										onChange={handleFormChange}
-										className='input input-bordered w-full max-w-xs'
-									/>
-									<input
-										type='text'
-										name='instrument'
-										placeholder='Instrument'
-										onChange={handleFormChange}
-										className='input input-bordered w-full max-w-xs'
-									/>
+								<form
+									onSubmit={handleSubmit}
+									className='flex flex-col gap-2 form-control'
+								>
+									<label className='label flex flex-col gap-2'>
+										<span className=''>Select a Student:</span>
+										<select
+											className='select select-bordered w-full max-w-xs'
+											id='selectStudent'
+											value={formData.student}
+											onChange={handleFormChange}
+											name='selectStudent'
+										>
+											{selectStudent}
+										</select>
+									</label>
+
 									<div className='card-actions justify-center mt-4'>
 										<button className='btn btn-primary'>
-											Create New Student
+											Create New Lesson
 										</button>
 									</div>
 								</form>
@@ -142,4 +143,4 @@ function CreateStudent() {
 	);
 }
 
-export default CreateStudent;
+export default CreateLesson;
