@@ -53,55 +53,65 @@ function SignUp() {
 
 	return (
 		<div>
-			<section className='flex flex-col items-center p-10'>
-				<div className='card w-96 shadow-xl bg-neutral'>
-					<div className='card-body'>
-						<h1 className='card-title self-center mb-4 text-white'>SignUp</h1>
-						<form onSubmit={handleSubmit} className='flex flex-col gap-2'>
-							<input
-								type='text'
-								name='userName'
-								placeholder='Full Name'
-								onChange={handleFormChange}
-								className='input input-bordered w-full max-w-xs'
-							/>
-							<input
-								type='text'
-								name='email'
-								placeholder='Email'
-								onChange={handleFormChange}
-								className='input input-bordered w-full max-w-xs'
-							/>
-							<input
-								type='password'
-								name='password'
-								placeholder='Password'
-								onChange={handleFormChange}
-								className='input input-bordered w-full max-w-xs'
-							/>
-							<input
-								type='password'
-								name='confirmPassword'
-								placeholder='Confirm Password'
-								onChange={handleFormChange}
-								className='input input-bordered w-full max-w-xs'
-							/>
-							<div className='card-actions justify-center mt-4'>
-								<button className='btn btn-primary'>Create User</button>
+			<label htmlFor='signup-modal' className='btn modal-button'>
+				Sign Up!
+			</label>
+			<input type='checkbox' id='signup-modal' className='modal-toggle' />
+			<label htmlFor='signup-modal' className='modal cursor-pointer'>
+				<label>
+					<section className='flex flex-col items-center p-10'>
+						<div className='card w-96 shadow-xl bg-neutral'>
+							<div className='card-body'>
+								<h1 className='card-title self-center mb-4 text-white'>
+									SignUp
+								</h1>
+								<form onSubmit={handleSubmit} className='flex flex-col gap-2'>
+									<input
+										type='text'
+										name='userName'
+										placeholder='Full Name'
+										onChange={handleFormChange}
+										className='input input-bordered w-full max-w-xs'
+									/>
+									<input
+										type='text'
+										name='email'
+										placeholder='Email'
+										onChange={handleFormChange}
+										className='input input-bordered w-full max-w-xs'
+									/>
+									<input
+										type='password'
+										name='password'
+										placeholder='Password'
+										onChange={handleFormChange}
+										className='input input-bordered w-full max-w-xs'
+									/>
+									<input
+										type='password'
+										name='confirmPassword'
+										placeholder='Confirm Password'
+										onChange={handleFormChange}
+										className='input input-bordered w-full max-w-xs'
+									/>
+									<div className='card-actions justify-center mt-4'>
+										<button className='btn btn-primary'>Create User</button>
+									</div>
+								</form>
+								<div
+									className={
+										msg.success
+											? 'text-success text-center'
+											: 'text-warning text-center'
+									}
+								>
+									{msg ? msg.text : ''}
+								</div>
 							</div>
-						</form>
-						<div
-							className={
-								msg.success
-									? 'text-success text-center'
-									: 'text-warning text-center'
-							}
-						>
-							{msg ? msg.text : ''}
 						</div>
-					</div>
-				</div>
-			</section>
+					</section>
+				</label>
+			</label>
 		</div>
 	);
 }

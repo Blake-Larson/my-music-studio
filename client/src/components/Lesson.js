@@ -15,7 +15,7 @@ function Lesson() {
 					url: 'http://localhost:5000/students',
 					withCredentials: true,
 				});
-				console.log('From Server:', response);
+
 				if (response.status === 200) {
 					setStudents(response.data);
 				} else {

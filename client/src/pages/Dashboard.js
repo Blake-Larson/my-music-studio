@@ -6,7 +6,7 @@ function Dashboard() {
 	// const { user } = useAuth();
 
 	return (
-		<div>
+		<div className='mt-12 lg:mt-0'>
 			<div className='flex flex-col p-10 items-center gap-5'>
 				<h2>This is the Dashboard page. (Private)</h2>
 				<Lesson />

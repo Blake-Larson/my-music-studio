@@ -1,12 +1,12 @@
 import React from 'react';
-//import { Navigate, useLocation } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import useAuth from './useAuth';
 import Nav from '../components/Nav';
 
 export const RequireAuth = ({ children }) => {
 	const { authed, user, handleLogout } = useAuth();
-	// const location = useLocation();
+
+	const location = useLocation();
 
 	// return authed === true ? (
 	// 	children
@@ -15,42 +15,48 @@ export const RequireAuth = ({ children }) => {
 	// );
 	return (
 		<div>
-			<Nav />
+			{location.pathname === '/' && <Nav />}
 			<div className='drawer drawer-mobile'>
 				<input id='drawer' type='checkbox' className='drawer-toggle' />
 				<div className='drawer-content flex flex-col'>
 					{/* <!-- Page content here --> */}
 					{authed ? (
-						children
+						<div>{children}</div>
 					) : (
 						<div>
-							<h1>Loading... Try Logging In.</h1>
+							<button className='btn loading'>loading</button>
 						</div>
 					)}
 					<label
 						htmlFor='drawer'
-						className='btn btn-square btn-ghost drawer-button lg:hidden fixed top-2 left-2 z-50'
+						className='btn btn-square drawer-button lg:hidden fixed top-2 left-2 z-50'
 					>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							fill='none'
 							viewBox='0 0 24 24'
-							className='inline-block w-5 h-5 stroke-current'
+							strokeWidth={1.5}
+							stroke='currentColor'
+							className='w-6 h-6'
 						>
 							<path
 								strokeLinecap='round'
 								strokeLinejoin='round'
-								strokeWidth='2'
-								d='M4 6h16M4 12h16M4 18h16'
-							></path>
+								d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'
+							/>
 						</svg>
 					</label>
 				</div>
 				<div className='drawer-side'>
 					<label htmlFor='drawer' className='drawer-overlay'></label>
-					<div className='menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content'>
+					<div className='menu p-4 overflow-y-auto bg-base-100 text-base-content w-64 flex flex-col gap-5'>
 						{/* <!-- Sidebar content here --> */}
-						<ul>
+
+						<h2 className='font-bold text-center text-xl'>
+							<NavLink to='/'>My Music Studio</NavLink>
+						</h2>
+
+						<ul className='custom-70vh'>
 							<li>
 								<NavLink to='/dashboard'>Dashboard</NavLink>
 							</li>
@@ -58,19 +64,43 @@ export const RequireAuth = ({ children }) => {
 								<NavLink to='/students'>Students</NavLink>
 							</li>
 						</ul>
-						<div className='flex flex-col'>
-							<span>Authenticated as {user.userName}</span>
-							<span>ID: {user._id}</span>
-						</div>
-						{authed && (
+						<div className='flex flex-col items-center gap-3'>
+							<div className='flex gap-3'>
+								<div className='avatar'>
+									<div className='w-16 rounded'>
+										<img
+											src='https://placeimg.com/192/192/people'
+											alt='Tailwind-CSS-Avatar-component'
+										/>
+									</div>
+								</div>
+								<div className='flex flex-col justify-center'>
+									<span className='text-lg'>{user.userName}</span>
+									<span className='text-sm'>Teacher</span>
+								</div>
+							</div>
 							<button
 								type='button'
 								onClick={handleLogout}
-								className='btn btn-neutral'
+								className='btn btn-neutral flex gap-2'
 							>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									fill='none'
+									viewBox='0 0 24 24'
+									strokeWidth={1.5}
+									stroke='currentColor'
+									className='w-6 h-6'
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75'
+									/>
+								</svg>
 								Sign Out
 							</button>
-						)}
+						</div>
 					</div>
 				</div>
 			</div>

@@ -30,25 +30,8 @@ function Nav() {
 			<div className='flex-none'>
 				{!authed && (
 					<div className='flex gap-2'>
-						<label htmlFor='login-modal' className='btn modal-button'>
-							Login
-						</label>
-						<input type='checkbox' id='login-modal' className='modal-toggle' />
-						<label htmlFor='login-modal' className='modal cursor-pointer'>
-							<label>
-								<Login />
-							</label>
-						</label>
-
-						<label htmlFor='signup-modal' className='btn modal-button'>
-							Sign Up!
-						</label>
-						<input type='checkbox' id='signup-modal' className='modal-toggle' />
-						<label htmlFor='signup-modal' className='modal cursor-pointer'>
-							<label>
-								<SignUp />
-							</label>
-						</label>
+						<Login />
+						<SignUp />
 					</div>
 				)}
 			</div>

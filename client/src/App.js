@@ -19,7 +19,7 @@ const App = () => {
 				}
 			/>
 			<Route
-				path='/students'
+				path='/students/*'
 				element={
 					<RequireAuth>
 						<Students />
