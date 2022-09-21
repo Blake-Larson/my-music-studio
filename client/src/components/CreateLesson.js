@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import useAuth from '../auth/useAuth';
+import dayjs from 'dayjs';
 
 function CreateLesson() {
 	const { user } = useAuth();
@@ -13,6 +14,7 @@ function CreateLesson() {
 	const [formData, setFormData] = React.useState({
 		student: '',
 		date: '',
+		end: '',
 	});
 
 	function handleFormChange(event) {
@@ -25,14 +27,17 @@ function CreateLesson() {
 
 	const handleSubmit = async event => {
 		event.preventDefault();
-		console.log(formData, 'New Student Attempt Sent');
+		const date = dayjs(formData.date);
+		const end = dayjs(formData.end);
+		console.log(formData, 'New Lesson Attempt Sent');
 		try {
 			const response = await axios({
 				method: 'POST',
 				data: {
 					teacher: user._id,
-					student: '',
-					date: '',
+					student: formData.student,
+					date: date,
+					end: end,
 				},
 				url: 'http://localhost:5000/lessons/createLesson',
 				withCredentials: true,
@@ -71,7 +76,11 @@ function CreateLesson() {
 	}, [user._id]);
 
 	const selectStudent = students.map((el, i) => {
-		return <option key={i}>{el.name}</option>;
+		return (
+			<option key={i} value={el._id}>
+				{el.name}
+			</option>
+		);
 	});
 
 	return (
@@ -107,7 +116,7 @@ function CreateLesson() {
 									className='flex flex-col gap-2 form-control'
 								>
 									<label className='label flex flex-col gap-2'>
-										<span className=''>Select a Student:</span>
+										<span>Student:</span>
 										<select
 											className='select select-bordered w-full max-w-xs'
 											id='selectStudent'
@@ -118,7 +127,28 @@ function CreateLesson() {
 											{selectStudent}
 										</select>
 									</label>
-
+									<label className='label flex flex-col gap-2'>
+										<span>Start:</span>
+										<input
+											type='datetime-local'
+											id='date'
+											name='date'
+											value={formData.date}
+											onChange={handleFormChange}
+											className='input input-bordered w-full max-w-xs'
+										/>
+									</label>
+									<label className='label flex flex-col gap-2'>
+										<span>End:</span>
+										<input
+											type='datetime-local'
+											id='end'
+											name='end'
+											value={formData.end}
+											onChange={handleFormChange}
+											className='input input-bordered w-full max-w-xs'
+										/>
+									</label>
 									<div className='card-actions justify-center mt-4'>
 										<button className='btn btn-primary'>
 											Create New Lesson

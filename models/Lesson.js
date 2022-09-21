@@ -15,7 +15,11 @@ const LessonSchema = new mongoose.Schema({
 		required: true,
 	},
 	date: {
-		type: Date,
+		type: Object,
+		required: true,
+	},
+	end: {
+		type: Object,
 		required: true,
 	},
 });

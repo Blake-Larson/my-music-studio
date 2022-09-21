@@ -1,4 +1,6 @@
 const Lesson = require('../models/Lesson');
+const dayjs = require('dayjs');
+dayjs().format();
 
 module.exports = {
 	getLessons: async (req, res) => {

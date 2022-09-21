@@ -9,6 +9,7 @@
 		"axios": "^0.27.2",
 		"axois": "^0.0.1-security",
 		"daisyui": "^2.19.1",
+		"dayjs": "^1.11.5",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router-dom": "^6.3.0",
