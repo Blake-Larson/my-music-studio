@@ -1,7 +1,7 @@
 import React from 'react';
 import CreateLesson from '../components/CreateLesson';
 // import useAuth from '../auth/useAuth';
-import Lesson from '../components/Lesson';
+import Lessons from '../components/Lessons';
 
 function Dashboard() {
 	// const { user } = useAuth();
@@ -11,7 +11,7 @@ function Dashboard() {
 			<div className='flex flex-col p-10 items-center gap-5'>
 				<h2>This is the Dashboard page. (Private)</h2>
 				<CreateLesson />
-				<Lesson />
+				<Lessons />
 			</div>
 		</div>
 	);

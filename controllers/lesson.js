@@ -21,11 +21,10 @@ module.exports = {
 	createLesson: async (req, res) => {
 		try {
 			await Lesson.create({
-				name: req.body.name,
-				age: req.body.age,
-				email: req.body.email,
-				instrument: req.body.instrument,
-				teacher: req.user._id,
+				teacher: req.body.teacher,
+				student: req.body.student,
+				date: req.body.date,
+				end: req.body.end,
 			});
 			console.log('Lesson has been added!');
 			res.json({

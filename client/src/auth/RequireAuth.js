@@ -23,7 +23,7 @@ export const RequireAuth = ({ children }) => {
 					{authed ? (
 						<div>{children}</div>
 					) : (
-						<div>
+						<div className='flex justify-center mt-10'>
 							<button className='btn loading'>loading</button>
 						</div>
 					)}

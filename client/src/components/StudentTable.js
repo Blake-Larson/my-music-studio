@@ -1,29 +1,10 @@
 import React from 'react';
-import useAuth from '../auth/useAuth';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import useStudents from '../contexts/useStudents';
 
 function StudentTable({ selectedStudent, setSelectedStudent }) {
-	const { user } = useAuth();
 	let navigate = useNavigate();
-
-	const [students, setStudents] = React.useState([]);
-
-	React.useEffect(() => {
-		(async () => {
-			try {
-				const response = await axios({
-					method: 'GET',
-					data: user._id,
-					url: 'http://localhost:5000/students',
-					withCredentials: true,
-				});
-				setStudents(response.data.sort((a, b) => (a.name > b.name ? 1 : -1)));
-			} catch (err) {
-				console.log(err);
-			}
-		})();
-	}, [user._id]);
+	const { students } = useStudents();
 
 	const studentArrLarge = students.map((el, i) => {
 		return (

@@ -2,9 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import useAuth from '../auth/useAuth';
 import dayjs from 'dayjs';
+import useStudents from '../contexts/useStudents';
 
 function CreateLesson() {
 	const { user } = useAuth();
+	const { students } = useStudents();
 
 	const [msg, setMsg] = React.useState({
 		text: '',
@@ -25,10 +27,26 @@ function CreateLesson() {
 		}));
 	}
 
+	const test = () => {
+		const date = {
+			dateObj: dayjs(formData.date),
+			date: dayjs(formData.date).format('MM/DD/YY'),
+			weekday: dayjs(formData.date).format('dddd'),
+			start: dayjs(formData.date).format('h:mm A'),
+			end: dayjs(formData.end).format('h:mm A'),
+		};
+		const end = dayjs(formData.end);
+		console.log(date);
+	};
 	const handleSubmit = async event => {
 		event.preventDefault();
-		const date = dayjs(formData.date);
-		const end = dayjs(formData.end);
+		const date = {
+			dateObj: dayjs(formData.date),
+			date: dayjs(formData.date).format('MM/DD/YY'),
+			weekday: dayjs(formData.date).format('dddd'),
+			start: dayjs(formData.date).format('h:mm A'),
+			end: dayjs(formData.end).format('h:mm A'),
+		};
 		console.log(formData, 'New Lesson Attempt Sent');
 		try {
 			const response = await axios({
@@ -37,7 +55,6 @@ function CreateLesson() {
 					teacher: user._id,
 					student: formData.student,
 					date: date,
-					end: end,
 				},
 				url: 'http://localhost:5000/lessons/createLesson',
 				withCredentials: true,
@@ -56,24 +73,6 @@ function CreateLesson() {
 			console.log(err.response);
 		}
 	};
-
-	const [students, setStudents] = React.useState([]);
-
-	React.useEffect(() => {
-		(async () => {
-			try {
-				const response = await axios({
-					method: 'GET',
-					data: user._id,
-					url: 'http://localhost:5000/students',
-					withCredentials: true,
-				});
-				setStudents(response.data.sort((a, b) => (a.name > b.name ? 1 : -1)));
-			} catch (err) {
-				console.log(err);
-			}
-		})();
-	}, [user._id]);
 
 	const selectStudent = students.map((el, i) => {
 		return (
@@ -119,11 +118,12 @@ function CreateLesson() {
 										<span>Student:</span>
 										<select
 											className='select select-bordered w-full max-w-xs'
-											id='selectStudent'
+											id='student'
 											value={formData.student}
 											onChange={handleFormChange}
-											name='selectStudent'
+											name='student'
 										>
+											<option value=''>Select a Student</option>
 											{selectStudent}
 										</select>
 									</label>
@@ -155,6 +155,9 @@ function CreateLesson() {
 										</button>
 									</div>
 								</form>
+								<button className='btn btn-neutral' onClick={test}>
+									Test
+								</button>
 								<div
 									className={
 										msg.success

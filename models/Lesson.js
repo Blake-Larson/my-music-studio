@@ -18,10 +18,6 @@ const LessonSchema = new mongoose.Schema({
 		type: Object,
 		required: true,
 	},
-	end: {
-		type: Object,
-		required: true,
-	},
 });
 
 module.exports = mongoose.model('Lesson', LessonSchema);
