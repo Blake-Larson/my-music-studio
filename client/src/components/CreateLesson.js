@@ -4,7 +4,7 @@ import useAuth from '../auth/useAuth';
 import dayjs from 'dayjs';
 import useStudents from '../contexts/useStudents';
 
-function CreateLesson() {
+function CreateLesson({ getLessons, setGetLessons }) {
 	const { user } = useAuth();
 	const { students } = useStudents();
 
@@ -27,17 +27,17 @@ function CreateLesson() {
 		}));
 	}
 
-	const test = () => {
-		const date = {
-			dateObj: dayjs(formData.date),
-			date: dayjs(formData.date).format('MM/DD/YY'),
-			weekday: dayjs(formData.date).format('dddd'),
-			start: dayjs(formData.date).format('h:mm A'),
-			end: dayjs(formData.end).format('h:mm A'),
-		};
-		const end = dayjs(formData.end);
-		console.log(date);
-	};
+	// const test = () => {
+	// 	const date = {
+	// 		dateObj: dayjs(formData.date),
+	// 		date: dayjs(formData.date).format('MM/DD/YY'),
+	// 		weekday: dayjs(formData.date).format('dddd'),
+	// 		start: dayjs(formData.date).format('h:mm A'),
+	// 		end: dayjs(formData.end).format('h:mm A'),
+	// 	};
+	// 	const end = dayjs(formData.end);
+	// 	console.log(date);
+	// };
 	const handleSubmit = async event => {
 		event.preventDefault();
 		const date = {
@@ -59,6 +59,7 @@ function CreateLesson() {
 				url: 'http://localhost:5000/lessons/createLesson',
 				withCredentials: true,
 			});
+			setGetLessons(!getLessons);
 			console.log('From Server:', response);
 			setMsg({
 				text: response.data.message.msgBody,
@@ -84,7 +85,7 @@ function CreateLesson() {
 
 	return (
 		<div>
-			<label htmlFor='createStudent-modal' className='btn btn-square'>
+			<label htmlFor='createLesson-modal' className='btn btn-square'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					fill='none'
@@ -100,16 +101,18 @@ function CreateLesson() {
 					/>
 				</svg>
 			</label>
-			<input
-				type='checkbox'
-				id='createStudent-modal'
-				className='modal-toggle'
-			/>
-			<label htmlFor='createStudent-modal' className='modal cursor-pointer'>
+			<input type='checkbox' id='createLesson-modal' className='modal-toggle' />
+			<label htmlFor='createLesson-modal' className='modal cursor-pointer'>
 				<label>
 					<section className='flex flex-col items-center p-10'>
 						<div className='card w-96 shadow-xl bg-base-100'>
 							<div className='card-body'>
+								<label
+									htmlFor='createLesson-modal'
+									className='btn btn-sm btn-circle absolute right-2 top-2'
+								>
+									✕
+								</label>
 								<form
 									onSubmit={handleSubmit}
 									className='flex flex-col gap-2 form-control'
@@ -155,9 +158,6 @@ function CreateLesson() {
 										</button>
 									</div>
 								</form>
-								<button className='btn btn-neutral' onClick={test}>
-									Test
-								</button>
 								<div
 									className={
 										msg.success

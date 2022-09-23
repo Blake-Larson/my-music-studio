@@ -9,8 +9,8 @@ function Students() {
 	const location = useLocation();
 
 	return (
-		<div className='mt-12 lg:mt-0'>
-			<div className='flex justify-between p-5'>
+		<div>
+			<div className='p-3 mb-3'>
 				<h1 className='text-3xl text-center lg:text-start'>Students</h1>
 			</div>
 			{location.pathname === '/students' && (

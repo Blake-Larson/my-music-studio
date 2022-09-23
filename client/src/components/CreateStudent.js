@@ -86,6 +86,12 @@ function CreateStudent() {
 					<section className='flex flex-col items-center p-10'>
 						<div className='card w-96 shadow-xl bg-neutral'>
 							<div className='card-body'>
+								<label
+									htmlFor='createStudent-modal'
+									className='btn btn-sm btn-circle absolute right-2 top-2'
+								>
+									✕
+								</label>
 								<h1 className='card-title self-center mb-4 text-white'>
 									New Student
 								</h1>

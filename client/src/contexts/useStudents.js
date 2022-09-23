@@ -7,6 +7,7 @@ const authContext = React.createContext();
 function useStudents() {
 	const { user } = useAuth();
 	const [students, setStudents] = React.useState([]);
+	const [getStudents, setGetStudents] = React.useState(false);
 
 	React.useEffect(() => {
 		(async () => {
@@ -22,11 +23,13 @@ function useStudents() {
 				console.log(err);
 			}
 		})();
-	}, [user._id]);
+	}, [user._id, getStudents]);
 
 	return {
 		students,
 		setStudents,
+		getStudents,
+		setGetStudents,
 	};
 }
 

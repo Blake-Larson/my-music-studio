@@ -1,4 +1,5 @@
 const Student = require('../models/Student');
+const Lesson = require('../models/Lesson');
 
 module.exports = {
 	getStudents: async (req, res) => {
@@ -37,6 +38,27 @@ module.exports = {
 			res.status(500).json({
 				message: {
 					msgBody: 'Error has occured trying to create a new student.',
+					msgError: true,
+					err,
+				},
+			});
+		}
+	},
+	deleteStudent: async (req, res) => {
+		try {
+			await Student.deleteOne({ _id: req.body.id });
+			await Lesson.deleteOne({ student: req.body.id });
+			res.status(200).json({
+				message: {
+					msgBody: 'Deleted Student!',
+					msgError: false,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: {
+					msgBody: 'Error has occured trying to delete this student.',
 					msgError: true,
 					err,
 				},

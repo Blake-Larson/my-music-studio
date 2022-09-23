@@ -5,7 +5,9 @@ dayjs().format();
 module.exports = {
 	getLessons: async (req, res) => {
 		try {
-			const lessons = await Lesson.find({ teacher: req.user.id });
+			const lessons = await Lesson.find({ teacher: req.user.id }).sort({
+				'date.dateObj': 'asc',
+			});
 			res.json(lessons);
 		} catch (err) {
 			console.log(err);
@@ -24,7 +26,6 @@ module.exports = {
 				teacher: req.body.teacher,
 				student: req.body.student,
 				date: req.body.date,
-				end: req.body.end,
 			});
 			console.log('Lesson has been added!');
 			res.json({
@@ -38,6 +39,26 @@ module.exports = {
 			res.status(500).json({
 				message: {
 					msgBody: 'Error has occured trying to create a new lesson.',
+					msgError: true,
+					err,
+				},
+			});
+		}
+	},
+	deleteLesson: async (req, res) => {
+		try {
+			await Lesson.deleteOne({ _id: req.body.id });
+			res.status(200).json({
+				message: {
+					msgBody: 'Deleted Lesson!',
+					msgError: false,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: {
+					msgBody: 'Error has occured trying to delete this lesson.',
 					msgError: true,
 					err,
 				},

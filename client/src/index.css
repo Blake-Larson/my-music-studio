@@ -9,4 +9,8 @@
 	.custom-70vh {
 		height: 70vh;
 	}
+	/* .fade-out {
+		opacity: 0;
+		transition: opacity 1s ease;
+	} */
 }
