@@ -13,7 +13,6 @@ function StudentTable({ selectedStudent, setSelectedStudent }) {
 					<div
 						className='flex items-center space-x-3 hover:cursor-pointer'
 						onClick={() => {
-							setSelectedStudent(el);
 							navigate(`/students/${el._id}`);
 						}}
 					>
@@ -41,7 +40,6 @@ function StudentTable({ selectedStudent, setSelectedStudent }) {
 						<div
 							className='flex items-center space-x-3 hover:cursor-pointer'
 							onClick={() => {
-								setSelectedStudent(el);
 								navigate(`/students/${el._id}`);
 							}}
 						>

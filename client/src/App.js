@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
 import Dashboard from './pages/Dashboard';
 import Students from './pages/Students';
-import { StudentProvider } from './contexts/useStudents';
 
 const App = () => {
 	return (
@@ -15,9 +14,7 @@ const App = () => {
 				path='/dashboard'
 				element={
 					<RequireAuth>
-						<StudentProvider>
-							<Dashboard />
-						</StudentProvider>
+						<Dashboard />
 					</RequireAuth>
 				}
 			/>
@@ -25,9 +22,7 @@ const App = () => {
 				path='/students/*'
 				element={
 					<RequireAuth>
-						<StudentProvider>
-							<Students />
-						</StudentProvider>
+						<Students />
 					</RequireAuth>
 				}
 			/>

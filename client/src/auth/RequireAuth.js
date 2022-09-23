@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import useAuth from './useAuth';
 import Nav from '../components/Nav';
+import { StudentProvider } from '../contexts/useStudents';
+import { LessonProvider } from '../contexts/useLessons';
 
 export const RequireAuth = ({ children }) => {
 	const { authed, user, handleLogout } = useAuth();
@@ -21,7 +23,11 @@ export const RequireAuth = ({ children }) => {
 				<div className='drawer-content flex flex-col'>
 					{/* <!-- Page content here --> */}
 					{authed ? (
-						<div>{children}</div>
+						<StudentProvider>
+							<LessonProvider>
+								<div>{children}</div>
+							</LessonProvider>
+						</StudentProvider>
 					) : (
 						<div className='flex justify-center mt-10'>
 							<button className='btn loading'>loading</button>
@@ -29,7 +35,7 @@ export const RequireAuth = ({ children }) => {
 					)}
 					<label
 						htmlFor='drawer'
-						className='btn btn-square drawer-button lg:hidden fixed top-2 left-2 z-50'
+						className='btn btn-square drawer-button lg:hidden fixed top-2 left-2 z-50 opacity-60 hover:opacity-100'
 					>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'

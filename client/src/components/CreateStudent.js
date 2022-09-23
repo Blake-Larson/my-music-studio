@@ -2,9 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import useAuth from '../auth/useAuth';
 import useStringHook from '../hooks/useStringHook';
+import useStudents from '../contexts/useStudents';
 
 function CreateStudent() {
 	const { user } = useAuth();
+	const { getStudents, setGetStudents } = useStudents();
 	const { capitolizeFirst } = useStringHook();
 
 	const [msg, setMsg] = React.useState({
@@ -15,7 +17,9 @@ function CreateStudent() {
 	const [formData, setFormData] = React.useState({
 		name: '',
 		age: '',
+		phone: '',
 		email: '',
+		primaryContact: '',
 		instrument: '',
 	});
 
@@ -36,7 +40,9 @@ function CreateStudent() {
 				data: {
 					name: capitolizeFirst(formData.name),
 					age: formData.age,
+					phone: formData.phone,
 					email: formData.email.toLowerCase(),
+					primaryContact: formData.primaryContact,
 					instrument: capitolizeFirst(formData.instrument),
 					teacher: user._id,
 				},
@@ -48,6 +54,7 @@ function CreateStudent() {
 				text: response.data.message.msgBody,
 				success: true,
 			});
+			setGetStudents(!getStudents);
 			event.target.reset();
 		} catch (err) {
 			setMsg({
@@ -85,23 +92,31 @@ function CreateStudent() {
 				<label>
 					<section className='flex flex-col items-center p-10'>
 						<div className='card w-96 shadow-xl bg-neutral'>
-							<div className='card-body'>
+							<div className='card-body flex flex-col gap-3 max-h-96 overflow-auto'>
 								<label
 									htmlFor='createStudent-modal'
-									className='btn btn-sm btn-circle absolute right-2 top-2'
+									className='btn btn-sm btn-circle absolute right-2 top-2 bg-base-100 text-neutral'
 								>
 									✕
 								</label>
-								<h1 className='card-title self-center mb-4 text-white'>
+								<h1 className='card-title self-center text-base-100'>
 									New Student
 								</h1>
-								<form onSubmit={handleSubmit} className='flex flex-col gap-2'>
+								<span className='text-center text-base-100'>
+									Information can be updated later from the student profile
+									page.
+								</span>
+								<form
+									onSubmit={handleSubmit}
+									className='flex flex-col gap-2 form-control'
+								>
 									<input
 										type='text'
 										name='name'
 										placeholder='Name'
 										onChange={handleFormChange}
 										className='input input-bordered w-full max-w-xs'
+										required
 									/>
 									<input
 										type='text'
@@ -111,9 +126,24 @@ function CreateStudent() {
 										className='input input-bordered w-full max-w-xs'
 									/>
 									<input
+										type='tel'
+										pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+										name='phone'
+										placeholder='123-456-7890'
+										onChange={handleFormChange}
+										className='input input-bordered w-full max-w-xs'
+									/>
+									<input
 										type='text'
 										name='email'
 										placeholder='Email'
+										onChange={handleFormChange}
+										className='input input-bordered w-full max-w-xs'
+									/>
+									<input
+										type='text'
+										name='primaryContact'
+										placeholder='Primary Contact'
 										onChange={handleFormChange}
 										className='input input-bordered w-full max-w-xs'
 									/>
@@ -134,7 +164,7 @@ function CreateStudent() {
 									className={
 										msg.success
 											? 'text-success text-center'
-											: 'text-warning text-center'
+											: 'text-error text-center'
 									}
 								>
 									{msg ? msg.text : ''}

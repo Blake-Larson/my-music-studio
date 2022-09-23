@@ -91,7 +91,7 @@ function Login() {
 									className={
 										msg.success
 											? 'text-success text-center'
-											: 'text-warning text-center'
+											: 'text-error text-center'
 									}
 								>
 									{msg ? msg.text : ''}

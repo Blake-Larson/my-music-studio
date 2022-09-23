@@ -4,7 +4,7 @@
 
 @layer base {
 	.custom-80vh {
-		height: 80vh;
+		min-height: 80vh;
 	}
 	.custom-70vh {
 		height: 70vh;

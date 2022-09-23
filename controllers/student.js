@@ -22,8 +22,12 @@ module.exports = {
 			await Student.create({
 				name: req.body.name,
 				age: req.body.age,
+				phone: req.body.phone,
 				email: req.body.email,
+				primaryContact: req.body.primaryContact,
 				instrument: req.body.instrument,
+				repertoire: req.body.repertoire,
+				concepts: req.body.concepts,
 				teacher: req.user._id,
 			});
 			console.log('Student has been added!');

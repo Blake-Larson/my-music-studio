@@ -3,10 +3,12 @@ import axios from 'axios';
 import useAuth from '../auth/useAuth';
 import dayjs from 'dayjs';
 import useStudents from '../contexts/useStudents';
+import useLessons from '../contexts/useLessons';
 
-function CreateLesson({ getLessons, setGetLessons }) {
+function CreateLesson() {
 	const { user } = useAuth();
 	const { students } = useStudents();
+	const { getLessons, setGetLessons } = useLessons();
 
 	const [msg, setMsg] = React.useState({
 		text: '',
@@ -27,17 +29,6 @@ function CreateLesson({ getLessons, setGetLessons }) {
 		}));
 	}
 
-	// const test = () => {
-	// 	const date = {
-	// 		dateObj: dayjs(formData.date),
-	// 		date: dayjs(formData.date).format('MM/DD/YY'),
-	// 		weekday: dayjs(formData.date).format('dddd'),
-	// 		start: dayjs(formData.date).format('h:mm A'),
-	// 		end: dayjs(formData.end).format('h:mm A'),
-	// 	};
-	// 	const end = dayjs(formData.end);
-	// 	console.log(date);
-	// };
 	const handleSubmit = async event => {
 		event.preventDefault();
 		const date = {
@@ -162,7 +153,7 @@ function CreateLesson({ getLessons, setGetLessons }) {
 									className={
 										msg.success
 											? 'text-success text-center'
-											: 'text-warning text-center'
+											: 'text-error text-center'
 									}
 								>
 									{msg ? msg.text : ''}
