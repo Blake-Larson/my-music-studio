@@ -4,16 +4,14 @@ import useAuth from '../auth/useAuth';
 import dayjs from 'dayjs';
 import useStudents from '../contexts/useStudents';
 import useLessons from '../contexts/useLessons';
+import useMsg from '../contexts/useMsg';
 
 function CreateLesson() {
 	const { user } = useAuth();
 	const { students } = useStudents();
 	const { getLessons, setGetLessons } = useLessons();
 
-	const [msg, setMsg] = React.useState({
-		text: '',
-		success: false,
-	});
+	const { msg, setMsg, clearMsg, setClearMsg } = useMsg();
 
 	const [formData, setFormData] = React.useState({
 		student: '',
@@ -52,16 +50,22 @@ function CreateLesson() {
 			});
 			setGetLessons(!getLessons);
 			console.log('From Server:', response);
-			setMsg({
-				text: response.data.message.msgBody,
-				success: true,
-			});
+			setMsg(
+				{
+					text: response.data.message.msgBody,
+					success: true,
+				},
+				setClearMsg(!clearMsg)
+			);
 			event.target.reset();
 		} catch (err) {
-			setMsg({
-				text: err.response.data.message.msgBody,
-				success: false,
-			});
+			setMsg(
+				{
+					text: err.response.data.message.msgBody,
+					success: false,
+				},
+				setClearMsg(!clearMsg)
+			);
 			console.log(err.response);
 		}
 	};

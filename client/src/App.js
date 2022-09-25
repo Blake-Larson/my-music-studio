@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
 import Dashboard from './pages/Dashboard';
 import Students from './pages/Students';
+import UserAccount from './pages/UserAccount';
 
 const App = () => {
 	return (
@@ -23,6 +24,14 @@ const App = () => {
 				element={
 					<RequireAuth>
 						<Students />
+					</RequireAuth>
+				}
+			/>
+			<Route
+				path='/account/*'
+				element={
+					<RequireAuth>
+						<UserAccount />
 					</RequireAuth>
 				}
 			/>

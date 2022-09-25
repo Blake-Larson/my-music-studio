@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { AuthProvider } from './auth/useAuth';
+import { MsgProvider } from './contexts/useMsg';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
@@ -10,7 +11,9 @@ root.render(
 	<React.StrictMode>
 		<Router>
 			<AuthProvider>
-				<App />
+				<MsgProvider>
+					<App />
+				</MsgProvider>
 			</AuthProvider>
 		</Router>
 	</React.StrictMode>

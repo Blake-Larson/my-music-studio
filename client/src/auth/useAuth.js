@@ -35,6 +35,7 @@ function useAuth() {
 	return {
 		authed,
 		user,
+		setUser,
 		handleLogin(user) {
 			setAuthed(true);
 			setUser(user);

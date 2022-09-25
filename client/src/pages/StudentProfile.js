@@ -3,6 +3,7 @@ import useStudents from '../contexts/useStudents';
 import useLessons from '../contexts/useLessons';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import useMsg from '../contexts/useMsg';
 
 function StudentProfile() {
 	const { students, getStudents, setGetStudents } = useStudents();
@@ -11,10 +12,26 @@ function StudentProfile() {
 	const [student, setStudent] = React.useState({});
 	const [editMode, setEditMode] = React.useState(false);
 	const { id } = useParams();
+	const { msg, setMsg, clearMsg, setClearMsg } = useMsg();
+	const [formData, setFormData] = React.useState({});
 
 	React.useEffect(() => {
 		setStudent(students.find(student => student._id === id));
 	}, [id, students]);
+
+	React.useEffect(() => {
+		if (student) {
+			setFormData({
+				name: student.name,
+				age: student.age,
+				phone: student.phone,
+				email: student.email,
+				primaryContact: student.primaryContact,
+				instrument: student.instrument,
+				status: student.status,
+			});
+		}
+	}, [student]);
 
 	async function deleteLesson(studentID) {
 		if (window.confirm('Are you sure you want to delete this student?')) {
@@ -34,22 +51,6 @@ function StudentProfile() {
 		}
 	}
 
-	const [msg, setMsg] = React.useState({
-		text: '',
-		success: false,
-	});
-
-	const [formData, setFormData] = React.useState({
-		toggle: false,
-		name: '',
-		age: '',
-		phone: '',
-		email: '',
-		primaryContact: '',
-		instrument: '',
-		active: '',
-	});
-
 	function handleFormChange(event) {
 		const { name, value, type, checked } = event.target;
 		setFormData(prevformData => ({
@@ -62,54 +63,40 @@ function StudentProfile() {
 		event.preventDefault();
 		try {
 			const response = await axios({
-				method: 'POST',
+				method: 'PUT',
 				data: {
+					id: student._id,
+					name: formData.name,
+					age: formData.age,
+					phone: formData.phone,
 					email: formData.email,
-					password: formData.password,
+					primaryContact: formData.primaryContact,
+					instrument: formData.instrument,
+					status: formData.status,
 				},
-				url: 'http://localhost:5000/login',
+				url: 'http://localhost:5000/students/updateStudent',
 				withCredentials: true,
 			});
-			console.log('From Server:', response.data.user);
-			setMsg({
-				text: response.data.message.msgBody,
-				success: true,
-			});
+			setMsg(
+				{
+					text: response.data.message.msgBody,
+					success: true,
+				},
+				setClearMsg(!clearMsg)
+			);
+			setEditMode(!editMode);
+			setGetStudents(!getStudents);
 		} catch (err) {
 			console.log(err);
-			setMsg({
-				text: err.response.data.message.msgBody,
-				success: false,
-			});
+			setMsg(
+				{
+					text: err.response.data.message.msgBody,
+					success: false,
+				},
+				setClearMsg(!clearMsg)
+			);
 		}
 	};
-
-	<form onSubmit={handleSubmit} className='flex flex-col gap-2'>
-		<input
-			type='text'
-			name='email'
-			placeholder='Email'
-			onChange={handleFormChange}
-			className='input input-bordered w-full max-w-xs'
-		/>
-		<input
-			type='password'
-			name='password'
-			placeholder='Password'
-			onChange={handleFormChange}
-			className='input input-bordered w-full max-w-xs'
-		/>
-		<div className='card-actions justify-center mt-4'>
-			<button className='btn btn-primary'>Save</button>
-		</div>
-	</form>;
-	<div
-		className={
-			msg.success ? 'text-success text-center' : 'text-error text-center'
-		}
-	>
-		{msg ? msg.text : ''}
-	</div>;
 
 	let lesson;
 	if (lessons && student) {
@@ -118,23 +105,11 @@ function StudentProfile() {
 
 	return (
 		<div>
-			<label
-				className='label cursor-pointer flex flex-col'
-				onClick={() => setEditMode(!editMode)}
-			>
-				<span className='label-text'>
-					{formData.toggle ? 'Editing...' : 'Edit Mode'}
-				</span>
-				<input
-					type='checkbox'
-					name='toggle'
-					className='toggle checked:toggle-primary'
-					value={formData.toggle}
-					onChange={handleFormChange}
-				/>
-			</label>
 			{student && (
-				<div className='bg-base-200 p-5 rounded mx-3 custom-80vh text-xl relative'>
+				<form
+					onSubmit={handleSubmit}
+					className='bg-base-200 p-5 rounded mx-3 custom-80vh text-xl relative pb-20'
+				>
 					<div className='flex flex-col gap-5'>
 						<div className='flex gap-3'>
 							<div className='avatar'>
@@ -150,10 +125,9 @@ function StudentProfile() {
 									<input
 										type='text'
 										name='name'
-										placeholder={student.name}
+										placeholder={student.name ? student.name : 'Name'}
 										onChange={handleFormChange}
 										className='input input-bordered w-full max-w-xs'
-										required
 									/>
 								) : (
 									<h3 className='text-2xl'>{student.name}</h3>
@@ -162,7 +136,9 @@ function StudentProfile() {
 									<input
 										type='text'
 										name='instrument'
-										placeholder={student.instrument}
+										placeholder={
+											student.instrument ? student.instrument : 'Instrument'
+										}
 										onChange={handleFormChange}
 										className='input input-bordered w-full max-w-xs'
 									/>
@@ -181,16 +157,20 @@ function StudentProfile() {
 								</div>
 							</div>
 						)}
-						<div className='text-lg flex flex-col p-2 rounded-xl'>
+						<div className='text-lg flex flex-col p-2 rounded-xl gap-3'>
 							<div>
 								<h5 className='font-semibold'>Repertoire</h5>
 								<ul className='list-disc list-inside'>
-									<li>{student.name}</li>
+									<li>Coming soon...</li>
 								</ul>
+							</div>
+							<div>
 								<h5 className='font-semibold'>Concepts</h5>
 								<ul className='list-disc list-inside'>
-									<li>{student.name}</li>
+									<li>Coming soon...</li>
 								</ul>
+							</div>
+							<div>
 								<h5 className='font-semibold'>Contact Information</h5>
 								<ul className='list-disc list-inside'>
 									{editMode ? (
@@ -198,7 +178,9 @@ function StudentProfile() {
 											type='tel'
 											pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
 											name='phone'
-											placeholder={student.phone}
+											placeholder={
+												student.phone ? student.phone : '123-456-7890'
+											}
 											onChange={handleFormChange}
 											className='input input-bordered w-full max-w-xs'
 										/>
@@ -209,7 +191,7 @@ function StudentProfile() {
 										<input
 											type='text'
 											name='email'
-											placeholder={student.email}
+											placeholder={student.email ? student.email : 'Email'}
 											onChange={handleFormChange}
 											className='input input-bordered w-full max-w-xs'
 										/>
@@ -220,7 +202,11 @@ function StudentProfile() {
 										<input
 											type='text'
 											name='primaryContact'
-											placeholder={student.primaryContact}
+											placeholder={
+												student.primaryContact
+													? student.phone
+													: 'Primary Contact'
+											}
 											onChange={handleFormChange}
 											className='input input-bordered w-full max-w-xs'
 										/>
@@ -228,6 +214,8 @@ function StudentProfile() {
 										<li>Primary Contact: {student.primaryContact}</li>
 									)}
 								</ul>
+							</div>
+							<div>
 								<h5 className='font-semibold'>Status</h5>
 								<ul className='list-disc list-inside'>
 									{editMode ? (
@@ -249,8 +237,56 @@ function StudentProfile() {
 							</div>
 						</div>
 					</div>
+					{/* <label
+						className='label cursor-pointer flex flex-col'
+						onClick={() => setEditMode(!editMode)}
+					>
+						<span className='label-text'>
+							{formData.toggle ? 'Editing...' : 'Edit Mode'}
+						</span>
+						<input
+							type='checkbox'
+							name='toggle'
+							className='toggle checked:toggle-primary'
+							value={formData.toggle}
+							onChange={handleFormChange}
+						/>
+					</label> */}
+					<div
+						className={
+							msg.success
+								? 'text-success text-center'
+								: 'text-error text-center'
+						}
+					>
+						{msg ? msg.text : ''}
+					</div>
+					<div className='absolute left-4 bottom-4 flex gap-3'>
+						{!editMode && (
+							<div
+								className='btn btn-ghost hover:bg-error border-base-300'
+								onClick={() => setEditMode(!editMode)}
+							>
+								edit
+							</div>
+						)}
+						{editMode && (
+							<button className='btn btn-ghost hover:bg-error border-base-300'>
+								Save
+							</button>
+						)}
+						{editMode && (
+							<div
+								className='btn btn-ghost hover:bg-error border-base-300'
+								onClick={() => setEditMode(!editMode)}
+							>
+								cancel
+							</div>
+						)}
+					</div>
+
 					<div className='absolute right-4 bottom-4'>
-						<button
+						<div
 							className='btn btn-ghost btn-square hover:bg-error border border-base-300'
 							onClick={() => deleteLesson(student._id)}
 						>
@@ -268,9 +304,9 @@ function StudentProfile() {
 									d='M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0'
 								/>
 							</svg>
-						</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			)}
 		</div>
 	);

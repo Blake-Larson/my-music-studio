@@ -69,6 +69,9 @@ export const RequireAuth = ({ children }) => {
 							<li>
 								<NavLink to='/students'>Students</NavLink>
 							</li>
+							<li>
+								<NavLink to='/account'>Account Settings</NavLink>
+							</li>
 						</ul>
 						<div className='flex flex-col items-center gap-3'>
 							<div className='flex gap-3'>

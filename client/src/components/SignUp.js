@@ -1,11 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import useMsg from '../contexts/useMsg';
 
 function SignUp() {
-	const [msg, setMsg] = React.useState({
-		text: '',
-		success: false,
-	});
+	const { msg, setMsg, clearMsg, setClearMsg } = useMsg();
 
 	const [signUpData, setSignUpData] = React.useState({
 		userName: '',
@@ -38,16 +36,21 @@ function SignUp() {
 				withCredentials: true,
 			});
 			console.log('From Server:', response);
-			setMsg({
-				text: response.data.message.msgBody,
-				success: true,
-			});
+			setMsg(
+				{
+					text: response.data.message.msgBody,
+					success: true,
+				},
+				setClearMsg(!clearMsg)
+			);
 		} catch (err) {
-			setMsg({
-				text: err.response.data.message.msgBody,
-				success: false,
-			});
-			console.log(err.response);
+			setMsg(
+				{
+					text: err.response.data.message.msgBody,
+					success: false,
+				},
+				setClearMsg(!clearMsg)
+			);
 		}
 	};
 

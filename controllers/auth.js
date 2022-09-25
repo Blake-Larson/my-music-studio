@@ -180,3 +180,29 @@ exports.getAuthenticated = (req, res) => {
 		}
 	});
 };
+exports.updateUser = async (req, res) => {
+	try {
+		await User.findOneAndUpdate(
+			{ _id: req.body.id },
+			{
+				userName: req.body.userName,
+				email: req.body.email,
+			}
+		);
+		res.status(200).json({
+			message: {
+				msgBody: 'Updated user information!',
+				msgError: false,
+			},
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({
+			message: {
+				msgBody: 'Error has occured when trying to update this user.',
+				msgError: true,
+				err,
+			},
+		});
+	}
+};

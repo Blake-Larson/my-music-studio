@@ -31,7 +31,7 @@ function Lessons() {
 		let student = students.find(student => student._id === lesson.student);
 		return (
 			<div key={lesson._id}>
-				<div className='collapse collapse-arrow rounded-xl border border-base-300 shadow-xl bg-base-200'>
+				<div className='collapse collapse-arrow rounded-xl border border-base-300 shadow-lg bg-base-200'>
 					<input type='checkbox' />
 					<div className='collapse-title text-lg font-medium flex w-96 justify-between items-center'>
 						<div className='flex flex-col'>

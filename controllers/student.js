@@ -10,7 +10,7 @@ module.exports = {
 			console.log(err);
 			res.status(500).json({
 				message: {
-					msgBody: 'Error has occured trying to find students.',
+					msgBody: 'Error has occured when trying to find students.',
 					msgError: true,
 					err,
 				},
@@ -30,7 +30,6 @@ module.exports = {
 				concepts: req.body.concepts,
 				teacher: req.user._id,
 			});
-			console.log('Student has been added!');
 			res.json({
 				message: {
 					msgBody: 'Student added!',
@@ -41,7 +40,40 @@ module.exports = {
 			console.log(err);
 			res.status(500).json({
 				message: {
-					msgBody: 'Error has occured trying to create a new student.',
+					msgBody: 'Error has occured when trying to create a new student.',
+					msgError: true,
+					err,
+				},
+			});
+		}
+	},
+	updateStudent: async (req, res) => {
+		try {
+			await Student.findOneAndUpdate(
+				{ _id: req.body.id },
+				{
+					name: req.body.name,
+					age: req.body.age,
+					phone: req.body.phone,
+					email: req.body.email,
+					primaryContact: req.body.primaryContact,
+					instrument: req.body.instrument,
+					repertoire: req.body.repertoire,
+					concepts: req.body.concepts,
+					teacher: req.user._id,
+				}
+			);
+			res.status(200).json({
+				message: {
+					msgBody: 'Updated Student!',
+					msgError: false,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: {
+					msgBody: 'Error has occured when trying to update this student.',
 					msgError: true,
 					err,
 				},
@@ -62,7 +94,7 @@ module.exports = {
 			console.log(err);
 			res.status(500).json({
 				message: {
-					msgBody: 'Error has occured trying to delete this student.',
+					msgBody: 'Error has occured when trying to delete this student.',
 					msgError: true,
 					err,
 				},

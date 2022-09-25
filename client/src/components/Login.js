@@ -2,16 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
 import axios from 'axios';
+import useMsg from '../contexts/useMsg';
 
 function Login() {
 	let navigate = useNavigate();
 
 	const { handleLogin } = useAuth();
 
-	const [msg, setMsg] = React.useState({
-		text: '',
-		success: false,
-	});
+	const { msg, setMsg, clearMsg, setClearMsg } = useMsg();
 
 	const [loginData, setLoginData] = React.useState({
 		email: '',
@@ -39,18 +37,24 @@ function Login() {
 				withCredentials: true,
 			});
 			console.log('From Server:', response.data.user);
-			setMsg({
-				text: response.data.message.msgBody,
-				success: true,
-			});
+			setMsg(
+				{
+					text: response.data.message.msgBody,
+					success: true,
+				},
+				setClearMsg(!clearMsg)
+			);
 			handleLogin(response.data.user);
 			navigate('/dashboard');
 		} catch (err) {
 			console.log(err);
-			setMsg({
-				text: err.response.data.message.msgBody,
-				success: false,
-			});
+			setMsg(
+				{
+					text: err.response.data.message.msgBody,
+					success: false,
+				},
+				setClearMsg(!clearMsg)
+			);
 		}
 	};
 

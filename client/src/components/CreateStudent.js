@@ -3,16 +3,14 @@ import axios from 'axios';
 import useAuth from '../auth/useAuth';
 import useStringHook from '../hooks/useStringHook';
 import useStudents from '../contexts/useStudents';
+import useMsg from '../contexts/useMsg';
 
 function CreateStudent() {
 	const { user } = useAuth();
 	const { getStudents, setGetStudents } = useStudents();
 	const { capitolizeFirst } = useStringHook();
 
-	const [msg, setMsg] = React.useState({
-		text: '',
-		success: false,
-	});
+	const { msg, setMsg, clearMsg, setClearMsg } = useMsg();
 
 	const [formData, setFormData] = React.useState({
 		name: '',
@@ -50,17 +48,23 @@ function CreateStudent() {
 				withCredentials: true,
 			});
 			console.log('From Server:', response);
-			setMsg({
-				text: response.data.message.msgBody,
-				success: true,
-			});
+			setMsg(
+				{
+					text: response.data.message.msgBody,
+					success: true,
+				},
+				setClearMsg(!clearMsg)
+			);
 			setGetStudents(!getStudents);
 			event.target.reset();
 		} catch (err) {
-			setMsg({
-				text: err.response.data.message.msgBody,
-				success: false,
-			});
+			setMsg(
+				{
+					text: response.data.message.msgBody,
+					success: false,
+				},
+				setClearMsg(!clearMsg)
+			);
 			console.log(err.response);
 		}
 	};
