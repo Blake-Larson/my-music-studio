@@ -1,6 +1,8 @@
 const passport = require('passport');
 const validator = require('validator');
 const User = require('../models/User');
+const Lesson = require('../models/Lesson');
+const Student = require('../models/Student');
 
 exports.postLogin = (req, res, next) => {
 	if (!validator.isEmail(req.body.email)) {
@@ -200,6 +202,28 @@ exports.updateUser = async (req, res) => {
 		res.status(500).json({
 			message: {
 				msgBody: 'Error has occured when trying to update this user.',
+				msgError: true,
+				err,
+			},
+		});
+	}
+};
+exports.deleteUser = async (req, res) => {
+	try {
+		await User.deleteOne({ _id: req.body.id });
+		await Lesson.deleteOne({ teacher: req.body.id });
+		await Student.deleteOne({ teacher: req.body.id });
+		res.status(200).json({
+			message: {
+				msgBody: 'Deleted Account!',
+				msgError: false,
+			},
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({
+			message: {
+				msgBody: 'Error has occured when trying to delete this account.',
 				msgError: true,
 				err,
 			},

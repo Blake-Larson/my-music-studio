@@ -2,7 +2,9 @@
 module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
-		extend: {},
+		fontFamily: {
+			lemon: ['Lemonada'],
+		},
 	},
 	plugins: [require('daisyui')],
 };

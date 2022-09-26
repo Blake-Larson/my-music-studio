@@ -1,14 +1,24 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 import Nav from '../components/Nav';
 import { StudentProvider } from '../contexts/useStudents';
 import { LessonProvider } from '../contexts/useLessons';
+import Logo from '../components/Logo';
 
 export const RequireAuth = ({ children }) => {
 	const { authed, user, handleLogout } = useAuth();
-
+	const navigate = useNavigate();
 	const location = useLocation();
+
+	React.useEffect(() => {
+		const clear = setTimeout(() => {
+			console.log('effect ran');
+			!authed && navigate('/login');
+		}, 1500);
+
+		return () => clearTimeout(clear);
+	}, [authed, navigate]);
 
 	// return authed === true ? (
 	// 	children
@@ -55,13 +65,10 @@ export const RequireAuth = ({ children }) => {
 				</div>
 				<div className='drawer-side'>
 					<label htmlFor='drawer' className='drawer-overlay'></label>
-					<div className='menu p-4 overflow-y-auto bg-base-100 lg:bg-base-200 text-base-content w-64 flex flex-col gap-5'>
+					<div className='menu p-4 overflow-y-auto bg-base-100 lg:bg-base-200 text-base-content w-64 flex flex-col'>
 						{/* <!-- Sidebar content here --> */}
-
-						<h2 className='font-bold text-center text-xl'>
-							<NavLink to='/'>My Music Studio</NavLink>
-						</h2>
-
+						<Logo />
+						<div className='divider'></div>
 						<ul className='custom-70vh flex flex-col gap-3'>
 							<li>
 								<NavLink to='/dashboard'>Dashboard</NavLink>

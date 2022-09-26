@@ -60,7 +60,7 @@ function CreateStudent() {
 		} catch (err) {
 			setMsg(
 				{
-					text: response.data.message.msgBody,
+					text: err.response.data.message.msgBody,
 					success: false,
 				},
 				setClearMsg(!clearMsg)
@@ -96,7 +96,7 @@ function CreateStudent() {
 				<label>
 					<section className='flex flex-col items-center p-10'>
 						<div className='card w-96 shadow-xl bg-neutral'>
-							<div className='card-body flex flex-col gap-3 max-h-96 overflow-auto'>
+							<div className='card-body flex flex-col gap-3 max-h-96 overflow-auto md:max-h-full'>
 								<label
 									htmlFor='createStudent-modal'
 									className='btn btn-sm btn-circle absolute right-2 top-2 bg-base-100 text-neutral'

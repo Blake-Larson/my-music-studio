@@ -10,4 +10,6 @@ router.post('/signup', authController.postSignup);
 
 router.put('/updateUser', authController.updateUser);
 
+router.delete('/delete', authController.deleteUser);
+
 module.exports = router;

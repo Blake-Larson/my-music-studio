@@ -6,7 +6,7 @@ import useMsg from '../contexts/useMsg';
 
 function UserAccount() {
 	const navigate = useNavigate();
-	const { user, setUser } = useAuth();
+	const { user, setUser, setAuthed } = useAuth();
 	const { msg, setMsg, clearMsg, setClearMsg } = useMsg();
 	const [editMode, setEditMode] = React.useState(false);
 
@@ -77,6 +77,7 @@ function UserAccount() {
 				});
 				console.log('From Server:', response);
 				navigate('/');
+				setAuthed(false);
 			} catch (err) {
 				console.log(err.response);
 			}

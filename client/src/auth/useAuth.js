@@ -34,6 +34,7 @@ function useAuth() {
 
 	return {
 		authed,
+		setAuthed,
 		user,
 		setUser,
 		handleLogin(user) {
