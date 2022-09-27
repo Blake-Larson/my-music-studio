@@ -15,7 +15,7 @@ function useMsg() {
 				text: '',
 				success: false,
 			});
-		}, 5000);
+		}, 7000);
 
 		return () => clearTimeout(clear);
 	}, [clearMsg]);
