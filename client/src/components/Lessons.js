@@ -33,24 +33,25 @@ function Lessons() {
 			<div key={lesson._id}>
 				<div className='collapse collapse-arrow rounded-xl border border-base-300 shadow-lg bg-base-200'>
 					<input type='checkbox' />
-					<div className='collapse-title text-lg font-medium flex w-96 justify-between items-center'>
-						<div className='flex flex-col'>
-							<span>{student?.name}</span>
-							<span>{`${lesson?.date.start} - ${lesson?.date.end}`}</span>
+					<div className='collapse-title'>
+						<div className='text-lg font-medium flex justify-between items-center'>
+							<div className='flex flex-col'>
+								<span>{student?.name}</span>
+								<span>{`${lesson?.date.start} - ${lesson?.date.end}`}</span>
+							</div>
+							<span>{lesson?.date.date}</span>
 						</div>
-
-						<span>{lesson?.date.date}</span>
 					</div>
-					<div className='collapse-content gap-5 flex flex-col bg-base-100 '>
+					<div className='collapse-content gap-5 flex flex-col bg-base-100'>
 						<div className='text-lg flex flex-col p-2 rounded-xl'>
 							<div>
 								<h5 className='font-semibold'>Repertoire</h5>
 								<ul className='list-disc list-inside'>
-									<li>{student?.name}</li>
+									<li>Coming soon...</li>
 								</ul>
 								<h5 className='font-semibold'>Concepts</h5>
 								<ul className='list-disc list-inside'>
-									<li>{student?.name}</li>
+									<li>Coming soon...</li>
 								</ul>
 							</div>
 						</div>
@@ -88,7 +89,7 @@ function Lessons() {
 	});
 
 	return (
-		<div className='flex flex-col gap-5'>
+		<div className='flex flex-col gap-5 w-full max-w-2xl px-5'>
 			{lessons && students && lessonArr}
 		</div>
 	);

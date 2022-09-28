@@ -71,7 +71,10 @@ function CreateStudent() {
 
 	return (
 		<div>
-			<label htmlFor='createStudent-modal' className='btn btn-square'>
+			<label
+				htmlFor='createStudent-modal'
+				className='btn btn-square btn-primary'
+			>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					fill='none'
