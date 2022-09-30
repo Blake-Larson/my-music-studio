@@ -194,6 +194,15 @@ function StudentProfile() {
 									) : (
 										<li>Add an item...</li>
 									)}
+									<li className={'hidden'}>
+										<input
+											type='text'
+											name='instrument'
+											placeholder={'Add an item...'}
+											onChange={handleFormChange}
+											className='input input-bordered w-full max-w-xs'
+										/>
+									</li>
 								</ul>
 							</div>
 							<div>
@@ -213,7 +222,7 @@ function StudentProfile() {
 							</div>
 							<div>
 								<h5 className='font-semibold'>Contact Information</h5>
-								<ul className='list-disc list-inside'>
+								<ul className='list-disc list-inside max-w-xl'>
 									{editMode ? (
 										<input
 											type='tel'

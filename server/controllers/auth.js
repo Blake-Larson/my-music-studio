@@ -4,6 +4,14 @@ const User = require('../models/User');
 const Lesson = require('../models/Lesson');
 const Student = require('../models/Student');
 
+exports.serverMessage = (req, res) => {
+	res.end(
+		JSON.stringify({
+			message: 'Server Running...',
+		})
+	);
+};
+
 exports.postLogin = (req, res, next) => {
 	if (!validator.isEmail(req.body.email)) {
 		res.status(400).json({

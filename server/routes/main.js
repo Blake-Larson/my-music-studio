@@ -2,14 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/auth');
 
-router.get(
-	'/',
-	res.end(
-		JSON.stringify({
-			message: 'Server Running...',
-		})
-	)
-);
+router.get('/', authController.serverMessage);
 router.get('/logout', authController.logout);
 router.get('/authenticated', authController.getAuthenticated);
 
