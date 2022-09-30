@@ -41,7 +41,9 @@ function CreateStudent() {
 					phone: formData.phone,
 					email: formData.email.toLowerCase(),
 					primaryContact: formData.primaryContact,
-					instrument: capitolizeFirst(formData.instrument),
+					instrument: formData.instrument
+						? capitolizeFirst(formData.instrument)
+						: '',
 					teacher: user._id,
 				},
 				url: 'http://localhost:5000/students/createStudent',
@@ -58,6 +60,7 @@ function CreateStudent() {
 			setGetStudents(!getStudents);
 			event.target.reset();
 		} catch (err) {
+			console.log(err);
 			setMsg(
 				{
 					text: err.response.data.message.msgBody,

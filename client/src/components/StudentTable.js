@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useStudents from '../contexts/useStudents';
 
-function StudentTable({ selectedStudent, setSelectedStudent }) {
+function StudentTable() {
 	let navigate = useNavigate();
 	const { students } = useStudents();
 
