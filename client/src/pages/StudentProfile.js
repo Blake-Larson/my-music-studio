@@ -4,8 +4,8 @@ import useLessons from '../contexts/useLessons';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import useMsg from '../contexts/useMsg';
-import SmallAddButton from '../components/SmallAddButton';
 import DeleteButton from '../components/DeleteButton';
+import List from '../components/List';
 
 function StudentProfile() {
 	const { students, getStudents, setGetStudents } = useStudents();
@@ -26,6 +26,8 @@ function StudentProfile() {
 			setFormData({
 				name: student.name,
 				age: student.age,
+				repertoire: student.repertoire,
+				concepts: student.concepts,
 				phone: student.phone,
 				email: student.email,
 				primaryContact: student.primaryContact,
@@ -62,6 +64,7 @@ function StudentProfile() {
 	}
 
 	const handleSubmit = async event => {
+		console.log(formData);
 		event.preventDefault();
 		try {
 			const response = await axios({
@@ -70,6 +73,8 @@ function StudentProfile() {
 					id: student._id,
 					name: formData.name,
 					age: formData.age,
+					repertoire: student.repertoire,
+					concepts: student.concepts,
 					phone: formData.phone,
 					email: formData.email,
 					primaryContact: formData.primaryContact,
@@ -128,205 +133,172 @@ function StudentProfile() {
 					</svg>
 				</div>
 			</div>
+
 			{student && (
-				<form
-					onSubmit={handleSubmit}
-					className='bg-base-200 p-5 rounded mx-3 custom-80vh text-xl relative pb-20'
-				>
-					<div className='flex flex-col gap-5'>
-						<div className='flex gap-3'>
-							<div className='avatar'>
-								<div className='w-24 rounded'>
-									<img
-										src='https://placeimg.com/192/192/people'
-										alt='student profile'
-									/>
+				<div className='bg-base-200 p-5 rounded mx-3 custom-80vh text-xl relative pb-20'>
+					<form onSubmit={handleSubmit}>
+						<div className='flex flex-col gap-5'>
+							<div className='flex gap-3'>
+								<div className='avatar'>
+									<div className='w-24 rounded'>
+										<img
+											src='https://placeimg.com/192/192/people'
+											alt='student profile'
+										/>
+									</div>
 								</div>
-							</div>
-							<div className='flex flex-col justify-evenly w-full'>
-								{editMode ? (
-									<input
-										type='text'
-										name='name'
-										placeholder={student.name ? student.name : 'Name'}
-										onChange={handleFormChange}
-										className='input input-bordered w-full max-w-xs'
-									/>
-								) : (
-									<h3 className='text-2xl'>{student.name}</h3>
-								)}
-								{editMode ? (
-									<input
-										type='text'
-										name='instrument'
-										placeholder={
-											student.instrument ? student.instrument : 'Instrument'
-										}
-										onChange={handleFormChange}
-										className='input input-bordered w-full max-w-xs'
-									/>
-								) : (
-									<span>{student.instrument}</span>
-								)}
-							</div>
-						</div>
-						<div className='divider'></div>
-						{lesson && (
-							<div className='flex justify-evenly md:w-full text-center'>
-								<div className='flex flex-col justify-evenly'>
-									<h5 className='font-semibold'>Next Lesson</h5>
-									<span>{`${lesson.date.weekday}, ${lesson.date.date}`}</span>
-									<span className='text-lg'>{`${lesson.date.start} - ${lesson.date.end}`}</span>
-								</div>
-							</div>
-						)}
-						<div className='text-lg flex flex-col p-2 rounded-xl gap-3'>
-							<div>
-								<div className='flex gap-3 items-center'>
-									<h5 className='font-semibold'>Repertoire</h5>
-									<SmallAddButton />
-								</div>
-								<ul className='list-disc list-inside'>
-									{student.repertoire?.length > 0 ? (
-										student.repertoire?.map((el, i) => {
-											return <li key={i}>{el}</li>;
-										})
+								<div className='flex flex-col justify-evenly w-full'>
+									{editMode ? (
+										<input
+											type='text'
+											name='name'
+											placeholder={student.name ? student.name : 'Name'}
+											onChange={handleFormChange}
+											className='input input-bordered w-full max-w-xs'
+										/>
 									) : (
-										<li>Add an item...</li>
+										<h3 className='text-2xl'>{student.name}</h3>
 									)}
-									<li className={'hidden'}>
+									{editMode ? (
 										<input
 											type='text'
 											name='instrument'
-											placeholder={'Add an item...'}
+											placeholder={
+												student.instrument ? student.instrument : 'Instrument'
+											}
 											onChange={handleFormChange}
 											className='input input-bordered w-full max-w-xs'
 										/>
-									</li>
-								</ul>
-							</div>
-							<div>
-								<div className='flex gap-3 items-center'>
-									<h5 className='font-semibold'>Concepts</h5>
-									<SmallAddButton />
+									) : (
+										<span>{student.instrument}</span>
+									)}
 								</div>
-								<ul className='list-disc list-inside'>
-									{student.concepts?.length > 0 ? (
-										student.concepts?.map((el, i) => {
-											return <li key={i}>{el}</li>;
-										})
-									) : (
-										<li>Add an item...</li>
-									)}
-								</ul>
 							</div>
-							<div>
-								<h5 className='font-semibold'>Contact Information</h5>
-								<ul className='list-disc list-inside max-w-xl'>
-									{editMode ? (
-										<input
-											type='tel'
-											pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-											name='phone'
-											placeholder={
-												student.phone ? student.phone : '123-456-7890'
-											}
-											onChange={handleFormChange}
-											className='input input-bordered w-full max-w-xs'
-										/>
-									) : (
-										<li>Phone: {student.phone}</li>
-									)}
-									{editMode ? (
-										<input
-											type='text'
-											name='email'
-											placeholder={student.email ? student.email : 'Email'}
-											onChange={handleFormChange}
-											className='input input-bordered w-full max-w-xs'
-										/>
-									) : (
-										<li>Email: {student.email}</li>
-									)}
-									{editMode ? (
-										<input
-											type='text'
-											name='primaryContact'
-											placeholder={
-												student.primaryContact
-													? student.phone
-													: 'Primary Contact'
-											}
-											onChange={handleFormChange}
-											className='input input-bordered w-full max-w-xs'
-										/>
-									) : (
-										<li>Primary Contact: {student.primaryContact}</li>
-									)}
-								</ul>
-							</div>
-							<div>
-								<h5 className='font-semibold'>Status</h5>
-								<ul className='list-disc list-inside'>
-									{editMode ? (
-										<select
-											className='select select-bordered w-full max-w-xs'
-											id='student'
-											value={formData.student}
-											onChange={handleFormChange}
-											name='student'
-										>
-											<option value='Active'>Active</option>
-											<option value='Inactive'>Inactive</option>
-											<option value='Archived'>Archived</option>
-										</select>
-									) : (
-										<li>{student.status}</li>
-									)}
-								</ul>
+							<div className='divider'></div>
+							{lesson && (
+								<div className='flex justify-evenly md:w-full text-center'>
+									<div className='flex flex-col justify-evenly'>
+										<h5 className='font-semibold'>Next Lesson</h5>
+										<span>{`${lesson.date.weekday}, ${lesson.date.date}`}</span>
+										<span className='text-lg'>{`${lesson.date.start} - ${lesson.date.end}`}</span>
+									</div>
+								</div>
+							)}
+							<div className='text-lg flex flex-col p-2 rounded-xl gap-3'>
+								<div>
+									<h5 className='font-semibold'>Contact Information</h5>
+									<ul className='list-disc list-inside max-w-xl'>
+										{editMode ? (
+											<input
+												type='tel'
+												pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+												name='phone'
+												placeholder={
+													student.phone ? student.phone : '123-456-7890'
+												}
+												onChange={handleFormChange}
+												className='input input-bordered w-full max-w-xs'
+											/>
+										) : (
+											<li>Phone: {student.phone}</li>
+										)}
+										{editMode ? (
+											<input
+												type='text'
+												name='email'
+												placeholder={student.email ? student.email : 'Email'}
+												onChange={handleFormChange}
+												className='input input-bordered w-full max-w-xs'
+											/>
+										) : (
+											<li>Email: {student.email}</li>
+										)}
+										{editMode ? (
+											<input
+												type='text'
+												name='primaryContact'
+												placeholder={
+													student.primaryContact
+														? student.phone
+														: 'Primary Contact'
+												}
+												onChange={handleFormChange}
+												className='input input-bordered w-full max-w-xs'
+											/>
+										) : (
+											<li>Primary Contact: {student.primaryContact}</li>
+										)}
+									</ul>
+								</div>
+								<div>
+									<h5 className='font-semibold'>Status</h5>
+									<ul className='list-disc list-inside'>
+										{editMode ? (
+											<select
+												className='select select-bordered w-full max-w-xs'
+												id='student'
+												value={formData.student}
+												onChange={handleFormChange}
+												name='student'
+											>
+												<option value='Active'>Active</option>
+												<option value='Inactive'>Inactive</option>
+												<option value='Archived'>Archived</option>
+											</select>
+										) : (
+											<li>{student.status}</li>
+										)}
+									</ul>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div
-						className={
-							msg.success
-								? 'text-success text-center'
-								: 'text-error text-center'
-						}
-					>
-						{msg ? msg.text : ''}
-					</div>
-					<div className='absolute left-4 bottom-4 flex gap-3'>
-						{!editMode && (
-							<div
-								className='btn btn-ghost hover:bg-error border-base-300'
-								onClick={() => setEditMode(!editMode)}
-							>
-								edit
-							</div>
-						)}
-						{editMode && (
-							<button className='btn btn-ghost hover:bg-error border-base-300'>
-								Save
-							</button>
-						)}
-						{editMode && (
-							<div
-								className='btn btn-ghost hover:bg-error border-base-300'
-								onClick={() => setEditMode(!editMode)}
-							>
-								cancel
-							</div>
-						)}
-					</div>
+						<div
+							className={
+								msg.success
+									? 'text-success text-center'
+									: 'text-error text-center'
+							}
+						>
+							{msg ? msg.text : ''}
+						</div>
+						<div className='absolute left-4 bottom-4 flex gap-3'>
+							{!editMode && (
+								<div
+									className='btn btn-ghost hover:bg-warning border-base-300'
+									onClick={() => setEditMode(!editMode)}
+								>
+									edit
+								</div>
+							)}
+							{editMode && (
+								<button className='btn btn-ghost hover:bg-primary border-base-300'>
+									Save
+								</button>
+							)}
+							{editMode && (
+								<div
+									className='btn btn-ghost hover:bg-error border-base-300'
+									onClick={() => setEditMode(!editMode)}
+								>
+									cancel
+								</div>
+							)}
+						</div>
 
-					<div
-						className='absolute right-4 bottom-4'
-						onClick={() => deleteLesson(student._id)}
-					>
-						<DeleteButton />
-					</div>
-				</form>
+						<div
+							className='absolute right-4 bottom-4'
+							onClick={() => deleteLesson(student._id)}
+						>
+							<DeleteButton />
+						</div>
+					</form>
+					{student && (
+						<div>
+							<List arrayName={'repertoire'} student={student} />
+							<List arrayName={'concepts'} student={student} />
+						</div>
+					)}
+				</div>
 			)}
 		</div>
 	);

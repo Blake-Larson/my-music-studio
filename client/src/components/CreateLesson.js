@@ -111,10 +111,7 @@ function CreateLesson() {
 								>
 									✕
 								</label>
-								<form
-									onSubmit={handleSubmit}
-									className='flex flex-col gap-2 form-control'
-								>
+								<form onSubmit={handleSubmit} className='flex flex-col gap-2'>
 									<label className='label flex flex-col gap-2'>
 										<span>Student:</span>
 										<select
@@ -123,6 +120,7 @@ function CreateLesson() {
 											value={formData.student}
 											onChange={handleFormChange}
 											name='student'
+											required
 										>
 											<option value=''>Select a Student</option>
 											{selectStudent}
@@ -137,6 +135,7 @@ function CreateLesson() {
 											value={formData.date}
 											onChange={handleFormChange}
 											className='input input-bordered w-full max-w-xs'
+											required
 										/>
 									</label>
 									<label className='label flex flex-col gap-2'>
@@ -148,6 +147,7 @@ function CreateLesson() {
 											value={formData.end}
 											onChange={handleFormChange}
 											className='input input-bordered w-full max-w-xs'
+											required
 										/>
 									</label>
 									<div className='card-actions justify-center mt-4'>

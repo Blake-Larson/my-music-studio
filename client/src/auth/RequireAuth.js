@@ -13,7 +13,6 @@ export const RequireAuth = ({ children }) => {
 
 	React.useEffect(() => {
 		const clear = setTimeout(() => {
-			console.log('effect ran');
 			!authed && navigate('/login');
 		}, 1500);
 

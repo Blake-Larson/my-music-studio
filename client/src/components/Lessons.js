@@ -4,6 +4,7 @@ import useStudents from '../contexts/useStudents';
 import { useNavigate } from 'react-router-dom';
 import useLessons from '../contexts/useLessons';
 import DeleteButton from './DeleteButton';
+import List from './List';
 
 function Lessons() {
 	const { students } = useStudents();
@@ -46,14 +47,12 @@ function Lessons() {
 					<div className='collapse-content gap-5 flex flex-col bg-base-100'>
 						<div className='text-lg flex flex-col p-2 rounded-xl'>
 							<div>
-								<h5 className='font-semibold'>Repertoire</h5>
-								<ul className='list-disc list-inside'>
-									<li>Coming soon...</li>
-								</ul>
-								<h5 className='font-semibold'>Concepts</h5>
-								<ul className='list-disc list-inside'>
-									<li>Coming soon...</li>
-								</ul>
+								{student && (
+									<div>
+										<List arrayName={'repertoire'} student={student} />
+										<List arrayName={'concepts'} student={student} />
+									</div>
+								)}
 							</div>
 						</div>
 						<div className='flex justify-between'>

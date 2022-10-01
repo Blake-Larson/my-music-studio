@@ -8,6 +8,8 @@ router.post('/createStudent', studentController.createStudent);
 
 router.put('/updateStudent', studentController.updateStudent);
 
+router.put('/updateListItem', studentController.updateListItem);
+
 router.delete('/delete', studentController.deleteStudent);
 
 module.exports = router;

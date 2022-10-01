@@ -26,8 +26,8 @@ module.exports = {
 				email: req.body.email,
 				primaryContact: req.body.primaryContact,
 				instrument: req.body.instrument,
-				repertoire: req.body.repertoire,
-				concepts: req.body.concepts,
+				repertoire: [],
+				concepts: [],
 				teacher: req.user._id,
 			});
 			res.json({
@@ -77,6 +77,32 @@ module.exports = {
 					msgError: true,
 					err,
 				},
+			});
+		}
+	},
+	updateListItem: async (req, res) => {
+		try {
+			await Student.findOneAndUpdate(
+				{ _id: req.body.id },
+				{
+					[req.body.list]: req.body.newArr,
+				}
+			);
+			res.status(200).json({
+				message: {
+					msgBody: 'Updated List!',
+					msgError: false,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: {
+					msgBody: 'Error has occured when trying to update this item.',
+					msgError: true,
+					err,
+				},
+				s,
 			});
 		}
 	},
