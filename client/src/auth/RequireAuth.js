@@ -5,6 +5,7 @@ import Nav from '../components/Nav';
 import { StudentProvider } from '../contexts/useStudents';
 import { LessonProvider } from '../contexts/useLessons';
 import Logo from '../components/Logo';
+import { Image } from 'cloudinary-react';
 
 export const RequireAuth = ({ children }) => {
 	const { authed, user, handleLogout } = useAuth();
@@ -83,9 +84,13 @@ export const RequireAuth = ({ children }) => {
 							<div className='flex gap-3'>
 								<div className='avatar'>
 									<div className='w-16 rounded'>
-										<img
-											src='https://placeimg.com/192/192/people'
-											alt='Tailwind-CSS-Avatar-component'
+										<Image
+											cloudName='drwljgjhd'
+											publicId={
+												user.profileImg
+													? user.profileImg
+													: 'https://res.cloudinary.com/drwljgjhd/image/upload/v1664830344/w1plcgp0zhfp0jbnykyu.jpg'
+											}
 										/>
 									</div>
 								</div>

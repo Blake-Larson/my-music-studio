@@ -2,8 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import useMsg from '../contexts/useMsg';
 import Nav from '../components/Nav';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
+	const navigate = useNavigate();
 	const { msg, setMsg, clearMsg, setClearMsg } = useMsg();
 
 	const [signUpData, setSignUpData] = React.useState({
@@ -11,6 +13,7 @@ function SignUp() {
 		email: '',
 		password: '',
 		confirmPassword: '',
+		studioName: '',
 	});
 
 	function handleFormChange(event) {
@@ -32,6 +35,7 @@ function SignUp() {
 					email: signUpData.email,
 					password: signUpData.password,
 					confirmPassword: signUpData.confirmPassword,
+					studioName: signUpData.studioName,
 				},
 				url: 'http://localhost:5000/signup',
 				withCredentials: true,
@@ -44,6 +48,7 @@ function SignUp() {
 				},
 				setClearMsg(!clearMsg)
 			);
+			navigate(`/login`);
 		} catch (err) {
 			setMsg(
 				{
@@ -67,30 +72,41 @@ function SignUp() {
 					<input
 						type='text'
 						name='userName'
-						placeholder='Full Name'
+						placeholder='Full Name*'
+						onChange={handleFormChange}
+						className='input border-2 border-base-300 w-full max-w-sm'
+						required
+					/>
+					<input
+						type='text'
+						name='studioName'
+						placeholder='Studio Name'
 						onChange={handleFormChange}
 						className='input border-2 border-base-300 w-full max-w-sm'
 					/>
 					<input
 						type='text'
 						name='email'
-						placeholder='Email'
+						placeholder='Email*'
 						onChange={handleFormChange}
 						className='input border-2 border-base-300 w-full max-w-sm'
+						required
 					/>
 					<input
 						type='password'
 						name='password'
-						placeholder='Password'
+						placeholder='Password*'
 						onChange={handleFormChange}
 						className='input border-2 border-base-300 w-full max-w-sm'
+						required
 					/>
 					<input
 						type='password'
 						name='confirmPassword'
-						placeholder='Confirm Password'
+						placeholder='Confirm Password*'
 						onChange={handleFormChange}
 						className='input border-2 border-base-300 w-full max-w-sm'
+						required
 					/>
 					<div className='self-center mt-3'>
 						<button className='btn btn-primary'>Create User</button>

@@ -5,6 +5,7 @@
 	"dependencies": {
 		"axios": "^0.27.2",
 		"axois": "^0.0.1-security",
+		"cloudinary-react": "^1.8.1",
 		"daisyui": "^2.19.1",
 		"dayjs": "^1.11.5"
 	},

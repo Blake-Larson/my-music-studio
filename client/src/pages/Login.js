@@ -74,6 +74,7 @@ function Login() {
 						placeholder='Email'
 						onChange={handleFormChange}
 						className='input border-2 border-base-300 w-full max-w-sm'
+						required
 					/>
 					<input
 						type='password'
@@ -81,6 +82,7 @@ function Login() {
 						placeholder='Password'
 						onChange={handleFormChange}
 						className='input border-2 border-base-300 w-full max-w-sm'
+						required
 					/>
 					<div className='self-center mt-3'>
 						<button className='btn btn-primary'>Log in</button>

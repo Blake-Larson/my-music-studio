@@ -3,11 +3,12 @@ import axios from 'axios';
 import useAuth from '../auth/useAuth';
 import { useNavigate } from 'react-router-dom';
 import useMsg from '../contexts/useMsg';
-import DeleteButton from '../components/DeleteButton';
+import DeleteButton from '../components/buttons/DeleteButton';
+import { Image } from 'cloudinary-react';
 
 function UserAccount() {
 	const navigate = useNavigate();
-	const { user, setUser, setAuthed } = useAuth();
+	const { user, getUser, setGetUser, setAuthed } = useAuth();
 	const { msg, setMsg, clearMsg, setClearMsg } = useMsg();
 	const [editMode, setEditMode] = React.useState(false);
 
@@ -18,6 +19,8 @@ function UserAccount() {
 			setFormData({
 				userName: user.userName,
 				email: user.email,
+				studioName: user.studioName,
+				profileImg: user.profileImg,
 			});
 		}
 	}, [user]);
@@ -33,12 +36,15 @@ function UserAccount() {
 	const handleSubmit = async event => {
 		event.preventDefault();
 		try {
+			const profileImg = await uploadImage();
 			const response = await axios({
 				method: 'PUT',
 				data: {
 					id: user._id,
 					userName: formData.userName,
 					email: formData.email,
+					studioName: formData.studioName,
+					profileImg: profileImg,
 				},
 				url: 'http://localhost:5000/updateUser',
 				withCredentials: true,
@@ -51,10 +57,7 @@ function UserAccount() {
 				setClearMsg(!clearMsg)
 			);
 			setEditMode(!editMode);
-			setUser({
-				userName: formData.userName,
-				email: formData.email,
-			});
+			setGetUser(!getUser);
 		} catch (err) {
 			console.log(err);
 			setMsg(
@@ -66,6 +69,42 @@ function UserAccount() {
 			);
 		}
 	};
+
+	const [image, setImage] = React.useState(null);
+
+	const uploadImage = async () => {
+		const imageFormData = new FormData();
+		imageFormData.append('file', image);
+		imageFormData.append('upload_preset', 'tifn41tp');
+
+		try {
+			const response = await axios({
+				method: 'POST',
+				data: imageFormData,
+				url: 'https://api.cloudinary.com/v1_1/drwljgjhd/image/upload',
+			});
+			console.log(response);
+			return response.data.public_id;
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	// const deleteImage = async () => {
+	// 	const imageFormData = new FormData();
+	// 	imageFormData.append('file', image);
+	// 	imageFormData.append('upload_preset', 'tifn41tp');
+
+	// 	try {
+	// 		const response = await axios({
+	// 			method: 'POST',
+	// 			data: imageFormData,
+	// 			url: 'https://api.cloudinary.com/v1_1/drwljgjhd/image/delete',
+	// 		});
+	// 		console.log(response);
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 
 	async function deleteUser() {
 		if (window.confirm('Are you sure you want to delete your account?')) {
@@ -99,12 +138,17 @@ function UserAccount() {
 						<div className='flex gap-3'>
 							<div className='avatar'>
 								<div className='w-24 rounded'>
-									<img
-										src='https://placeimg.com/192/192/people'
-										alt='user profile'
+									<Image
+										cloudName='drwljgjhd'
+										publicId={
+											user.profileImg
+												? user.profileImg
+												: 'https://res.cloudinary.com/drwljgjhd/image/upload/v1664830344/w1plcgp0zhfp0jbnykyu.jpg'
+										}
 									/>
 								</div>
 							</div>
+
 							<div className='flex flex-col justify-evenly w-full'>
 								{editMode ? (
 									<input
@@ -119,16 +163,42 @@ function UserAccount() {
 								)}
 								{editMode ? (
 									<input
-										type='email'
-										name='email'
-										placeholder={user.email ? user.email : 'Email'}
+										type='text'
+										name='studioName'
+										placeholder={
+											user.studioName ? user.studioName : 'Studio Name'
+										}
 										onChange={handleFormChange}
 										className='input input-bordered w-full max-w-xs'
 									/>
+								) : user.studioName ? (
+									<h3 className='text-2xl'>{user.studioName}</h3>
 								) : (
-									<span>{user.email}</span>
+									<h3 className='opacity-60'>Studio name</h3>
 								)}
 							</div>
+						</div>
+						{editMode && (
+							<div>
+								<input
+									type='file'
+									onChange={event => setImage(event.target.files[0])}
+								/>
+							</div>
+						)}
+						<div>
+							<h2 className='font-bold text-lg'>Email</h2>
+							{editMode ? (
+								<input
+									type='email'
+									name='email'
+									placeholder={user.email ? user.email : 'Email'}
+									onChange={handleFormChange}
+									className='input input-bordered w-full max-w-xs'
+								/>
+							) : (
+								<span>{user.email}</span>
+							)}
 						</div>
 
 						<div

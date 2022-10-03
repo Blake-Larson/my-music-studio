@@ -3,7 +3,7 @@ import axios from 'axios';
 import useStudents from '../contexts/useStudents';
 import { useNavigate } from 'react-router-dom';
 import useLessons from '../contexts/useLessons';
-import DeleteButton from './DeleteButton';
+import DeleteButton from './buttons/DeleteButton';
 import List from './List';
 
 function Lessons() {

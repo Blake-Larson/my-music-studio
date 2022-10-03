@@ -8,6 +8,10 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	studioName: { type: String },
+	profileImg: {
+		type: String,
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now,

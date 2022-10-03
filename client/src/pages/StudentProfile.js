@@ -4,7 +4,7 @@ import useLessons from '../contexts/useLessons';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import useMsg from '../contexts/useMsg';
-import DeleteButton from '../components/DeleteButton';
+import DeleteButton from '../components/buttons/DeleteButton';
 import List from '../components/List';
 
 function StudentProfile() {

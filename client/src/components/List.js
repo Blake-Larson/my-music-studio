@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import SmallAddButton from './SmallAddButton';
+import SmallAddButton from './buttons/SmallAddButton';
 import useStudents from '../contexts/useStudents';
 import useStringHook from '../hooks/useStringHook';
-import SmallDeleteButton from './SmallDeleteButton';
-import SmallCheckButton from './SmallCheckButton';
-import SmallCancelButton from './SmallCancelButton';
+import SmallDeleteButton from './buttons/SmallDeleteButton';
+import SmallCheckButton from './buttons/SmallCheckButton';
+import SmallCancelButton from './buttons/SmallCancelButton';
 
 function ArrayInput({ student, arrayName }) {
 	const { getStudents, setGetStudents } = useStudents();
@@ -69,6 +69,7 @@ function ArrayInput({ student, arrayName }) {
 			console.log(response);
 			event.target.reset();
 			setResetForm(!resetForm);
+			setGetStudents(!getStudents);
 		} catch (err) {
 			console.log(err);
 		}
