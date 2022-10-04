@@ -6,6 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useMsg from '../contexts/useMsg';
 import DeleteButton from '../components/buttons/DeleteButton';
 import List from '../components/List';
+import { Image } from 'cloudinary-react';
+import PastLessons from '../components/PastLessons';
 
 function StudentProfile() {
 	const { students, getStudents, setGetStudents } = useStudents();
@@ -64,8 +66,8 @@ function StudentProfile() {
 	}
 
 	const handleSubmit = async event => {
-		console.log(formData);
 		event.preventDefault();
+		const profileImg = await uploadImage();
 		try {
 			const response = await axios({
 				method: 'PUT',
@@ -80,6 +82,8 @@ function StudentProfile() {
 					primaryContact: formData.primaryContact,
 					instrument: formData.instrument,
 					status: formData.status,
+					profileImg: profileImg ? profileImg : student.profileImg,
+					oldImg: student.profileImg,
 				},
 				url: 'http://localhost:5000/students/updateStudent',
 				withCredentials: true,
@@ -105,9 +109,33 @@ function StudentProfile() {
 		}
 	};
 
-	let lesson;
+	const [image, setImage] = React.useState(null);
+
+	const uploadImage = async () => {
+		const imageFormData = new FormData();
+		imageFormData.append('file', image);
+		imageFormData.append('upload_preset', 'tifn41tp');
+
+		try {
+			const response = await axios({
+				method: 'POST',
+				data: imageFormData,
+				url: 'https://api.cloudinary.com/v1_1/drwljgjhd/image/upload',
+			});
+			console.log(response);
+			return response.data.public_id;
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	let nextLesson;
 	if (lessons && student) {
-		lesson = lessons.find(lesson => lesson.student === student._id);
+		nextLesson = lessons.find(lesson => lesson.student === student._id);
+	}
+	let allLessons;
+	if (lessons && student) {
+		allLessons = lessons.filter(lesson => lesson.student === student._id);
 	}
 
 	return (
@@ -141,9 +169,13 @@ function StudentProfile() {
 							<div className='flex gap-3'>
 								<div className='avatar'>
 									<div className='w-24 rounded'>
-										<img
-											src='https://placeimg.com/192/192/people'
-											alt='student profile'
+										<Image
+											cloudName='drwljgjhd'
+											publicId={
+												student.profileImg
+													? student.profileImg
+													: 'https://res.cloudinary.com/drwljgjhd/image/upload/v1664830344/w1plcgp0zhfp0jbnykyu.jpg'
+											}
 										/>
 									</div>
 								</div>
@@ -173,14 +205,23 @@ function StudentProfile() {
 										<span>{student.instrument}</span>
 									)}
 								</div>
+								{editMode && (
+									<div>
+										<h2 className='font-bold text-lg'>Profile Photo</h2>
+										<input
+											type='file'
+											onChange={event => setImage(event.target.files[0])}
+										/>
+									</div>
+								)}
 							</div>
 							<div className='divider'></div>
-							{lesson && (
+							{nextLesson && (
 								<div className='flex justify-evenly md:w-full text-center'>
 									<div className='flex flex-col justify-evenly'>
 										<h5 className='font-semibold'>Next Lesson</h5>
-										<span>{`${lesson.date.weekday}, ${lesson.date.date}`}</span>
-										<span className='text-lg'>{`${lesson.date.start} - ${lesson.date.end}`}</span>
+										<span>{`${nextLesson.date.weekday}, ${nextLesson.date.date}`}</span>
+										<span className='text-lg'>{`${nextLesson.date.start} - ${nextLesson.date.end}`}</span>
 									</div>
 								</div>
 							)}
@@ -298,6 +339,7 @@ function StudentProfile() {
 							<List arrayName={'concepts'} student={student} />
 						</div>
 					)}
+					<PastLessons student={student} allLessons={allLessons} />
 				</div>
 			)}
 		</div>

@@ -44,7 +44,8 @@ function UserAccount() {
 					userName: formData.userName,
 					email: formData.email,
 					studioName: formData.studioName,
-					profileImg: profileImg,
+					profileImg: profileImg ? profileImg : user.profileImg,
+					oldImg: user.profileImg,
 				},
 				url: 'http://localhost:5000/updateUser',
 				withCredentials: true,
@@ -89,22 +90,6 @@ function UserAccount() {
 			console.log(err);
 		}
 	};
-	// const deleteImage = async () => {
-	// 	const imageFormData = new FormData();
-	// 	imageFormData.append('file', image);
-	// 	imageFormData.append('upload_preset', 'tifn41tp');
-
-	// 	try {
-	// 		const response = await axios({
-	// 			method: 'POST',
-	// 			data: imageFormData,
-	// 			url: 'https://api.cloudinary.com/v1_1/drwljgjhd/image/delete',
-	// 		});
-	// 		console.log(response);
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// };
 
 	async function deleteUser() {
 		if (window.confirm('Are you sure you want to delete your account?')) {
@@ -180,6 +165,7 @@ function UserAccount() {
 						</div>
 						{editMode && (
 							<div>
+								<h2 className='font-bold text-lg'>Profile Photo</h2>
 								<input
 									type='file'
 									onChange={event => setImage(event.target.files[0])}
@@ -213,14 +199,14 @@ function UserAccount() {
 						<div className='absolute left-4 bottom-4 flex gap-3'>
 							{!editMode && (
 								<div
-									className='btn btn-ghost hover:bg-error border-base-300'
+									className='btn btn-ghost hover:bg-warning border-base-300'
 									onClick={() => setEditMode(!editMode)}
 								>
 									edit
 								</div>
 							)}
 							{editMode && (
-								<button className='btn btn-ghost hover:bg-error border-base-300'>
+								<button className='btn btn-ghost hover:bg-primary border-base-300'>
 									Save
 								</button>
 							)}

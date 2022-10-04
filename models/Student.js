@@ -34,6 +34,9 @@ const StudentSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
 	},
+	profileImg: {
+		type: String,
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now,

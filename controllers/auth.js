@@ -3,6 +3,7 @@ const validator = require('validator');
 const User = require('../models/User');
 const Lesson = require('../models/Lesson');
 const Student = require('../models/Student');
+const cloudinary = require('../middleware/cloudinary');
 
 module.exports = {
 	serverMessage: (req, res) => {
@@ -197,7 +198,11 @@ module.exports = {
 
 	updateUser: async (req, res) => {
 		console.log(req.body);
-
+		if (req.body.profileImg !== req.body.oldImg) {
+			cloudinary.uploader
+				.destroy(req.body.oldImg)
+				.then(result => console.log('deleted img', result));
+		}
 		try {
 			await User.findOneAndUpdate(
 				{ _id: req.body.id },

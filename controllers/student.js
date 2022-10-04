@@ -1,5 +1,6 @@
 const Student = require('../models/Student');
 const Lesson = require('../models/Lesson');
+const cloudinary = require('../middleware/cloudinary');
 
 module.exports = {
 	getStudents: async (req, res) => {
@@ -48,6 +49,11 @@ module.exports = {
 		}
 	},
 	updateStudent: async (req, res) => {
+		if (req.body.profileImg !== req.body.oldImg) {
+			cloudinary.uploader
+				.destroy(req.body.oldImg)
+				.then(result => console.log('deleted img', result));
+		}
 		try {
 			await Student.findOneAndUpdate(
 				{ _id: req.body.id },
@@ -61,6 +67,7 @@ module.exports = {
 					repertoire: req.body.repertoire,
 					concepts: req.body.concepts,
 					teacher: req.user._id,
+					profileImg: req.body.profileImg,
 				}
 			);
 			res.status(200).json({
