@@ -25,13 +25,13 @@ function useAuth() {
 					setUser(response.data);
 				} else {
 					setAuthed(false);
-					setUser({});
+					setUser({ username: '', email: '', profileImg: '' });
 				}
 			} catch (err) {
 				console.log(err);
 			}
 		})();
-	}, [getUser]);
+	}, [getUser, user]);
 
 	return {
 		authed,

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const logger = require('morgan');
@@ -28,6 +29,7 @@ connectDB();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 app.use(logger('dev'));
 
 // Sessions
