@@ -16,7 +16,7 @@ function useAuth() {
 			try {
 				const response = await axios({
 					method: 'GET',
-					url: 'http://localhost:5000/authenticated',
+					url: `${process.env.REACT_APP_API_URL}/authenticated`,
 					withCredentials: true,
 				});
 				console.log('From Server:', response);

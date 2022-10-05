@@ -44,8 +44,8 @@ function Lessons() {
 										<Image
 											cloudName='drwljgjhd'
 											publicId={
-												student.profileImg
-													? student.profileImg
+												student?.profileImg
+													? student?.profileImg
 													: 'https://res.cloudinary.com/drwljgjhd/image/upload/v1664830344/w1plcgp0zhfp0jbnykyu.jpg'
 											}
 										/>
