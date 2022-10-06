@@ -5,7 +5,7 @@ const cloudinary = require('../middleware/cloudinary');
 module.exports = {
 	getStudents: async (req, res) => {
 		try {
-			const students = await Student.find({ teacher: req.user.id });
+			const students = await Student.find({ teacher: req.body.user._id });
 			res.json(students);
 		} catch (err) {
 			console.log(err);
