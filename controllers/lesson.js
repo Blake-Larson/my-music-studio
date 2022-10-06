@@ -4,8 +4,9 @@ dayjs().format();
 
 module.exports = {
 	getLessons: async (req, res) => {
+		console.log(req.body.user._id);
 		try {
-			const lessons = await Lesson.find({ teacher: req.user.id }).sort({
+			const lessons = await Lesson.find({ teacher: req.body.user._id }).sort({
 				'date.dateObj': 'asc',
 			});
 			res.json(lessons);

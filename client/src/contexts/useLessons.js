@@ -1,18 +1,23 @@
 import * as React from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import useAuth from '../auth/useAuth';
 
 const authContext = React.createContext();
 
 function useLessons() {
 	const [lessons, setLessons] = React.useState([]);
 	const [getLessons, setGetLessons] = React.useState(false);
+	const { user } = useAuth();
 
 	React.useEffect(() => {
 		(async () => {
 			try {
 				const response = await axios({
-					method: 'GET',
+					method: 'PUT',
+					data: {
+						user: user,
+					},
 					url: `${process.env.REACT_APP_API_URL}/lessons`,
 					withCredentials: true,
 				});
@@ -24,7 +29,7 @@ function useLessons() {
 				console.log(err);
 			}
 		})();
-	}, [getLessons]);
+	}, [getLessons, user]);
 
 	return {
 		lessons,
