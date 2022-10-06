@@ -12,13 +12,13 @@ export const RequireAuth = ({ children }) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	React.useEffect(() => {
-		const clear = setTimeout(() => {
-			!authed && navigate('/login');
-		}, 1500);
+	// React.useEffect(() => {
+	// 	const clear = setTimeout(() => {
+	// 		!authed && navigate('/login');
+	// 	}, 1500);
 
-		return () => clearTimeout(clear);
-	}, [authed, navigate]);
+	// 	return () => clearTimeout(clear);
+	// }, [authed, navigate]);
 
 	// return authed === true ? (
 	// 	children

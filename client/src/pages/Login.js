@@ -34,7 +34,7 @@ function Login() {
 					email: loginData.email,
 					password: loginData.password,
 				},
-				url: 'http://localhost:5000/login',
+				url: `${process.env.REACT_APP_API_URL}/login`,
 				withCredentials: true,
 			});
 			console.log('From Server:', response.data.user);

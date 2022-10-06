@@ -15,7 +15,7 @@ function useStudents() {
 				const response = await axios({
 					method: 'GET',
 					data: user._id,
-					url: 'http://localhost:5000/students',
+					url: `${process.env.REACT_APP_API_URL}/students`,
 					withCredentials: true,
 				});
 				setStudents(response.data.sort((a, b) => (a.name > b.name ? 1 : -1)));

@@ -47,7 +47,7 @@ function UserAccount() {
 					profileImg: profileImg ? profileImg : user.profileImg,
 					oldImg: user.profileImg,
 				},
-				url: 'http://localhost:5000/updateUser',
+				url: `${process.env.REACT_APP_API_URL}/updateUser`,
 				withCredentials: true,
 			});
 			setMsg(
@@ -97,7 +97,7 @@ function UserAccount() {
 				const response = await axios({
 					method: 'DELETE',
 					data: { id: user._id },
-					url: 'http://localhost:5000/delete',
+					url: `${process.env.REACT_APP_API_URL}/delete`,
 					withCredentials: true,
 				});
 				console.log('From Server:', response);

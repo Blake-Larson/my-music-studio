@@ -45,7 +45,7 @@ function StudentProfile() {
 				const response = await axios({
 					method: 'DELETE',
 					data: { id: studentID },
-					url: 'http://localhost:5000/students/delete',
+					url: `${process.env.REACT_APP_API_URL}/students/delete`,
 					withCredentials: true,
 				});
 				console.log('From Server:', response);
@@ -85,7 +85,7 @@ function StudentProfile() {
 					profileImg: profileImg ? profileImg : student.profileImg,
 					oldImg: student.profileImg,
 				},
-				url: 'http://localhost:5000/students/updateStudent',
+				url: `${process.env.REACT_APP_API_URL}/students/updateStudent`,
 				withCredentials: true,
 			});
 			setMsg(

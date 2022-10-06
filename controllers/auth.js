@@ -171,6 +171,7 @@ module.exports = {
 	},
 
 	getAuthenticated: (req, res) => {
+		console.log(req.session);
 		User.findById(req.session?.passport?.user, (err, user) => {
 			if (err) {
 				res.status(500).json({

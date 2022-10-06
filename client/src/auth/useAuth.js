@@ -48,7 +48,7 @@ function useAuth() {
 			try {
 				const response = await axios({
 					method: 'GET',
-					url: 'http://localhost:5000/logout',
+					url: `${process.env.REACT_APP_API_URL}/logout`,
 					withCredentials: true,
 				});
 				console.log('From Server:', response.data.message.msgBody);

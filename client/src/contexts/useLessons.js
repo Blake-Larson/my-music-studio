@@ -13,7 +13,7 @@ function useLessons() {
 			try {
 				const response = await axios({
 					method: 'GET',
-					url: 'http://localhost:5000/lessons',
+					url: `${process.env.REACT_APP_API_URL}/lessons`,
 					withCredentials: true,
 				});
 				const filteredLessons = response.data.filter(el =>
