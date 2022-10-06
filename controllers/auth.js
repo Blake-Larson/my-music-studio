@@ -14,59 +14,6 @@ module.exports = {
 		);
 	},
 
-	postLogin: (req, res, next) => {
-		if (!validator.isEmail(req.body.email)) {
-			res.status(400).json({
-				message: {
-					msgBody: 'Please enter a valid email address.',
-					msgError: true,
-				},
-			});
-			return;
-		}
-		if (validator.isEmpty(req.body.password)) {
-			res.status(400).json({
-				message: {
-					msgBody: 'Password cannot be blank.',
-					msgError: true,
-				},
-			});
-			return;
-		}
-
-		req.body.email = validator.normalizeEmail(req.body.email, {
-			gmail_remove_dots: false,
-		});
-
-		passport.authenticate('local', (err, user, info) => {
-			if (err) {
-				return next(err);
-			}
-			if (!user) {
-				res.status(500).json({
-					message: {
-						msgBody: 'Incorrect email or password.',
-						msgError: true,
-						err,
-					},
-				});
-				return;
-			}
-			req.logIn(user, err => {
-				if (err) {
-					return next(err);
-				}
-				res.status(201).json({
-					user: user,
-					message: {
-						msgBody: 'Success! You are logged in.',
-						msgError: false,
-					},
-				});
-			});
-		})(req, res, next);
-	},
-
 	postSignup: (req, res) => {
 		if (!validator.isEmail(req.body.email)) {
 			res.status(400).json({
@@ -151,6 +98,59 @@ module.exports = {
 				});
 			}
 		);
+	},
+
+	login: (req, res, next) => {
+		if (!validator.isEmail(req.body.email)) {
+			res.status(400).json({
+				message: {
+					msgBody: 'Please enter a valid email address.',
+					msgError: true,
+				},
+			});
+			return;
+		}
+		if (validator.isEmpty(req.body.password)) {
+			res.status(400).json({
+				message: {
+					msgBody: 'Password cannot be blank.',
+					msgError: true,
+				},
+			});
+			return;
+		}
+
+		req.body.email = validator.normalizeEmail(req.body.email, {
+			gmail_remove_dots: false,
+		});
+
+		passport.authenticate('local', (err, user, info) => {
+			if (err) {
+				return next(err);
+			}
+			if (!user) {
+				res.status(500).json({
+					message: {
+						msgBody: 'Incorrect email or password.',
+						msgError: true,
+						err,
+					},
+				});
+				return;
+			}
+			req.logIn(user, err => {
+				if (err) {
+					return next(err);
+				}
+				res.status(201).json({
+					user: user,
+					message: {
+						msgBody: 'Success! You are logged in.',
+						msgError: false,
+					},
+				});
+			});
+		})(req, res, next);
 	},
 
 	logout: (req, res) => {

@@ -6,7 +6,7 @@ router.get('/', authController.serverMessage);
 router.get('/logout', authController.logout);
 router.get('/authenticated', authController.getAuthenticated);
 
-router.post('/login', authController.postLogin);
+router.post('/login', authController.login);
 router.post('/signup', authController.postSignup);
 
 router.put('/updateUser', authController.updateUser);
