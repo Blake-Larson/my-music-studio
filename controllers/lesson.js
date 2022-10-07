@@ -20,6 +20,35 @@ module.exports = {
 			});
 		}
 	},
+	updateLesson: async (req, res) => {
+		try {
+			await Student.findOneAndUpdate(
+				{ _id: req.body.id },
+				{
+					attendance: req.body.attendance,
+					paid: req.body.paid,
+					teacher: req.body.teacher,
+					student: req.body.student,
+					date: req.body.date,
+				}
+			);
+			res.status(200).json({
+				message: {
+					msgBody: 'Updated Lesson!',
+					msgError: false,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: {
+					msgBody: 'Error has occured when trying to update this lesson.',
+					msgError: true,
+					err,
+				},
+			});
+		}
+	},
 	createLesson: async (req, res) => {
 		try {
 			await Lesson.create({

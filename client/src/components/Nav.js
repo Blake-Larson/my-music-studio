@@ -7,7 +7,7 @@ import SignOut from './buttons/SignOut';
 function Nav() {
 	const location = useLocation();
 
-	const { authed, handleLogout } = useAuth();
+	const { authed } = useAuth();
 
 	return (
 		<nav className='navbar bg-base-100 border border-base-200'>

@@ -44,6 +44,8 @@ function CreateLesson() {
 					teacher: user._id,
 					student: formData.student,
 					date: date,
+					attendance: '',
+					paid: '',
 				},
 				url: 'http://localhost:5000/lessons/createLesson',
 				withCredentials: true,

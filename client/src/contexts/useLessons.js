@@ -1,6 +1,5 @@
 import * as React from 'react';
 import axios from 'axios';
-import dayjs from 'dayjs';
 import useAuth from '../auth/useAuth';
 
 const authContext = React.createContext();
@@ -21,10 +20,7 @@ function useLessons() {
 					url: `${process.env.REACT_APP_API_URL}/lessons`,
 					withCredentials: true,
 				});
-				const filteredLessons = response.data.filter(el =>
-					dayjs(el.date.dateObj).isAfter(dayjs(new Date()).format('YYYY-MM-DD'))
-				);
-				setLessons(filteredLessons);
+				setLessons(response.data);
 			} catch (err) {
 				console.log(err);
 			}

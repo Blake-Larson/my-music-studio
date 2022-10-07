@@ -8,6 +8,7 @@ import DeleteButton from '../components/buttons/DeleteButton';
 import List from '../components/List';
 import { Image } from 'cloudinary-react';
 import PastLessons from '../components/PastLessons';
+import dayjs from 'dayjs';
 
 function StudentProfile() {
 	const { students, getStudents, setGetStudents } = useStudents();
@@ -131,7 +132,11 @@ function StudentProfile() {
 
 	let nextLesson;
 	if (lessons && student) {
-		nextLesson = lessons.find(lesson => lesson.student === student._id);
+		nextLesson = lessons
+			.filter(el =>
+				dayjs(el.date.dateObj).isAfter(dayjs(new Date()).format('YYYY-MM-DD'))
+			)
+			.find(lesson => lesson.student === student._id);
 	}
 	let allLessons;
 	if (lessons && student) {
@@ -163,7 +168,7 @@ function StudentProfile() {
 			</div>
 
 			{student && (
-				<div className='bg-base-200 p-5 rounded mx-3 custom-80vh text-xl relative pb-20'>
+				<div className='bg-base-200 p-5 rounded mx-3 text-xl relative pb-20'>
 					<form onSubmit={handleSubmit}>
 						<div className='flex flex-col gap-5'>
 							<div className='flex gap-3'>

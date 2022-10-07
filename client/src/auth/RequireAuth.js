@@ -1,10 +1,9 @@
 import React from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 import Nav from '../components/Nav';
 import { StudentProvider } from '../contexts/useStudents';
 import { LessonProvider } from '../contexts/useLessons';
-
 import Footer from '../components/Footer';
 import SideBar from '../components/SideBar';
 import Hamburger from '../components/buttons/Hamburger';
@@ -32,12 +31,12 @@ export const RequireAuth = ({ children }) => {
 			{location.pathname === '/' && <Nav />}
 			<div className='drawer drawer-mobile'>
 				<input id='drawer' type='checkbox' className='drawer-toggle' />
-				<div className='drawer-content flex flex-col'>
+				<div className='drawer-content flex flex-col min-h-full'>
 					{/* <!-- Page content here --> */}
 					{authed ? (
 						<StudentProvider>
 							<LessonProvider>
-								<div>{children}</div>
+								<div className='pb-5'>{children}</div>
 							</LessonProvider>
 						</StudentProvider>
 					) : (

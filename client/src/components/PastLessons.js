@@ -22,6 +22,7 @@ function PastLessons({ student, allLessons }) {
 									<td>{lesson.date.weekday}</td>
 									<td>{`${lesson.date.start} - ${lesson.date.end}`}</td>
 									<td></td>
+									<td></td>
 								</tr>
 							);
 						})}

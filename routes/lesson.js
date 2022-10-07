@@ -6,6 +6,8 @@ router.put('/', lessonController.getLessons);
 
 router.post('/createLesson', lessonController.createLesson);
 
+router.put('/updateLesson', lessonController.updateLesson);
+
 router.delete('/delete', lessonController.deleteLesson);
 
 module.exports = router;

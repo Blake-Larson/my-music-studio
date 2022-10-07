@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const LessonSchema = new mongoose.Schema({
-	content: {
+	attendance: {
+		type: String,
+	},
+	paid: {
 		type: String,
 	},
 	teacher: {
