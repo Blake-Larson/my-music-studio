@@ -1,5 +1,4 @@
 const LocalStrategy = require('passport-local').Strategy;
-const CookieStrategy = require('passport-cookie').Strategy;
 const mongoose = require('mongoose');
 const User = require('../models/User');
 

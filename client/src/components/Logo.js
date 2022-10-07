@@ -20,7 +20,7 @@ function Logo() {
 				<div className='flex items-center gap-2'>
 					<img src={logo} alt='logo' className='h-12' />
 					<span className='font-lemon font-normal'>
-						{user.studioName ? user.studioName : 'My Music Studio'}
+						{user?.studioName ? user?.studioName : 'My Music Studio'}
 					</span>
 				</div>
 			</NavLink>

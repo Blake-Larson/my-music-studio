@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Nav from '../components/Nav';
 import mainBg from '../assets/images/main-bg.jpg';
 import useAuth from '../auth/useAuth';
+import Footer from '../components/Footer';
 
 function Home() {
 	const { authed } = useAuth();
@@ -39,6 +40,7 @@ function Home() {
 					/>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 }
