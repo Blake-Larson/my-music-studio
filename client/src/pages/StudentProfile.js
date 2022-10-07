@@ -138,9 +138,9 @@ function StudentProfile() {
 			)
 			.find(lesson => lesson.student === student._id);
 	}
-	let allLessons;
+	let pastLessons;
 	if (lessons && student) {
-		allLessons = lessons.filter(lesson => lesson.student === student._id);
+		pastLessons = lessons.filter(el => el.student === student._id);
 	}
 
 	return (
@@ -168,9 +168,9 @@ function StudentProfile() {
 			</div>
 
 			{student && (
-				<div className='bg-base-200 p-5 rounded mx-3 text-xl relative pb-20'>
+				<div className='bg-base-200 p-5 rounded mx-3 text-xl relative pb-20 flex flex-col gap-5'>
 					<form onSubmit={handleSubmit}>
-						<div className='flex flex-col gap-5'>
+						<div className='flex flex-col'>
 							<div className='flex gap-3'>
 								<div className='avatar'>
 									<div className='w-24 rounded'>
@@ -210,29 +210,38 @@ function StudentProfile() {
 										<span>{student.instrument}</span>
 									)}
 								</div>
-								{editMode && (
-									<div>
-										<h2 className='font-bold text-lg'>Profile Photo</h2>
-										<input
-											type='file'
-											onChange={event => setImage(event.target.files[0])}
-										/>
-									</div>
-								)}
 							</div>
+							{editMode && (
+								<div>
+									<h2 className='font-bold text-lg'>Profile Photo</h2>
+									<input
+										type='file'
+										onChange={event => setImage(event.target.files[0])}
+									/>
+								</div>
+							)}
+
+							<div
+								className={
+									msg.success
+										? 'absolute top-10 left-0 right-0 m-auto text-success text-center'
+										: 'absolute top-10 left-0 right-0 m-auto text-error text-center'
+								}
+							>
+								{msg ? msg.text : ''}
+							</div>
+
 							<div className='divider'></div>
-							{nextLesson && (
-								<div className='flex justify-evenly md:w-full text-center'>
+							<div className='text-lg flex flex-col rounded-xl gap-5'>
+								{nextLesson && (
 									<div className='flex flex-col justify-evenly'>
-										<h5 className='font-semibold'>Next Lesson</h5>
+										<h3 className='text-lg font-semibold'>Next Lesson</h3>
 										<span>{`${nextLesson.date.weekday}, ${nextLesson.date.date}`}</span>
 										<span className='text-lg'>{`${nextLesson.date.start} - ${nextLesson.date.end}`}</span>
 									</div>
-								</div>
-							)}
-							<div className='text-lg flex flex-col p-2 rounded-xl gap-3'>
+								)}
 								<div>
-									<h5 className='font-semibold'>Contact Information</h5>
+									<h3 className='font-semibold'>Contact Information</h3>
 									<ul className='list-disc list-inside max-w-xl'>
 										{editMode ? (
 											<input
@@ -265,19 +274,23 @@ function StudentProfile() {
 												name='primaryContact'
 												placeholder={
 													student.primaryContact
-														? student.phone
+														? student.primaryContact
 														: 'Primary Contact'
 												}
 												onChange={handleFormChange}
 												className='input input-bordered w-full max-w-xs'
 											/>
 										) : (
-											<li>Primary Contact: {student.primaryContact}</li>
+											<li
+												className={student.primaryContact ? '' : 'opacity-50'}
+											>
+												Primary Contact: {student.primaryContact}
+											</li>
 										)}
 									</ul>
 								</div>
 								<div>
-									<h5 className='font-semibold'>Status</h5>
+									<h3 className='font-semibold'>Status</h3>
 									<ul className='list-disc list-inside'>
 										{editMode ? (
 											<select
@@ -298,15 +311,7 @@ function StudentProfile() {
 								</div>
 							</div>
 						</div>
-						<div
-							className={
-								msg.success
-									? 'text-success text-center'
-									: 'text-error text-center'
-							}
-						>
-							{msg ? msg.text : ''}
-						</div>
+
 						<div className='absolute left-4 bottom-4 flex gap-3'>
 							{!editMode && (
 								<div
@@ -338,13 +343,9 @@ function StudentProfile() {
 							<DeleteButton />
 						</div>
 					</form>
-					{student && (
-						<div>
-							<List arrayName={'repertoire'} student={student} />
-							<List arrayName={'concepts'} student={student} />
-						</div>
-					)}
-					<PastLessons student={student} allLessons={allLessons} />
+					<List arrayName={'repertoire'} student={student} />
+					<List arrayName={'concepts'} student={student} />
+					<PastLessons student={student} pastLessons={pastLessons} />
 				</div>
 			)}
 		</div>

@@ -76,9 +76,9 @@ function ArrayInput({ student, arrayName }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} className='w-full'>
 			<div className='flex gap-3 items-center'>
-				<h5 className='font-semibold'>{capitolizeFirst(arrayName)}</h5>
+				<h3 className='font-semibold text-lg'>{capitolizeFirst(arrayName)}</h3>
 				<div onClick={() => setShow(!show)}>
 					<SmallAddButton />
 				</div>
@@ -87,18 +87,19 @@ function ArrayInput({ student, arrayName }) {
 				{student[arrayName] &&
 					student[arrayName]?.map((el, i) => {
 						return (
-							<li key={i} className='flex items-center gap-3 group'>
-								<span>{el}</span>
+							<div className='flex group items-center gap-3'>
+								<li key={i} className='text-lg'>
+									{el}
+								</li>
 								<div
-									className='group-hover:opacity-100 opacity-0 transition-opacity duration-500'
+									className='group-hover:opacity-100 opacity-0 transition-opacity duration-500 inline-block'
 									onClick={() => handleDelete(i)}
 								>
 									<SmallDeleteButton />
 								</div>
-							</li>
+							</div>
 						);
 					})}
-
 				<li className={show ? 'flex items-center gap-3' : 'hidden'}>
 					<input
 						type='text'

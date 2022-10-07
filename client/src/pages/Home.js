@@ -10,7 +10,7 @@ function Home() {
 	const navigate = useNavigate();
 
 	return (
-		<div>
+		<div className='min-h-screen flex flex-col'>
 			<Nav />
 			<div className='flex flex-col p-3 items-center md:flex-row md:p-0 border-b border-base-200'>
 				<div className='flex flex-col p-3 items-center gap-5 md:w-1/2 '>

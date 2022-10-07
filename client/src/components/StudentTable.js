@@ -23,7 +23,7 @@ function StudentTable() {
 				</td>
 				<td>{el.instrument}</td>
 				<td>
-					<a href='tel:1-111-1111'>Phone</a>
+					<a href={`tel:${el.phone}`}>{el.phone}</a>
 				</td>
 				<td>
 					<a href={`mailto:${el.email}`}>{el.email}</a>
@@ -50,7 +50,7 @@ function StudentTable() {
 					</td>
 
 					<td>
-						<a href='tel:1-111-1111'>Phone</a>
+						<a href={`tel:${el.phone}`}>{el.phone}</a>
 					</td>
 				</tr>
 			);

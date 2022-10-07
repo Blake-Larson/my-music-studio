@@ -22,7 +22,7 @@ module.exports = {
 	},
 	updateLesson: async (req, res) => {
 		try {
-			await Student.findOneAndUpdate(
+			await Lesson.findOneAndUpdate(
 				{ _id: req.body.id },
 				{
 					attendance: req.body.attendance,
@@ -49,12 +49,64 @@ module.exports = {
 			});
 		}
 	},
+	updateAttendance: async (req, res) => {
+		try {
+			await Lesson.findOneAndUpdate(
+				{ _id: req.body.id },
+				{
+					attendance: req.body.attendance,
+				}
+			);
+			res.status(200).json({
+				message: {
+					msgBody: 'Updated Attendance!',
+					msgError: false,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: {
+					msgBody: 'Error has occured when trying to update attendance.',
+					msgError: true,
+					err,
+				},
+			});
+		}
+	},
+	updatePayment: async (req, res) => {
+		try {
+			await Lesson.findOneAndUpdate(
+				{ _id: req.body.id },
+				{
+					payment: req.body.payment,
+				}
+			);
+			res.status(200).json({
+				message: {
+					msgBody: 'Updated Payment!',
+					msgError: false,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: {
+					msgBody: 'Error has occured when trying to update payment.',
+					msgError: true,
+					err,
+				},
+			});
+		}
+	},
 	createLesson: async (req, res) => {
 		try {
 			await Lesson.create({
 				teacher: req.body.teacher,
 				student: req.body.student,
 				date: req.body.date,
+				attendance: req.body.attendance,
+				payment: req.body.payment,
 			});
 			console.log('Lesson has been added!');
 			res.json({

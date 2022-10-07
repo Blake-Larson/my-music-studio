@@ -7,6 +7,7 @@ import DeleteButton from './buttons/DeleteButton';
 import List from './List';
 import { Image } from 'cloudinary-react';
 import dayjs from 'dayjs';
+import LessonService from '../services/LessonService';
 
 function Lessons() {
 	const { students } = useStudents();
@@ -20,7 +21,7 @@ function Lessons() {
 				const response = await axios({
 					method: 'DELETE',
 					data: { id: lessonID },
-					url: 'http://localhost:5000/lessons/delete',
+					url: `${process.env.REACT_APP_API_URL}/lessons/delete`,
 					withCredentials: true,
 				});
 				console.log('From Server:', response);
@@ -32,7 +33,7 @@ function Lessons() {
 	}
 
 	return (
-		<div className='flex flex-col gap-5 w-full max-w-2xl px-5'>
+		<div className='flex flex-col gap-5 w-full max-w-4xl px-5'>
 			{lessons &&
 				students &&
 				lessons
@@ -81,11 +82,90 @@ function Lessons() {
 										<div className='text-lg flex flex-col p-2 rounded-xl'>
 											<div>
 												{student && (
-													<div>
+													<div className='flex flex-col md:flex-row md:justify-between gap-3'>
 														<List arrayName={'repertoire'} student={student} />
 														<List arrayName={'concepts'} student={student} />
 													</div>
 												)}
+											</div>
+										</div>
+										<div className='flex flex-col gap-3'>
+											<h3
+												className={
+													lesson.attendance ? 'hidden' : 'text-lg font-semibold'
+												}
+											>
+												Attendance
+											</h3>
+											<div
+												className={lesson.attendance ? 'hidden' : 'flex gap-3'}
+											>
+												<button
+													className='btn btn-primary'
+													onClick={async () => {
+														const res = await LessonService.updateAttendace(
+															'Present',
+															lesson._id
+														);
+														if (res === 'yes') {
+															setGetLessons(!getLessons);
+														}
+													}}
+												>
+													Present
+												</button>
+												<button
+													className='btn btn-warning'
+													onClick={async () => {
+														const res = await LessonService.updateAttendace(
+															'Absent',
+															lesson._id
+														);
+														if (res === 'yes') {
+															setGetLessons(!getLessons);
+														}
+													}}
+												>
+													Absent
+												</button>
+											</div>
+
+											<h3
+												className={
+													lesson.payment ? 'hidden' : 'text-lg font-semibold'
+												}
+											>
+												Payment
+											</h3>
+											<div className={lesson.payment ? 'hidden' : 'flex gap-3'}>
+												<button
+													className='btn btn-primary'
+													onClick={async () => {
+														const res = await LessonService.updatePayment(
+															'Paid',
+															lesson._id
+														);
+														if (res === 'yes') {
+															setGetLessons(!getLessons);
+														}
+													}}
+												>
+													Paid
+												</button>
+												<button
+													className='btn btn-warning'
+													onClick={async () => {
+														const res = await LessonService.updatePayment(
+															'Not Paid',
+															lesson._id
+														);
+														if (res === 'yes') {
+															setGetLessons(!getLessons);
+														}
+													}}
+												>
+													Not paid
+												</button>
 											</div>
 										</div>
 										<div className='flex justify-between'>

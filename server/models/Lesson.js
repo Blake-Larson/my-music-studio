@@ -4,7 +4,7 @@ const LessonSchema = new mongoose.Schema({
 	attendance: {
 		type: String,
 	},
-	paid: {
+	payment: {
 		type: String,
 	},
 	teacher: {
