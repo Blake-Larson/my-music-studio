@@ -6,7 +6,7 @@ import useAuth from '../auth/useAuth';
 import SignOut from './buttons/SignOut';
 
 function SideBar() {
-	const { user, handleLogout } = useAuth();
+	const { user } = useAuth();
 	return (
 		<div className='menu p-4 overflow-y-auto bg-base-100 lg:bg-base-200 text-base-content w-64 flex flex-col'>
 			<Logo />

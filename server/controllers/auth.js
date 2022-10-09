@@ -52,6 +52,7 @@ module.exports = {
 			userName: req.body.userName,
 			email: req.body.email,
 			password: req.body.password,
+			studioName: req.body.studioName,
 		});
 
 		User.findOne(

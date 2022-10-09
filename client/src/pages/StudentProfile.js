@@ -40,7 +40,7 @@ function StudentProfile() {
 		}
 	}, [student]);
 
-	async function deleteLesson(studentID) {
+	async function deleteStudent(studentID) {
 		if (window.confirm('Are you sure you want to delete this student?')) {
 			try {
 				const response = await axios({
@@ -140,7 +140,9 @@ function StudentProfile() {
 	}
 	let pastLessons;
 	if (lessons && student) {
-		pastLessons = lessons.filter(el => el.student === student._id);
+		pastLessons = lessons
+			.filter(el => el.student === student._id)
+			.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1));
 	}
 
 	return (
@@ -338,14 +340,14 @@ function StudentProfile() {
 
 						<div
 							className='absolute right-4 bottom-4'
-							onClick={() => deleteLesson(student._id)}
+							onClick={() => deleteStudent(student._id)}
 						>
 							<DeleteButton />
 						</div>
 					</form>
 					<List arrayName={'repertoire'} student={student} />
 					<List arrayName={'concepts'} student={student} />
-					<PastLessons student={student} pastLessons={pastLessons} />
+					<PastLessons pastLessons={pastLessons} />
 				</div>
 			)}
 		</div>

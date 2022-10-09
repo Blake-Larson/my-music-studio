@@ -2,7 +2,6 @@ import Axios from 'axios';
 
 const LessonService = {
 	updateAttendace: async (status, id) => {
-		console.log(id);
 		try {
 			const response = await Axios({
 				method: 'PUT',

@@ -1,15 +1,17 @@
 import React from 'react';
 
-function SmallAddButton() {
+function AddButton({ width, height, padding }) {
 	return (
-		<div className='btn-ghost border border-base-300 p-0.5 rounded-md cursor-pointer hover:btn-primary'>
+		<div
+			className={`btn-ghost border border-base-300 p-${padding} rounded-md cursor-pointer hover:btn-primary`}
+		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				fill='none'
 				viewBox='0 0 24 24'
 				strokeWidth={1.5}
 				stroke='currentColor'
-				className='w-4 h-4'
+				className={`w-${width} h-${height}`}
 			>
 				<path
 					strokeLinecap='round'
@@ -21,4 +23,4 @@ function SmallAddButton() {
 	);
 }
 
-export default SmallAddButton;
+export default AddButton;

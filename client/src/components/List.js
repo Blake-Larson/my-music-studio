@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import SmallAddButton from './buttons/SmallAddButton';
+import AddButton from './buttons/AddButton';
 import useStudents from '../contexts/useStudents';
 import useStringHook from '../hooks/useStringHook';
 import SmallDeleteButton from './buttons/SmallDeleteButton';
 import SmallCheckButton from './buttons/SmallCheckButton';
 import SmallCancelButton from './buttons/SmallCancelButton';
 
-function ArrayInput({ student, arrayName }) {
+function List({ student, arrayName }) {
 	const { getStudents, setGetStudents } = useStudents();
 	const [formData, setFormData] = React.useState({});
 	const [show, setShow] = React.useState(false);
@@ -80,17 +80,15 @@ function ArrayInput({ student, arrayName }) {
 			<div className='flex gap-3 items-center'>
 				<h3 className='font-semibold text-lg'>{capitolizeFirst(arrayName)}</h3>
 				<div onClick={() => setShow(!show)}>
-					<SmallAddButton />
+					<AddButton width={'4'} height={'4'} padding={'0.5'} />
 				</div>
 			</div>
 			<ul className='list-disc list-inside'>
 				{student[arrayName] &&
 					student[arrayName]?.map((el, i) => {
 						return (
-							<div className='flex group items-center gap-3'>
-								<li key={i} className='text-lg'>
-									{el}
-								</li>
+							<div key={i} className='flex group items-center gap-3'>
+								<li className='text-lg'>{el}</li>
 								<div
 									className='group-hover:opacity-100 opacity-0 transition-opacity duration-500 inline-block'
 									onClick={() => handleDelete(i)}
@@ -125,4 +123,4 @@ function ArrayInput({ student, arrayName }) {
 	);
 }
 
-export default ArrayInput;
+export default List;

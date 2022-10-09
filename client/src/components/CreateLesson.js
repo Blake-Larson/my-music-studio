@@ -1,10 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 import useAuth from '../auth/useAuth';
-import dayjs from 'dayjs';
 import useStudents from '../contexts/useStudents';
 import useLessons from '../contexts/useLessons';
 import useMsg from '../contexts/useMsg';
+import dayjs from 'dayjs';
+import Axios from 'axios';
 
 function CreateLesson() {
 	const { user } = useAuth();
@@ -38,7 +38,7 @@ function CreateLesson() {
 		};
 		console.log(formData, 'New Lesson Attempt Sent');
 		try {
-			const response = await axios({
+			const response = await Axios({
 				method: 'POST',
 				data: {
 					teacher: user._id,

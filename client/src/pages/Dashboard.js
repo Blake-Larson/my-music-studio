@@ -1,6 +1,7 @@
 import React from 'react';
 import CreateLesson from '../components/CreateLesson';
 import Lessons from '../components/Lessons';
+import Todos from '../components/Todos';
 
 function Dashboard() {
 	return (
@@ -15,6 +16,7 @@ function Dashboard() {
 				</div>
 				<div className='flex flex-col items-center gap-5'>
 					<Lessons />
+					<Todos />
 				</div>
 			</div>
 		</div>

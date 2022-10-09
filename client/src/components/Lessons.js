@@ -175,6 +175,16 @@ function Lessons() {
 											>
 												Profile
 											</button>
+											{lesson.attendance && (
+												<div className='btn btn-sm btn-primary btn-outline'>
+													{lesson.attendance}
+												</div>
+											)}
+											{lesson.payment && (
+												<div className='btn btn-sm btn-primary btn-outline'>
+													{lesson.payment}
+												</div>
+											)}
 											<div onClick={() => deleteLesson(lesson._id)}>
 												<DeleteButton />
 											</div>
