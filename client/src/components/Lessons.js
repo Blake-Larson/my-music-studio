@@ -168,6 +168,30 @@ function Lessons() {
 												</button>
 											</div>
 										</div>
+										<div className='flex gap-3'>
+											{lesson.attendance && (
+												<div
+													className={
+														lesson.attendance === 'Present'
+															? 'btn btn-sm btn-primary btn-outline'
+															: 'btn btn-sm btn-warning btn-outline'
+													}
+												>
+													{lesson.attendance}
+												</div>
+											)}
+											{lesson.payment && (
+												<div
+													className={
+														lesson.payment === 'Paid'
+															? 'btn btn-sm btn-primary btn-outline'
+															: 'btn btn-sm btn-warning btn-outline'
+													}
+												>
+													{lesson.payment}
+												</div>
+											)}
+										</div>
 										<div className='flex justify-between'>
 											<button
 												className='btn btn-ghost hover:bg-primary border border-base-300'
@@ -175,16 +199,7 @@ function Lessons() {
 											>
 												Profile
 											</button>
-											{lesson.attendance && (
-												<div className='btn btn-sm btn-primary btn-outline'>
-													{lesson.attendance}
-												</div>
-											)}
-											{lesson.payment && (
-												<div className='btn btn-sm btn-primary btn-outline'>
-													{lesson.payment}
-												</div>
-											)}
+
 											<div onClick={() => deleteLesson(lesson._id)}>
 												<DeleteButton />
 											</div>
