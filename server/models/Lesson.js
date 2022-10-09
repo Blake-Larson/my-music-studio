@@ -7,6 +7,9 @@ const LessonSchema = new mongoose.Schema({
 	payment: {
 		type: String,
 	},
+	archived: {
+		type: Boolean,
+	},
 	teacher: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',

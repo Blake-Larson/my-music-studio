@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import useStudents from '../contexts/useStudents';
 import { useNavigate } from 'react-router-dom';
 import useLessons from '../contexts/useLessons';
@@ -16,20 +15,8 @@ function Lessons() {
 	const navigate = useNavigate();
 
 	async function deleteLesson(lessonID) {
-		if (window.confirm('Are you sure you want to delete this lesson?')) {
-			try {
-				const response = await axios({
-					method: 'DELETE',
-					data: { id: lessonID },
-					url: `${process.env.REACT_APP_API_URL}/lessons/delete`,
-					withCredentials: true,
-				});
-				console.log('From Server:', response);
-				setGetLessons(!getLessons);
-			} catch (err) {
-				console.log(err.response);
-			}
-		}
+		await LessonService.deleteLesson(lessonID);
+		setGetLessons(!getLessons);
 	}
 
 	return (
@@ -37,10 +24,11 @@ function Lessons() {
 			{lessons &&
 				students &&
 				lessons
-					.filter(el =>
-						dayjs(el.date.dateObj).isAfter(
-							dayjs(new Date()).format('YYYY-MM-DD')
-						)
+					.filter(
+						el =>
+							dayjs(el.date.dateObj).isAfter(
+								dayjs(new Date()).format('YYYY-MM-DD')
+							) && !el.archived
 					)
 					.map((lesson, i) => {
 						let student = students.find(
@@ -66,6 +54,28 @@ function Lessons() {
 													</div>
 												</div>
 												<span>{student?.name}</span>
+												{lesson.attendance && (
+													<div
+														className={
+															lesson.attendance === 'Present'
+																? 'btn btn-sm btn-primary btn-outline'
+																: 'btn btn-sm btn-warning btn-outline'
+														}
+													>
+														{lesson.attendance}
+													</div>
+												)}
+												{lesson.payment && (
+													<div
+														className={
+															lesson.payment === 'Paid'
+																? 'btn btn-sm btn-primary btn-outline'
+																: 'btn btn-sm btn-warning btn-outline'
+														}
+													>
+														{lesson.payment}
+													</div>
+												)}
 											</div>
 
 											{lesson && (
@@ -168,40 +178,34 @@ function Lessons() {
 												</button>
 											</div>
 										</div>
-										<div className='flex gap-3'>
-											{lesson.attendance && (
-												<div
-													className={
-														lesson.attendance === 'Present'
-															? 'btn btn-sm btn-primary btn-outline'
-															: 'btn btn-sm btn-warning btn-outline'
-													}
-												>
-													{lesson.attendance}
-												</div>
-											)}
-											{lesson.payment && (
-												<div
-													className={
-														lesson.payment === 'Paid'
-															? 'btn btn-sm btn-primary btn-outline'
-															: 'btn btn-sm btn-warning btn-outline'
-													}
-												>
-													{lesson.payment}
-												</div>
-											)}
-										</div>
-										<div className='flex justify-between'>
-											<button
-												className='btn btn-ghost hover:bg-primary border border-base-300'
-												onClick={() => navigate(`/students/${student?._id}`)}
-											>
-												Profile
-											</button>
 
-											<div onClick={() => deleteLesson(lesson._id)}>
-												<DeleteButton />
+										<div className='flex justify-between'>
+											<div className='flex gap-3 items-center'>
+												<button
+													className='btn btn-ghost hover:bg-primary border border-base-300'
+													onClick={() => navigate(`/students/${student?._id}`)}
+												>
+													Profile
+												</button>
+											</div>
+											<div className='flex gap-3'>
+												<button
+													className='btn btn-warning btn-outline'
+													onClick={async () => {
+														const res = await LessonService.updateArchived(
+															true,
+															lesson._id
+														);
+														if (res === 'yes') {
+															setGetLessons(!getLessons);
+														}
+													}}
+												>
+													Archive
+												</button>
+												<div onClick={() => deleteLesson(lesson._id)}>
+													<DeleteButton />
+												</div>
 											</div>
 										</div>
 									</div>

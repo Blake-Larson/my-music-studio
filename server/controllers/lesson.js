@@ -3,6 +3,33 @@ const dayjs = require('dayjs');
 dayjs().format();
 
 module.exports = {
+	createLesson: async (req, res) => {
+		try {
+			await Lesson.create({
+				teacher: req.body.teacher,
+				student: req.body.student,
+				date: req.body.date,
+				attendance: req.body.attendance,
+				payment: req.body.payment,
+			});
+			console.log('Lesson has been added!');
+			res.json({
+				message: {
+					msgBody: 'Lesson added!',
+					msgError: false,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: {
+					msgBody: 'Error has occured trying to create a new lesson.',
+					msgError: true,
+					err,
+				},
+			});
+		}
+	},
 	getLessons: async (req, res) => {
 		try {
 			const lessons = await Lesson.find({ teacher: req.body.user._id }).sort({
@@ -99,19 +126,17 @@ module.exports = {
 			});
 		}
 	},
-	createLesson: async (req, res) => {
+	updateArchived: async (req, res) => {
 		try {
-			await Lesson.create({
-				teacher: req.body.teacher,
-				student: req.body.student,
-				date: req.body.date,
-				attendance: req.body.attendance,
-				payment: req.body.payment,
-			});
-			console.log('Lesson has been added!');
-			res.json({
+			await Lesson.findOneAndUpdate(
+				{ _id: req.body.id },
+				{
+					archived: req.body.archived,
+				}
+			);
+			res.status(200).json({
 				message: {
-					msgBody: 'Lesson added!',
+					msgBody: 'Updated Archived Status!',
 					msgError: false,
 				},
 			});
@@ -119,7 +144,8 @@ module.exports = {
 			console.log(err);
 			res.status(500).json({
 				message: {
-					msgBody: 'Error has occured trying to create a new lesson.',
+					msgBody:
+						'Error has occured when trying to update the archived status.',
 					msgError: true,
 					err,
 				},

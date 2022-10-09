@@ -1,16 +1,20 @@
 import React from 'react';
-import SmallCancelButton from './buttons/SmallCancelButton';
-import SmallCheckButton from './buttons/SmallCheckButton';
 import EditButton from './buttons/EditButton';
 import useLessons from '../contexts/useLessons';
 import LessonService from '../services/LessonService';
+import SmallDeleteButton from './buttons/SmallDeleteButton';
 
-function PastLessons({ pastLessons }) {
+function PastLessons({ allLessons }) {
 	const [editMode, setEditMode] = React.useState(false);
 	const { getLessons, setGetLessons } = useLessons();
 
 	function handleEditMode(i) {
 		setEditMode(!editMode);
+	}
+
+	async function deleteLesson(lessonID) {
+		await LessonService.deleteLesson(lessonID);
+		setGetLessons(!getLessons);
 	}
 
 	return (
@@ -25,12 +29,14 @@ function PastLessons({ pastLessons }) {
 							<th>Time</th>
 							<th>Attendance</th>
 							<th>Paid</th>
+							<th>Status</th>
+							<th>Del</th>
 						</tr>
 					</thead>
 					<tbody>
-						{pastLessons.map((lesson, i) => {
+						{allLessons.map((lesson, i) => {
 							return (
-								<tr key={i}>
+								<tr key={i} className='hover'>
 									<td>{lesson.date.date}</td>
 									<td>{lesson.date.weekday}</td>
 									<td>{`${lesson.date.start} - ${lesson.date.end}`}</td>
@@ -129,6 +135,15 @@ function PastLessons({ pastLessons }) {
 												</div>
 											</div>
 										)}
+									</td>
+									<td>{lesson.archived ? 'Archived' : 'Active'}</td>
+									<td>
+										<div
+											className='flex items-center max-w-fit'
+											onClick={() => deleteLesson(lesson._id)}
+										>
+											<SmallDeleteButton />
+										</div>
 									</td>
 								</tr>
 							);

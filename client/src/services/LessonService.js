@@ -35,6 +35,40 @@ const LessonService = {
 			console.log(err);
 		}
 	},
+	updateArchived: async (status, id) => {
+		try {
+			const response = await Axios({
+				method: 'PUT',
+				data: {
+					id: id,
+					archived: status,
+				},
+				url: `${process.env.REACT_APP_API_URL}/lessons/updateArchived`,
+				withCredentials: true,
+			});
+			console.log(response);
+			return 'yes';
+		} catch (err) {
+			console.log(err);
+		}
+	},
+	deleteLesson: async id => {
+		if (window.confirm('Are you sure you want to delete this lesson?')) {
+			try {
+				const response = await Axios({
+					method: 'DELETE',
+					data: {
+						id: id,
+					},
+					url: `${process.env.REACT_APP_API_URL}/lessons/delete`,
+					withCredentials: true,
+				});
+				console.log('From Server:', response);
+			} catch (err) {
+				console.log(err.response);
+			}
+		}
+	},
 };
 
 export default LessonService;

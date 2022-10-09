@@ -7,10 +7,9 @@ router.put('/', lessonController.getLessons);
 router.post('/createLesson', lessonController.createLesson);
 
 router.put('/updateLesson', lessonController.updateLesson);
-
 router.put('/updateAttendance', lessonController.updateAttendance);
-
 router.put('/updatePayment', lessonController.updatePayment);
+router.put('/updateArchived', lessonController.updateArchived);
 
 router.delete('/delete', lessonController.deleteLesson);
 

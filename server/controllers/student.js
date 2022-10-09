@@ -62,6 +62,7 @@ module.exports = {
 					age: req.body.age,
 					phone: req.body.phone,
 					email: req.body.email,
+					status: req.body.status,
 					primaryContact: req.body.primaryContact,
 					instrument: req.body.instrument,
 					repertoire: req.body.repertoire,

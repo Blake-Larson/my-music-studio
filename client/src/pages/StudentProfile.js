@@ -9,6 +9,7 @@ import List from '../components/List';
 import { Image } from 'cloudinary-react';
 import PastLessons from '../components/PastLessons';
 import dayjs from 'dayjs';
+import LessonService from '../services/LessonService';
 
 function StudentProfile() {
 	const { students, getStudents, setGetStudents } = useStudents();
@@ -138,9 +139,9 @@ function StudentProfile() {
 			)
 			.find(lesson => lesson.student === student._id);
 	}
-	let pastLessons;
+	let allLessons;
 	if (lessons && student) {
-		pastLessons = lessons
+		allLessons = lessons
 			.filter(el => el.student === student._id)
 			.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1));
 	}
@@ -297,10 +298,10 @@ function StudentProfile() {
 										{editMode ? (
 											<select
 												className='select select-bordered w-full max-w-xs'
-												id='student'
+												id='status'
 												value={formData.student}
 												onChange={handleFormChange}
-												name='student'
+												name='status'
 											>
 												<option value='Active'>Active</option>
 												<option value='Inactive'>Inactive</option>
@@ -347,7 +348,7 @@ function StudentProfile() {
 					</form>
 					<List arrayName={'repertoire'} student={student} />
 					<List arrayName={'concepts'} student={student} />
-					<PastLessons pastLessons={pastLessons} />
+					<PastLessons allLessons={allLessons} />
 				</div>
 			)}
 		</div>
