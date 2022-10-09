@@ -4,6 +4,8 @@ import Nav from '../components/Nav';
 import mainBg from '../assets/images/main-bg.jpg';
 import useAuth from '../auth/useAuth';
 import Footer from '../components/Footer';
+import Card from '../components/Card';
+import YoutubeEmbed from '../components/YoutubeEmbed';
 
 function Home() {
 	const { authed } = useAuth();
@@ -38,6 +40,14 @@ function Home() {
 						alt='guitars and pianos'
 						className='rounded md:rounded-none'
 					/>
+				</div>
+			</div>
+			<div className='py-20 bg-base-200'>
+				<Card />
+			</div>
+			<div className=''>
+				<div className='py-20 max-w-2xl'>
+					<YoutubeEmbed embedId={''} />
 				</div>
 			</div>
 			<Footer />

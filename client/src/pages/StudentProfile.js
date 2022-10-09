@@ -9,7 +9,6 @@ import List from '../components/List';
 import { Image } from 'cloudinary-react';
 import PastLessons from '../components/PastLessons';
 import dayjs from 'dayjs';
-import LessonService from '../services/LessonService';
 
 function StudentProfile() {
 	const { students, getStudents, setGetStudents } = useStudents();
