@@ -1,14 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import AddButton from './buttons/AddButton';
-import useStudents from '../contexts/useStudents';
+import useLessons from '../contexts/useLessons';
 import useStringHook from '../hooks/useStringHook';
 import SmallDeleteButton from './buttons/SmallDeleteButton';
 import SmallCheckButton from './buttons/SmallCheckButton';
 import SmallCancelButton from './buttons/SmallCancelButton';
 
-function List({ student, arrayName }) {
-	const { getStudents, setGetStudents } = useStudents();
+function List({ lesson, arrayName }) {
+	const { getLessons, setGetLessons } = useLessons();
 	const [formData, setFormData] = React.useState({});
 	const [show, setShow] = React.useState(false);
 	const { capitolizeFirst } = useStringHook();
@@ -21,21 +21,21 @@ function List({ student, arrayName }) {
 	}, [arrayName]);
 
 	async function handleDelete(i) {
-		student[arrayName].splice(i, 1);
-		let newArr = student[arrayName];
+		lesson[arrayName].splice(i, 1);
+		let newArr = lesson[arrayName];
 		try {
 			const response = await axios({
 				method: 'PUT',
 				data: {
-					id: student._id,
+					id: lesson._id,
 					list: [arrayName],
 					newArr: newArr,
 				},
-				url: 'http://localhost:5000/students/updateListItem',
+				url: `${process.env.REACT_APP_API_URL}/lessons/updateListItem`,
 				withCredentials: true,
 			});
 			console.log(response);
-			setGetStudents(!getStudents);
+			setGetLessons(!getLessons);
 		} catch (err) {
 			console.log(err);
 		}
@@ -49,9 +49,9 @@ function List({ student, arrayName }) {
 	const handleSubmit = async event => {
 		event.preventDefault();
 		let newArr;
-		if (student[arrayName]) {
-			student[arrayName].push(formData[arrayName]);
-			newArr = student[arrayName];
+		if (lesson[arrayName]) {
+			lesson[arrayName].push(formData[arrayName]);
+			newArr = lesson[arrayName];
 		} else {
 			newArr = [formData[arrayName]];
 		}
@@ -59,17 +59,17 @@ function List({ student, arrayName }) {
 			const response = await axios({
 				method: 'PUT',
 				data: {
-					id: student._id,
+					id: lesson._id,
 					list: [arrayName],
 					newArr: newArr,
 				},
-				url: 'http://localhost:5000/students/updateListItem',
+				url: `${process.env.REACT_APP_API_URL}/lessons/updateListItem`,
 				withCredentials: true,
 			});
 			console.log(response);
 			event.target.reset();
 			setResetForm(!resetForm);
-			setGetStudents(!getStudents);
+			setGetLessons(!getLessons);
 		} catch (err) {
 			console.log(err);
 		}
@@ -84,8 +84,8 @@ function List({ student, arrayName }) {
 				</div>
 			</div>
 			<ul className='list-disc list-inside'>
-				{student[arrayName] &&
-					student[arrayName]?.map((el, i) => {
+				{lesson[arrayName] &&
+					lesson[arrayName]?.map((el, i) => {
 						return (
 							<div key={i} className='flex group items-center gap-3'>
 								<li className='text-lg'>{el}</li>

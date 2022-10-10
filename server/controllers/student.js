@@ -110,7 +110,6 @@ module.exports = {
 					msgError: true,
 					err,
 				},
-				s,
 			});
 		}
 	},

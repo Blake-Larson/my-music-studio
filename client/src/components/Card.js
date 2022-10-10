@@ -5,8 +5,8 @@ import manage from '../assets/images/manage.jpg';
 
 function Card() {
 	return (
-		<div className='flex justify-evenly'>
-			<div className='card w-96 bg-base-100 shadow-xl'>
+		<div className='flex md:justify-evenly md:flex-row flex-col gap-5 items-center'>
+			<div className='card md:w-96 bg-base-100 shadow-xl'>
 				<figure>
 					<img src={organize} alt='keyboard, paper, and writing utensils' />
 				</figure>
@@ -18,7 +18,7 @@ function Card() {
 					</p>
 				</div>
 			</div>
-			<div className='card w-96 bg-base-100 shadow-xl'>
+			<div className='card md:w-96 bg-base-100 shadow-xl'>
 				<figure>
 					<img src={teach} alt='Young person being taught guitar' />
 				</figure>
@@ -27,7 +27,7 @@ function Card() {
 					<p>Save time so you can spend more time teaching your students!</p>
 				</div>
 			</div>
-			<div className='card w-96 bg-base-100 shadow-xl'>
+			<div className='card md:w-96 bg-base-100 shadow-xl'>
 				<figure>
 					<img src={manage} alt='Woman and child learning piano' />
 				</figure>

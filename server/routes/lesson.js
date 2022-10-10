@@ -10,6 +10,7 @@ router.put('/updateLesson', lessonController.updateLesson);
 router.put('/updateAttendance', lessonController.updateAttendance);
 router.put('/updatePayment', lessonController.updatePayment);
 router.put('/updateArchived', lessonController.updateArchived);
+router.put('/updateListItem', lessonController.updateListItem);
 
 router.delete('/delete', lessonController.deleteLesson);
 

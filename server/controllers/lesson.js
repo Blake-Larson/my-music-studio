@@ -152,6 +152,31 @@ module.exports = {
 			});
 		}
 	},
+	updateListItem: async (req, res) => {
+		try {
+			await Lesson.findOneAndUpdate(
+				{ _id: req.body.id },
+				{
+					[req.body.list]: req.body.newArr,
+				}
+			);
+			res.status(200).json({
+				message: {
+					msgBody: 'Updated List!',
+					msgError: false,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({
+				message: {
+					msgBody: 'Error has occured when trying to update this item.',
+					msgError: true,
+					err,
+				},
+			});
+		}
+	},
 	deleteLesson: async (req, res) => {
 		try {
 			await Lesson.deleteOne({ _id: req.body.id });

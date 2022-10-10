@@ -7,6 +7,9 @@ const LessonSchema = new mongoose.Schema({
 	payment: {
 		type: String,
 	},
+	comments: {
+		type: Array,
+	},
 	archived: {
 		type: Boolean,
 	},

@@ -42,10 +42,10 @@ function Home() {
 					/>
 				</div>
 			</div>
-			<div className='py-20 bg-base-200'>
+			<div className='md:py-20 bg-base-200 px-5 py-10'>
 				<Card />
 			</div>
-			<div className='py-20'>
+			<div className='py-20 px-2'>
 				<YoutubeEmbed embedId={''} />
 			</div>
 			<Footer />

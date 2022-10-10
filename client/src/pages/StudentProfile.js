@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import useMsg from '../contexts/useMsg';
 import DeleteButton from '../components/buttons/DeleteButton';
-import List from '../components/List';
+import StudentList from '../components/StudentList';
 import { Image } from 'cloudinary-react';
 import PastLessons from '../components/PastLessons';
 import dayjs from 'dayjs';
@@ -345,8 +345,8 @@ function StudentProfile() {
 							<DeleteButton />
 						</div>
 					</form>
-					<List arrayName={'repertoire'} student={student} />
-					<List arrayName={'concepts'} student={student} />
+					<StudentList arrayName={'repertoire'} student={student} />
+					<StudentList arrayName={'concepts'} student={student} />
 					<PastLessons allLessons={allLessons} />
 				</div>
 			)}
