@@ -11,7 +11,7 @@ function SideBar() {
 		<div className='menu p-4 overflow-y-auto bg-base-100 lg:bg-base-200 text-base-content w-64 flex flex-col'>
 			<Logo />
 			<div className='divider'></div>
-			<ul className='custom-70vh flex flex-col gap-3'>
+			<ul className='flex flex-col gap-3'>
 				<li>
 					<NavLink to='/dashboard'>Dashboard</NavLink>
 				</li>
@@ -22,7 +22,7 @@ function SideBar() {
 					<NavLink to='/account'>Account Settings</NavLink>
 				</li>
 			</ul>
-			<div className='flex flex-col items-center gap-3'>
+			<div className='flex flex-col items-center gap-5 p-2 absolute bottom-0 left-0 right-0 mt-auto mb-5'>
 				<div className='flex gap-3'>
 					<div className='avatar'>
 						<div className='w-16 rounded'>

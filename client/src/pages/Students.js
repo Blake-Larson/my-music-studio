@@ -9,13 +9,13 @@ function Students() {
 
 	return (
 		<div>
-			<div className='p-3 mb-3'>
-				<h1 className='text-3xl text-center lg:text-start'>Students</h1>
+			<div className='p-3 mb-3 flex gap-5 items-center justify-center md:justify-start'>
+				<h1 className='text-3xl font-lemon'>Students</h1>
+				{location.pathname === '/students' && <CreateStudent />}
 			</div>
 			{location.pathname === '/students' && (
 				<div className='flex flex-col mx-3 gap-5'>
 					<StudentTable />
-					{location.pathname === '/students' && <CreateStudent />}
 				</div>
 			)}
 			<Routes>

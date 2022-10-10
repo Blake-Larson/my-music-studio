@@ -45,10 +45,8 @@ function Home() {
 			<div className='py-20 bg-base-200'>
 				<Card />
 			</div>
-			<div className=''>
-				<div className='py-20 max-w-2xl'>
-					<YoutubeEmbed embedId={''} />
-				</div>
+			<div className='py-20'>
+				<YoutubeEmbed embedId={''} />
 			</div>
 			<Footer />
 		</div>

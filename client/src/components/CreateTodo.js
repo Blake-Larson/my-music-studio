@@ -48,7 +48,7 @@ function CreateTodo({ getTodos, setGetTodos }) {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit} className='flex gap-2 form-control'>
+			<form onSubmit={handleSubmit} className='flex gap-2 items-center'>
 				<input
 					type='text'
 					name='text'

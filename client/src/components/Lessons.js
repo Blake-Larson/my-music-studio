@@ -20,7 +20,8 @@ function Lessons() {
 	}
 
 	return (
-		<div className='flex flex-col gap-5 w-full max-w-4xl px-5'>
+		<div className='flex flex-col gap-5 w-full max-w-4xl items-center'>
+			<h2 className='text-xl font-semibold'>Upcoming Lessons</h2>
 			{lessons &&
 				students &&
 				lessons
@@ -35,7 +36,7 @@ function Lessons() {
 							student => student._id === lesson.student
 						);
 						return (
-							<div key={lesson._id}>
+							<div key={lesson._id} className='w-full'>
 								<div className='collapse collapse-arrow rounded-xl border border-base-300 shadow-lg bg-base-200'>
 									<input type='checkbox' />
 									<div className='collapse-title'>
@@ -58,8 +59,8 @@ function Lessons() {
 													<div
 														className={
 															lesson.attendance === 'Present'
-																? 'btn btn-sm btn-primary btn-outline'
-																: 'btn btn-sm btn-warning btn-outline'
+																? 'btn btn-sm btn-primary btn-outline bg-base-100'
+																: 'btn btn-sm btn-warning btn-outline bg-base-100'
 														}
 													>
 														{lesson.attendance}
@@ -69,8 +70,8 @@ function Lessons() {
 													<div
 														className={
 															lesson.payment === 'Paid'
-																? 'btn btn-sm btn-primary btn-outline'
-																: 'btn btn-sm btn-warning btn-outline'
+																? 'btn btn-sm btn-primary btn-outline bg-base-100'
+																: 'btn btn-sm btn-warning btn-outline bg-base-100'
 														}
 													>
 														{lesson.payment}

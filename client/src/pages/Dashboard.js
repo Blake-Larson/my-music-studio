@@ -6,18 +6,13 @@ import Todos from '../components/Todos';
 function Dashboard() {
 	return (
 		<div>
-			<div className='p-3'>
-				<h1 className='text-3xl text-center lg:text-start'>Dashboard</h1>
+			<div className='p-3 mb-3 flex gap-5 items-center justify-center md:justify-start'>
+				<h1 className='text-3xl font-lemon'>Dashboard</h1>
+				<CreateLesson />
 			</div>
-			<div className=''>
-				<div className='flex flex-row justify-between items-center p-2'>
-					<h2 className='text-xl'>Upcoming Lessons</h2>
-					<CreateLesson />
-				</div>
-				<div className='flex flex-col items-center gap-5'>
-					<Lessons />
-					<Todos />
-				</div>
+			<div className='flex gap-5 lg:flex-row px-5 items-center lg:items-start flex-col-reverse justify-evenly'>
+				<Lessons />
+				<Todos />
 			</div>
 		</div>
 	);
