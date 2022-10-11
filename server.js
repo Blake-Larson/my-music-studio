@@ -11,16 +11,16 @@ const studentRoutes = require('./routes/student');
 const lessonRoutes = require('./routes/lesson');
 const todoRoutes = require('./routes/todo');
 
-//const cors = require('cors');
+const cors = require('cors');
 
 require('dotenv').config({ path: './config/.env' });
 
-// app.use(
-// 	cors({
-// 		credentials: true,
-// 		origin: 'https://my-music-studio.herokuapp.com/',
-// 	})
-// );
+app.use(
+	cors({
+		credentials: true,
+		origin: 'https://my-music-studio.herokuapp.com/',
+	})
+);
 
 // Passport config
 require('./config/passport')(passport);
@@ -56,10 +56,10 @@ if (process.env.NODE_ENV === 'production') {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', mainRoutes);
-app.use('/students', studentRoutes);
-app.use('/lessons', lessonRoutes);
-app.use('/todos', todoRoutes);
+app.use('/api/', mainRoutes);
+app.use('/api/students', studentRoutes);
+app.use('/api/lessons', lessonRoutes);
+app.use('/api/todos', todoRoutes);
 
 app.listen(process.env.PORT, () => {
 	console.log('Server is running, you better catch it!');
