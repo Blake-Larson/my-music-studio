@@ -5,7 +5,7 @@ import mainBg from '../assets/images/main-bg.jpg';
 import useAuth from '../auth/useAuth';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
-import YoutubeEmbed from '../components/YoutubeEmbed';
+//import YoutubeEmbed from '../components/YoutubeEmbed';
 
 function Home() {
 	const { authed } = useAuth();
@@ -45,9 +45,9 @@ function Home() {
 			<div className='md:py-20 bg-base-200 px-5 py-10'>
 				<Card />
 			</div>
-			<div className='py-20 px-2'>
+			{/* <div className='py-20 px-2'>
 				<YoutubeEmbed embedId={''} />
-			</div>
+			</div> */}
 			<Footer />
 		</div>
 	);
