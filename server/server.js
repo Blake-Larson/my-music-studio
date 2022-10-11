@@ -18,7 +18,7 @@ require('dotenv').config({ path: './config/.env' });
 app.use(
 	cors({
 		credentials: true,
-		origin: 'http://localhost:3000',
+		origin: 'https://mymusicstudio.netlify.app/',
 	})
 );
 
