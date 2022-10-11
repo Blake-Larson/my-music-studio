@@ -44,6 +44,11 @@ app.use(
 
 const path = require('path');
 
+app.use('/api/', mainRoutes);
+app.use('/api/students', studentRoutes);
+app.use('/api/lessons', lessonRoutes);
+app.use('/api/todos', todoRoutes);
+
 if (process.env.NODE_ENV === 'production') {
 	console.log('in production environment');
 	app.use(express.static('client/build'));
@@ -55,11 +60,6 @@ if (process.env.NODE_ENV === 'production') {
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use('/api/', mainRoutes);
-app.use('/api/students', studentRoutes);
-app.use('/api/lessons', lessonRoutes);
-app.use('/api/todos', todoRoutes);
 
 app.listen(process.env.PORT, () => {
 	console.log('Server is running, you better catch it!');
