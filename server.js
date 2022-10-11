@@ -46,7 +46,7 @@ console.log(path.resolve(__dirname, 'client/build', 'index.html'));
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('build'));
-	app.get('/*', (req, res) => {
+	app.get('*', (req, res) => {
 		res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
 	});
 }
@@ -55,10 +55,10 @@ if (process.env.NODE_ENV === 'production') {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', mainRoutes);
-app.use('/students', studentRoutes);
-app.use('/lessons', lessonRoutes);
-app.use('/todos', todoRoutes);
+// app.use('/', mainRoutes);
+// app.use('/students', studentRoutes);
+// app.use('/lessons', lessonRoutes);
+// app.use('/todos', todoRoutes);
 
 app.listen(process.env.PORT, () => {
 	console.log('Server is running, you better catch it!');
