@@ -43,10 +43,12 @@ app.use(
 
 const path = require('path');
 
-app.get('*', (req, res) => {
-	console.log(path.resolve(__dirname, './client/build', 'index.html'));
-	res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+	app.get('*', (req, res) => {
+		console.log(path.resolve(__dirname, './client/build', 'index.html'));
+		res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+	});
+}
 
 // Passport middleware
 app.use(passport.initialize());
