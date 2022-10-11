@@ -46,7 +46,7 @@ function CreateStudent() {
 						: '',
 					teacher: user._id,
 				},
-				url: 'http://localhost:5000/students/createStudent',
+				url: `${process.env.REACT_APP_API_URL}/students/createStudent`,
 				withCredentials: true,
 			});
 			console.log('From Server:', response);

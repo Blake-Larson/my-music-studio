@@ -47,7 +47,7 @@ function CreateLesson() {
 					attendance: '',
 					payment: '',
 				},
-				url: 'http://localhost:5000/lessons/createLesson',
+				url: `${process.env.REACT_APP_API_URL}/lessons/createLesson`,
 				withCredentials: true,
 			});
 			setGetLessons(!getLessons);
