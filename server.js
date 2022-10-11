@@ -24,6 +24,19 @@ require('dotenv').config({ path: './config/.env' });
 
 app.use(cors());
 
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+	res.setHeader(
+		'Access-Control-Allow-Origin',
+		'https://mymusicstudio.netlify.app/'
+	);
+	res.header(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, Content-Type, Accept'
+	);
+	next();
+});
+
 // Passport config
 require('./config/passport')(passport);
 
