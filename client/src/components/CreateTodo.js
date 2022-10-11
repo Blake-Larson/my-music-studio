@@ -1,3 +1,4 @@
+import { ErrorResponse } from '@remix-run/router';
 import React from 'react';
 import useAuth from '../auth/useAuth';
 import useMsg from '../contexts/useMsg';
@@ -26,23 +27,10 @@ function CreateTodo({ getTodos, setGetTodos }) {
 		event.preventDefault();
 		const response = await TodoService.createTodo(formData);
 		if (response.status === 200) {
-			setMsg(
-				{
-					text: response.data.message.msgBody,
-					success: true,
-				},
-				setClearMsg(!clearMsg)
-			);
 			setGetTodos(!getTodos);
 			event.target.reset();
 		} else {
-			setMsg(
-				{
-					text: response.response.data.message.msgBody,
-					success: false,
-				},
-				setClearMsg(!clearMsg)
-			);
+			console.log(response);
 		}
 	};
 
@@ -61,13 +49,6 @@ function CreateTodo({ getTodos, setGetTodos }) {
 					<SmallCheckButton />
 				</button>
 			</form>
-			<div
-				className={
-					msg.success ? 'text-success text-center' : 'text-error text-center'
-				}
-			>
-				{msg ? msg.text : ''}
-			</div>
 		</div>
 	);
 }
