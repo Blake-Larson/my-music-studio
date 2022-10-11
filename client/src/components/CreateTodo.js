@@ -1,14 +1,10 @@
-import { ErrorResponse } from '@remix-run/router';
 import React from 'react';
 import useAuth from '../auth/useAuth';
-import useMsg from '../contexts/useMsg';
 import TodoService from '../services/TodoService';
 import SmallCheckButton from './buttons/SmallCheckButton';
 
 function CreateTodo({ getTodos, setGetTodos }) {
 	const { user } = useAuth();
-
-	const { msg, setMsg, clearMsg, setClearMsg } = useMsg();
 
 	const [formData, setFormData] = React.useState({
 		text: '',
