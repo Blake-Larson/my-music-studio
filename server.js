@@ -11,16 +11,16 @@ const studentRoutes = require('./routes/student');
 const lessonRoutes = require('./routes/lesson');
 const todoRoutes = require('./routes/todo');
 
-const cors = require('cors');
+// const cors = require('cors');
 
 require('dotenv').config({ path: './config/.env' });
 
-app.use(
-	cors({
-		credentials: true,
-		origin: 'https://mymusicstudio.netlify.app',
-	})
-);
+// app.use(
+// 	cors({
+// 		credentials: true,
+// 		origin: 'https://mymusicstudio.netlify.app',
+// 	})
+// );
 
 // Passport config
 require('./config/passport')(passport);
@@ -42,7 +42,10 @@ app.use(
 	})
 );
 
+const path = require('path');
+
 app.get('*', (req, res) => {
+	console.log(path.resolve(__dirname, './client/build', 'index.html'));
 	res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
 
