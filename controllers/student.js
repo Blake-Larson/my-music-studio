@@ -5,7 +5,9 @@ const cloudinary = require('../middleware/cloudinary');
 module.exports = {
 	getStudents: async (req, res) => {
 		try {
-			const students = await Student.find({ teacher: req.body.user._id });
+			const students = await Student.find({
+				teacher: req.session?.passport?.user,
+			});
 			res.json(students);
 		} catch (err) {
 			console.log(err);
@@ -27,9 +29,9 @@ module.exports = {
 				email: req.body.email,
 				primaryContact: req.body.primaryContact,
 				instrument: req.body.instrument,
-				repertoire: [],
-				concepts: [],
-				teacher: req.user._id,
+				repertoire: req.body.repertoire,
+				concepts: req.body.concepts,
+				teacher: req.body.teacher,
 			});
 			res.json({
 				message: {

@@ -13,10 +13,7 @@ function useStudents() {
 		(async () => {
 			try {
 				const response = await axios({
-					method: 'PUT',
-					data: {
-						user: user,
-					},
+					method: 'GET',
 					url: `${process.env.REACT_APP_API_URL}/students`,
 					withCredentials: true,
 				});

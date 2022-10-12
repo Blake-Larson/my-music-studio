@@ -44,6 +44,8 @@ function CreateStudent() {
 					instrument: formData.instrument
 						? capitolizeFirst(formData.instrument)
 						: '',
+					repertoire: [],
+					concepts: [],
 					teacher: user._id,
 				},
 				url: `${process.env.REACT_APP_API_URL}/students/createStudent`,

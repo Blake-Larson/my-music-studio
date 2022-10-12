@@ -18,7 +18,11 @@ require('dotenv').config({ path: './config/.env' });
 app.use(
 	cors({
 		credentials: true,
-		origin: 'https://my-music-studio.herokuapp.com/',
+		origin: `${
+			process.env.NODE_ENV === 'production'
+				? 'https://my-music-studio.herokuapp.com/'
+				: 'http://localhost:3000'
+		}`,
 	})
 );
 
@@ -44,17 +48,22 @@ app.use(
 
 const path = require('path');
 
-app.use('/api/', mainRoutes);
-app.use('/api/students', studentRoutes);
-app.use('/api/lessons', lessonRoutes);
-app.use('/api/todos', todoRoutes);
-
 if (process.env.NODE_ENV === 'production') {
-	console.log('in production environment');
 	app.use(express.static('client/build'));
+
+	app.use('/api/', mainRoutes);
+	app.use('/api/students', studentRoutes);
+	app.use('/api/lessons', lessonRoutes);
+	app.use('/api/todos', todoRoutes);
+
 	app.get('/*', (req, res) => {
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 	});
+} else {
+	app.use('/', mainRoutes);
+	app.use('/students', studentRoutes);
+	app.use('/lessons', lessonRoutes);
+	app.use('/todos', todoRoutes);
 }
 
 // Passport middleware

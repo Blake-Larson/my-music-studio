@@ -32,7 +32,9 @@ module.exports = {
 	},
 	getLessons: async (req, res) => {
 		try {
-			const lessons = await Lesson.find({ teacher: req.body.user._id }).sort({
+			const lessons = await Lesson.find({
+				teacher: req.session?.passport?.user,
+			}).sort({
 				'date.dateObj': 'asc',
 			});
 			res.json(lessons);
