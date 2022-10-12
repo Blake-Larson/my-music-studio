@@ -69,7 +69,7 @@ module.exports = {
 					instrument: req.body.instrument,
 					repertoire: req.body.repertoire,
 					concepts: req.body.concepts,
-					teacher: req.user._id,
+					teacher: req.session.passport.user,
 					profileImg: req.body.profileImg,
 				}
 			);

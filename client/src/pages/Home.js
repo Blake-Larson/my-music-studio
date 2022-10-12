@@ -5,7 +5,7 @@ import mainBg from '../assets/images/main-bg.jpg';
 import useAuth from '../auth/useAuth';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
-//import YoutubeEmbed from '../components/YoutubeEmbed';
+import YoutubeEmbed from '../components/YoutubeEmbed';
 
 function Home() {
 	const { authed } = useAuth();
@@ -20,10 +20,9 @@ function Home() {
 						Enrich your teaching{' '}
 						<span className='text-primary'>experience</span>
 					</h1>
-					<p className='text-center md:text-start max-w-4xl'>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-						at turpis non massa auctor mollis. Maecenas in urna vestibulum velit
-						pretium posuere.
+					<p className='text-center max-w-4xl'>
+						You can create your own account or log in using "demo@demo.com" with
+						password "demodemo" to see an example account.
 					</p>
 					<button
 						className='btn btn-primary normal-case w-60 mt-3'
@@ -45,9 +44,9 @@ function Home() {
 			<div className='md:py-20 bg-base-200 px-5 py-10'>
 				<Card />
 			</div>
-			{/* <div className='py-20 px-2'>
-				<YoutubeEmbed embedId={''} />
-			</div> */}
+			<div className='py-20 px-2'>
+				<YoutubeEmbed embedId={'WXCoNu3Z1Q8'} />
+			</div>
 			<Footer />
 		</div>
 	);
