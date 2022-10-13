@@ -48,11 +48,7 @@ function Lessons() {
 													<div className='w-12 rounded'>
 														<Image
 															cloudName='drwljgjhd'
-															publicId={
-																student?.profileImg
-																	? student?.profileImg
-																	: 'https://res.cloudinary.com/drwljgjhd/image/upload/v1664830344/w1plcgp0zhfp0jbnykyu.jpg'
-															}
+															publicId={student?.profileImg}
 														/>
 													</div>
 												</div>

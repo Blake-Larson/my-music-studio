@@ -31,6 +31,7 @@ module.exports = {
 				instrument: req.body.instrument,
 				repertoire: req.body.repertoire,
 				concepts: req.body.concepts,
+				profileImg: req.body.profileImg,
 				teacher: req.body.teacher,
 			});
 			res.json({

@@ -122,15 +122,8 @@ function UserAccount() {
 					<div className='flex flex-col gap-5'>
 						<div className='flex gap-3'>
 							<div className='avatar'>
-								<div className='w-24 rounded'>
-									<Image
-										cloudName='drwljgjhd'
-										publicId={
-											user.profileImg
-												? user.profileImg
-												: 'https://res.cloudinary.com/drwljgjhd/image/upload/v1664830344/w1plcgp0zhfp0jbnykyu.jpg'
-										}
-									/>
+								<div className='w-24 rounded border border-base-100'>
+									<Image cloudName='drwljgjhd' publicId={user.profileImg} />
 								</div>
 							</div>
 

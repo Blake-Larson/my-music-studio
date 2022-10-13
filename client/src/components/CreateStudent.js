@@ -46,6 +46,8 @@ function CreateStudent() {
 						: '',
 					repertoire: [],
 					concepts: [],
+					profileImg:
+						'https://res.cloudinary.com/drwljgjhd/image/upload/v1665621280/blank_dz68ei.webp',
 					teacher: user._id,
 				},
 				url: `${process.env.REACT_APP_API_URL}/students/createStudent`,
