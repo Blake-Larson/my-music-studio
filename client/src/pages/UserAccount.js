@@ -111,13 +111,15 @@ function UserAccount() {
 
 	return (
 		<div>
-			<div className='p-3 mb-3'>
-				<h1 className='text-3xl text-center lg:text-start'>Account Settings</h1>
+			<div className='p-3 sticky z-50 bg-base-100 w-full border border-base-100 border-b-base-200 top-0'>
+				<h1 className='text-2xl text-center lg:text-start font-lemon'>
+					Account Settings
+				</h1>
 			</div>
 			{user && (
 				<form
 					onSubmit={handleSubmit}
-					className='bg-base-200 p-5 rounded mx-3 text-xl relative pb-20'
+					className='bg-base-200 p-5 rounded m-5 text-xl relative pb-20'
 				>
 					<div className='flex flex-col gap-5'>
 						<div className='flex gap-3'>
