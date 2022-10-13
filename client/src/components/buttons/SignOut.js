@@ -1,13 +1,13 @@
 import React from 'react';
 import useAuth from '../../auth/useAuth';
 
-function SignOut({ color }) {
+function SignOut({ color, textColor }) {
 	const { handleLogout } = useAuth();
 	return (
 		<button
 			type='button'
 			onClick={handleLogout}
-			className={`btn btn-${color} flex gap-2`}
+			className={`btn btn-${color} flex gap-2 text-${textColor}`}
 		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
