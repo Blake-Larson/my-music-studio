@@ -41,7 +41,7 @@ export const RequireAuth = ({ children }) => {
 						</StudentProvider>
 					) : (
 						<div className='flex justify-center mt-10'>
-							<button className='btn loading'>loading</button>
+							<button className='btn loading text-base-100'>loading</button>
 						</div>
 					)}
 					<Footer />

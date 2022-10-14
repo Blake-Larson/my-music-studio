@@ -2,9 +2,9 @@
 
 A full-stack application for private music teachers to manage their studios and their students.
 
-<!-- **Link to project:** http://recruiters-love-seeing-live-demos.com/
+[Live Site](https://my-music-studio.herokuapp.com/)
 
-![alt tag](http://placecorgi.com/1200/650)-->
+<!-- ![alt tag](http://placecorgi.com/1200/650)-->
 
 ## How It's Made:
 
