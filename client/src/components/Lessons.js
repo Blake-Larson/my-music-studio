@@ -42,7 +42,7 @@ function Lessons() {
 								<div className='collapse collapse-arrow rounded-xl border border-secondary shadow-lg bg-base-200'>
 									<input type='checkbox' />
 									<div className='collapse-title'>
-										<div className='text-lg font-medium flex justify-between items-center flex-col sm:flex-row gap-3'>
+										<div className='font-medium flex justify-between items-center flex-col sm:flex-row gap-3'>
 											<div className='flex gap-3 items-center'>
 												<div className='avatar'>
 													<div className='w-12 rounded'>
@@ -52,7 +52,7 @@ function Lessons() {
 														/>
 													</div>
 												</div>
-												<span>{student?.name}</span>
+												<span className='text-lg'>{student?.name}</span>
 												{lesson.attendance && (
 													<div
 														className={
@@ -81,14 +81,14 @@ function Lessons() {
 												<div className='flex text-center'>
 													<div className='flex flex-col justify-evenly'>
 														<span>{`${lesson.date.weekday}, ${lesson.date.date}`}</span>
-														<span className='text-lg'>{`${lesson.date.start} - ${lesson.date.end}`}</span>
+														<span>{`${lesson.date.start} - ${lesson.date.end}`}</span>
 													</div>
 												</div>
 											)}
 										</div>
 									</div>
 									<div className='collapse-content gap-5 flex flex-col bg-base-100'>
-										<div className='text-lg flex flex-col py-2 rounded-xl'>
+										<div className='flex flex-col py-2 rounded-xl'>
 											<div>
 												{student && (
 													<div className='flex flex-col md:flex-row md:justify-between gap-3'>

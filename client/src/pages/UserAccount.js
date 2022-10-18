@@ -119,7 +119,7 @@ function UserAccount() {
 			{user && (
 				<form
 					onSubmit={handleSubmit}
-					className='bg-base-200 p-5 rounded m-5 text-xl relative pb-20'
+					className='bg-base-200 p-5 rounded m-5 relative pb-20'
 				>
 					<div className='flex flex-col gap-5'>
 						<div className='flex gap-3'>

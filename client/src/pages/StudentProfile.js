@@ -170,7 +170,7 @@ function StudentProfile() {
 			</div>
 
 			{student && (
-				<div className='bg-base-200 p-5 rounded mx-3 text-xl relative pb-20 flex flex-col gap-5'>
+				<div className='bg-base-200 p-5 rounded m-5 relative pb-20 flex flex-col gap-5'>
 					<form onSubmit={handleSubmit}>
 						<div className='flex flex-col'>
 							<div className='flex gap-3'>
@@ -230,16 +230,16 @@ function StudentProfile() {
 							</div>
 
 							<div className='divider'></div>
-							<div className='text-lg flex flex-col rounded-xl gap-5'>
+							<div className='flex flex-col rounded-xl gap-5'>
 								{nextLesson && (
 									<div className='flex flex-col justify-evenly'>
 										<h3 className='text-lg font-semibold'>Next Lesson</h3>
 										<span>{`${nextLesson.date.weekday}, ${nextLesson.date.date}`}</span>
-										<span className='text-lg'>{`${nextLesson.date.start} - ${nextLesson.date.end}`}</span>
+										<span>{`${nextLesson.date.start} - ${nextLesson.date.end}`}</span>
 									</div>
 								)}
 								<div>
-									<h3 className='font-semibold'>Contact Information</h3>
+									<h3 className='font-semibold text-lg'>Contact Information</h3>
 									<ul className='list-disc list-inside max-w-xl'>
 										{editMode ? (
 											<input
@@ -288,7 +288,7 @@ function StudentProfile() {
 									</ul>
 								</div>
 								<div>
-									<h3 className='font-semibold'>Status</h3>
+									<h3 className='font-semibold text-lg'>Status</h3>
 									<ul className='list-disc list-inside'>
 										{editMode ? (
 											<select

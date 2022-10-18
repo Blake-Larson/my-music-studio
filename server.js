@@ -46,6 +46,7 @@ app.use(
 	})
 );
 
+// Routes
 const path = require('path');
 
 if (process.env.NODE_ENV === 'production') {

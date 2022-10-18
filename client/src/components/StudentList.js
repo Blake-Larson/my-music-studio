@@ -88,7 +88,7 @@ function List({ student, arrayName }) {
 					student[arrayName]?.map((el, i) => {
 						return (
 							<div key={i} className='flex group items-center gap-3'>
-								<li className='text-lg'>{el}</li>
+								<li>{el}</li>
 								<div
 									className='group-hover:opacity-100 opacity-0 transition-opacity duration-500 inline-block'
 									onClick={() => handleDelete(i)}

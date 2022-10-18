@@ -36,7 +36,7 @@ function Todos() {
 					{todos?.map((todo, i) => {
 						return (
 							<div key={i} className='flex group items-center gap-3'>
-								<li className='text-lg'>{todo.text}</li>
+								<li>{todo.text}</li>
 								<div
 									className='group-hover:opacity-100 opacity-0 transition-opacity duration-500 inline-block'
 									onClick={() => deleteTodo(todo._id)}
