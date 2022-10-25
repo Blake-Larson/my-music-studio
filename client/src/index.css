@@ -6,10 +6,16 @@
 	html {
 		font-family: 'Poppins', system-ui, sans-serif;
 	}
+	.custom-90vh {
+		height: 90vh;
+	}
 	.custom-80vh {
 		min-height: 80vh;
 	}
 	.custom-70vh {
 		height: 70vh;
+	}
+	.custom-10vh {
+		min-height: 10vh;
 	}
 }

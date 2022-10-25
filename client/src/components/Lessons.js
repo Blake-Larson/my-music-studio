@@ -39,7 +39,7 @@ function Lessons() {
 						);
 						return (
 							<div key={lesson._id} className='w-full'>
-								<div className='collapse collapse-arrow rounded-xl border border-secondary shadow-lg bg-base-200'>
+								<div className='collapse collapse-arrow rounded-xl shadow-lg bg-base-100'>
 									<input type='checkbox' />
 									<div className='collapse-title'>
 										<div className='font-medium flex justify-between items-center flex-col sm:flex-row gap-3'>

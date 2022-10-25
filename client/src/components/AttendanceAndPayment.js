@@ -12,7 +12,7 @@ function AttendanceAndPayment({ lesson }) {
 			</h3>
 			<div className={lesson.attendance ? 'hidden' : 'flex gap-3'}>
 				<button
-					className='btn btn-primary'
+					className='btn btn-primary w-28'
 					onClick={async () => {
 						const res = await LessonService.updateAttendace(
 							'Present',
@@ -26,7 +26,7 @@ function AttendanceAndPayment({ lesson }) {
 					Present
 				</button>
 				<button
-					className='btn btn-warning'
+					className='btn btn-warning w-28'
 					onClick={async () => {
 						const res = await LessonService.updateAttendace(
 							'Absent',
@@ -46,7 +46,7 @@ function AttendanceAndPayment({ lesson }) {
 			</h3>
 			<div className={lesson.payment ? 'hidden' : 'flex gap-3'}>
 				<button
-					className='btn btn-primary'
+					className='btn btn-primary w-28'
 					onClick={async () => {
 						const res = await LessonService.updatePayment('Paid', lesson._id);
 						if (res === 'yes') {
@@ -57,7 +57,7 @@ function AttendanceAndPayment({ lesson }) {
 					Paid
 				</button>
 				<button
-					className='btn btn-warning'
+					className='btn btn-warning w-28'
 					onClick={async () => {
 						const res = await LessonService.updatePayment(
 							'Not Paid',

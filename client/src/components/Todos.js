@@ -31,7 +31,7 @@ function Todos() {
 	return (
 		<div className='flex flex-col gap-5 w-full max-w-lg items-center'>
 			<h2 className='text-xl font-semibold text-center'>Todo List</h2>
-			<div className='flex flex-col gap-5 w-full rounded-xl border border-accent shadow-lg bg-base-200 p-5'>
+			<div className='flex flex-col gap-5 w-full rounded-xl shadow-lg bg-primary-light p-5'>
 				<ul className='list-disc list-inside'>
 					{todos?.map((todo, i) => {
 						return (

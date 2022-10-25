@@ -19,7 +19,6 @@ function useAuth() {
 					url: `${process.env.REACT_APP_API_URL}/authenticated`,
 					withCredentials: true,
 				});
-				console.log('From Server:', response);
 				if (response.status === 200) {
 					setAuthed(true);
 					setUser(response.data);

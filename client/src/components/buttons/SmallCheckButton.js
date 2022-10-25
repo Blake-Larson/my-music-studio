@@ -2,7 +2,7 @@ import React from 'react';
 
 function SmallCheckButton() {
 	return (
-		<div className='btn-ghost border border-base-300 p-0.5 rounded-md cursor-pointer hover:btn-primary'>
+		<div className='btn-ghost border border-base-300 p-0.5 rounded-md cursor-pointer hover:btn-primary bg-base-100'>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				fill='none'

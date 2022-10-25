@@ -41,7 +41,7 @@ function Home() {
 					/>
 				</div>
 			</div>
-			<div className='md:py-20 bg-base-200 px-5 py-10'>
+			<div className='md:py-20 bg-secondary-light px-5 py-10'>
 				<Card />
 			</div>
 			<div className='py-20 px-2'>

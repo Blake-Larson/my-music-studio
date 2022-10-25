@@ -7,7 +7,7 @@ function SignOut({ color, textColor }) {
 		<button
 			type='button'
 			onClick={handleLogout}
-			className={`btn btn-${color} flex gap-2 text-${textColor}`}
+			className={`btn btn-outline btn-${color} flex gap-2 text-${textColor} border-none`}
 		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'

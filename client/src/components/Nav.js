@@ -15,9 +15,11 @@ function Nav() {
 				<Logo />
 			</div>
 			{authed && location.pathname === '/' && (
-				<div className='gap-5 hidden md:flex'>
-					<NavLink to='/dashboard'>Dashboard</NavLink>
-					<SignOut color={'primary'} textColor={'black'} />
+				<div className='gap-3 hidden md:flex'>
+					<NavLink to='/dashboard' className='btn btn-secondary'>
+						Dashboard
+					</NavLink>
+					<SignOut color={'nuetral'} textColor={'nuetral'} />
 				</div>
 			)}
 			{!authed && (
@@ -59,7 +61,7 @@ function Nav() {
 							<NavLink to='/dashboard'>Dashboard</NavLink>
 						</li>
 						<li className='text-lg'>
-							<SignOut color={'primary'} textColor={'black'} />
+							<SignOut color={'nuetral'} textColor={'nuetral'} />
 						</li>
 					</ul>
 				)}

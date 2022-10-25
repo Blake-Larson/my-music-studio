@@ -41,7 +41,7 @@ function SideBar() {
 						<span className='text-sm'>Teacher</span>
 					</div>
 				</div>
-				<SignOut color={'nuetral'} textColor={'base-100'} />
+				<SignOut color={'nuetral'} textColor={'nuetral'} />
 			</div>
 		</div>
 	);

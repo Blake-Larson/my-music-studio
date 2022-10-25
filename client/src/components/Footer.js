@@ -3,7 +3,7 @@ import LogoIcon from './LogoIcon';
 
 function Footer() {
 	return (
-		<footer className='bg-neutral p-4 mt-auto w-full text-base-100'>
+		<footer className='bg-neutral p-4 mt-auto w-full text-base-100 custom-10vh'>
 			<div className='flex items-center md:justify-between flex-col md:flex-row gap-3'>
 				<LogoIcon />
 

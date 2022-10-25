@@ -21,11 +21,6 @@ export const RequireAuth = ({ children }) => {
 		return () => clearTimeout(clear);
 	}, [authed, navigate]);
 
-	// return authed === true ? (
-	// 	children
-	// ) : (
-	// 	<Navigate to='/' replace state={{ path: location.pathname }} />
-	// );
 	return (
 		<div>
 			{location.pathname === '/' && <Nav />}
@@ -36,7 +31,9 @@ export const RequireAuth = ({ children }) => {
 					{authed ? (
 						<StudentProvider>
 							<LessonProvider>
-								<div className='pb-5'>{children}</div>
+								<div className='custom-90vh overflow-auto bg-secondary-light'>
+									{children}
+								</div>
 							</LessonProvider>
 						</StudentProvider>
 					) : (
