@@ -27,7 +27,7 @@ module.exports = {
 	},
 	getTodos: async (req, res) => {
 		try {
-			const todos = await Todo.find({ user: req.body.user });
+			const todos = await Todo.find(req.session?.passport);
 			res.json(todos);
 		} catch (err) {
 			console.log(err);

@@ -22,10 +22,7 @@ const TodoService = {
 	getTodos: async id => {
 		try {
 			const response = await Axios({
-				method: 'PUT',
-				data: {
-					user: id,
-				},
+				method: 'GET',
 				url: `${process.env.REACT_APP_API_URL}/todos`,
 				withCredentials: true,
 			});

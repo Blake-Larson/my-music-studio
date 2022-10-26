@@ -111,7 +111,7 @@ function UserAccount() {
 
 	return (
 		<div>
-			<div className='p-3 sticky z-50 bg-base-100 w-full border border-base-100 border-b-base-200 top-0'>
+			<div className='p-3 sticky z-50 bg-base-100 w-full border-b border-l border-base-200 top-0'>
 				<h1 className='text-2xl text-center lg:text-start font-lemon'>
 					Account Settings
 				</h1>
@@ -119,12 +119,12 @@ function UserAccount() {
 			{user && (
 				<form
 					onSubmit={handleSubmit}
-					className='bg-base-200 p-5 rounded m-5 relative pb-20'
+					className='bg-base-100 p-5 rounded m-5 relative pb-20 max-w-4xl'
 				>
 					<div className='flex flex-col gap-5'>
 						<div className='flex gap-3'>
 							<div className='avatar'>
-								<div className='w-24 rounded border border-base-100'>
+								<div className='w-24 rounded border-2 border-secondary'>
 									<Image cloudName='drwljgjhd' publicId={user.profileImg} />
 								</div>
 							</div>

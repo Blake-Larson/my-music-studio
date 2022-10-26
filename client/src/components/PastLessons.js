@@ -19,18 +19,18 @@ function PastLessons({ allLessons }) {
 
 	return (
 		<div>
-			<h3 className='text-lg font-semibold'>Past Lessons</h3>
-			<div className='overflow-x-auto w-full border rounded-t-xl table-compact'>
+			<h3 className='text-lg font-semibold py-5'>Past Lessons</h3>
+			<div className='overflow-x-auto w-full border border-accent-light rounded-t-xl table-compact'>
 				<table className='table w-full'>
 					<thead>
 						<tr>
-							<th>Date</th>
-							<th>Day</th>
-							<th>Time</th>
-							<th>Attendance</th>
-							<th>Paid</th>
-							<th>Status</th>
-							<th>Del</th>
+							<th className='bg-accent-light'>Date</th>
+							<th className='bg-accent-light'>Day</th>
+							<th className='bg-accent-light'>Time</th>
+							<th className='bg-accent-light'>Attendance</th>
+							<th className='bg-accent-light'>Paid</th>
+							<th className='bg-accent-light'>Status</th>
+							<th className='bg-accent-light'>Del</th>
 						</tr>
 					</thead>
 					<tbody>

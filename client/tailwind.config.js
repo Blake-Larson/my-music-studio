@@ -31,7 +31,7 @@ module.exports = {
 
 					warning: '#FBBD23',
 
-					error: '#BD5642',
+					error: '#f87272',
 				},
 			},
 		],

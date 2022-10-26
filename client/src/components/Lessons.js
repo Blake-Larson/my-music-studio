@@ -45,7 +45,7 @@ function Lessons() {
 										<div className='font-medium flex justify-between items-center flex-col sm:flex-row gap-3'>
 											<div className='flex gap-3 items-center'>
 												<div className='avatar'>
-													<div className='w-12 rounded'>
+													<div className='w-12 rounded border border-secondary'>
 														<Image
 															cloudName='drwljgjhd'
 															publicId={student?.profileImg}

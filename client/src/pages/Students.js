@@ -9,7 +9,7 @@ function Students() {
 
 	return (
 		<div>
-			<div className='p-3 flex gap-5 items-center justify-center md:justify-start sticky z-50 bg-base-100 w-full border border-base-100 border-b-base-200 top-0'>
+			<div className='p-3 flex gap-5 items-center justify-center lg:justify-start sticky z-50 w-full border-b border-l border-base-200 top-0 bg-base-100'>
 				<h1 className='text-2xl font-lemon'>Students</h1>
 				{location.pathname === '/students' && <CreateStudent />}
 			</div>

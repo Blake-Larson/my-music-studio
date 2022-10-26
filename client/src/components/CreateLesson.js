@@ -84,7 +84,7 @@ function CreateLesson() {
 		<div>
 			<label
 				htmlFor='createLesson-modal'
-				className='btn btn-square btn-primary'
+				className='btn btn-square btn-primary btn-sm'
 			>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'

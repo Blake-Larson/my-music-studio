@@ -12,6 +12,17 @@ export const RequireAuth = ({ children }) => {
 	const { authed } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
+	const [bgColor, setBgColor] = React.useState('');
+
+	React.useEffect(() => {
+		if (children.type.name === 'Dashboard') {
+			setBgColor('bg-secondary-light');
+		} else if (children.type.name === 'Students') {
+			setBgColor('bg-secondary-light');
+		} else if (children.type.name === 'UserAccount') {
+			setBgColor('bg-secondary-light');
+		}
+	}, [children.type.name]);
 
 	React.useEffect(() => {
 		const clear = setTimeout(() => {
@@ -31,7 +42,7 @@ export const RequireAuth = ({ children }) => {
 					{authed ? (
 						<StudentProvider>
 							<LessonProvider>
-								<div className='custom-90vh overflow-auto bg-secondary-light'>
+								<div className={`custom-90vh overflow-auto ${bgColor}`}>
 									{children}
 								</div>
 							</LessonProvider>

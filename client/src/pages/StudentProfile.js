@@ -170,12 +170,12 @@ function StudentProfile() {
 			</div>
 
 			{student && (
-				<div className='bg-base-200 p-5 rounded m-5 relative pb-20 flex flex-col gap-5'>
+				<div className='bg-base-100 p-5 rounded m-5 relative pb-20 flex flex-col gap-5'>
 					<form onSubmit={handleSubmit}>
 						<div className='flex flex-col'>
 							<div className='flex gap-3'>
 								<div className='avatar'>
-									<div className='w-24 rounded border border-base-100'>
+									<div className='w-24 rounded border-2 border-secondary'>
 										<Image
 											cloudName='drwljgjhd'
 											publicId={student.profileImg}

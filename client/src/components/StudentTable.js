@@ -58,25 +58,25 @@ function StudentTable() {
 
 	return (
 		<div>
-			<div className='hidden md:block overflow-x-auto w-full border rounded-t-xl'>
+			<div className='hidden md:block overflow-x-auto w-full rounded-t-xl'>
 				<table className='table w-full'>
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Instrument</th>
-							<th>Phone</th>
-							<th>Email</th>
+							<th className='bg-accent-light'>Name</th>
+							<th className='bg-accent-light'>Instrument</th>
+							<th className='bg-accent-light'>Phone</th>
+							<th className='bg-accent-light'>Email</th>
 						</tr>
 					</thead>
 					<tbody>{studentArrLarge}</tbody>
 				</table>
 			</div>
-			<div className='overflow-x-auto w-full border rounded-t-xl md:hidden'>
+			<div className='overflow-x-auto w-full rounded-t-xl md:hidden'>
 				<table className='table w-full'>
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Phone</th>
+							<th className='bg-accent-light'>Name</th>
+							<th className='bg-accent-light'>Phone</th>
 						</tr>
 					</thead>
 					<tbody>{studentArrSmall}</tbody>
