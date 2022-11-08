@@ -21,8 +21,8 @@ function Home() {
 						<span className='text-primary'>experience</span>
 					</h1>
 					<p className='text-center max-w-4xl'>
-						Try Logging with "demo@demo.com" and password "demodemo" to see an
-						example account or create your own!
+						Try logging in with "demo@demo.com" and password "demodemo" to see
+						an example account or create your own!
 					</p>
 					<button
 						className='btn btn-primary normal-case w-60 mt-3'
