@@ -1,13 +1,33 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
 import Logo from './Logo';
+import axios from 'axios';
 import SignOut from './buttons/SignOut';
 
 function Nav() {
 	const location = useLocation();
+	let navigate = useNavigate();
+	const { authed, handleLogin } = useAuth();
 
-	const { authed } = useAuth();
+	async function demoLogin() {
+		try {
+			const response = await axios({
+				method: 'POST',
+				data: {
+					email: 'demo@demo.com',
+					password: 'demodemo',
+				},
+				url: `${process.env.REACT_APP_API_URL}/login`,
+				withCredentials: true,
+			});
+			console.log('From Server:', response.data.user);
+			handleLogin(response.data.user);
+			navigate('/dashboard');
+		} catch (err) {
+			console.log(err);
+		}
+	}
 
 	return (
 		<nav className='navbar bg-base-100 border border-base-200'>
@@ -25,6 +45,12 @@ function Nav() {
 			{!authed && (
 				<div className='hidden md:flex'>
 					<div className='flex gap-5 items-center'>
+						<button
+							onClick={demoLogin}
+							className='btn btn-secondary normal-case'
+						>
+							Demo
+						</button>
 						<NavLink to='/login' className=''>
 							Login
 						</NavLink>
