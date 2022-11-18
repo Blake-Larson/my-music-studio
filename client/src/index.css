@@ -18,4 +18,7 @@
 	.custom-10vh {
 		min-height: 10vh;
 	}
+	.custom-card-height {
+		height: 26rem;
+	}
 }
