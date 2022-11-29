@@ -14,7 +14,7 @@ module.exports = {
 		);
 	},
 
-	postSignup: (req, res) => {
+	signup: (req, res) => {
 		if (!validator.isEmail(req.body.email)) {
 			res.status(400).json({
 				message: {

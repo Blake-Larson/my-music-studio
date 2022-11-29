@@ -4,7 +4,6 @@ A full-stack application for private music teachers to manage their studios and 
 
 [Live Site](https://my-music-studio.herokuapp.com/)
 
-<!-- ![alt tag](http://placecorgi.com/1200/650)-->
 <p align="center" ><img align="center" src="https://github.com/Blake-Larson/my-music-studio/blob/main/client/src/assets/images/demo.jpg" alt="The inital view of My Music Studio" /></p>
 
 ## How It's Made:
