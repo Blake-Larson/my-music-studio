@@ -28,7 +28,6 @@ export const RequireAuth = ({ children }) => {
 		const clear = setTimeout(() => {
 			!authed && navigate('/login');
 		}, 1500);
-
 		return () => clearTimeout(clear);
 	}, [authed, navigate]);
 
