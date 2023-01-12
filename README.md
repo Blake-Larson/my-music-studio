@@ -26,9 +26,10 @@ The back-end for this app was built using Node, Express, Mongoose, and MongoDB a
 
 This is a long term project with many optimizations and dreams in mind.
 
-- I want to clean up my authentication and double check it is secure and performing correctly across devices.
-- I want to clean up the functionality of updating the users lesson data, specifically the attendance and payment areas.
-- I want to eventually add a student portal that students can access to view their assigned music and lessons.
+- Optimize React state handling and organization. Specifically, I want to address my use of React Context and making requests to the server only when necessary.
+- Clean up my authentication and double check it is secure and performing correctly across devices.
+- Clean up the functionality of updating the users lesson data, specifically the attendance and payment areas.
+- Add a student portal that students can access to view their assigned music and lessons.
 
 ## Lessons Learned:
 

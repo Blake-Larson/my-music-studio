@@ -1,10 +1,14 @@
 function useStringHook() {
 	return {
 		capitolizeFirst(str) {
-			str.toLowerCase();
-			let stringArr = str.split('');
-			stringArr.splice(0, 1, stringArr[0].toUpperCase());
-			return stringArr.join('');
+			let words = str.split(' ');
+			return words
+				.map(word => {
+					let arr = word.toLowerCase().split('');
+					arr.splice(0, 1, arr[0].toUpperCase());
+					return arr.join('');
+				})
+				.join(' ');
 		},
 	};
 }
