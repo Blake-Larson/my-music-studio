@@ -2,6 +2,8 @@
 
 A full-stack application for private music teachers to manage their studios and their students.
 
+I'm currently refactoring this project in a new repo using Next.js, TypeScript, tRPC, and Prisma. You can find the new repo [here](https://github.com/Blake-Larson/t3-my-music-studio), along with more details on why I'm using a different stack and how I'm approaching the refactor.
+
 [Live Site](https://my-music-studio.herokuapp.com/)
 
 <p align="center" ><img align="center" src="https://github.com/Blake-Larson/my-music-studio/blob/main/client/src/assets/images/demo.jpg" alt="The inital view of My Music Studio" /></p>
