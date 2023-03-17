@@ -7,7 +7,7 @@ import SmallDeleteButton from './buttons/SmallDeleteButton';
 import SmallCheckButton from './buttons/SmallCheckButton';
 import SmallCancelButton from './buttons/SmallCancelButton';
 
-function List({ student, arrayName }) {
+function StudentList({ student, arrayName }) {
 	const { getStudents, setGetStudents } = useStudents();
 	const [formData, setFormData] = React.useState({});
 	const [show, setShow] = React.useState(false);
@@ -123,4 +123,4 @@ function List({ student, arrayName }) {
 	);
 }
 
-export default List;
+export default StudentList;
